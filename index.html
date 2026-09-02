@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f2ead7">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Adriático 2026">
+  <meta name="format-detection" content="telephone=no">
+  <title>Adriático 2026 · Henrique & Cibele</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="assets/icons/icon.svg">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div class="paper-noise" aria-hidden="true"></div>
+  <header class="topbar">
+    <div>
+      <div class="eyebrow">HENRIQUE &amp; CIBELE · SETEMBRO 2026</div>
+      <div id="device-date" class="device-date"></div>
+    </div>
+    <div id="network-pill" class="network-pill" aria-live="polite">offline pronto</div>
+  </header>
+
+  <main id="app-main" tabindex="-1"></main>
+
+  <nav class="bottom-nav" aria-label="Navegação principal">
+    <button class="nav-button is-active" data-tab="today" aria-label="Hoje"><span>◉</span><b>HOJE</b></button>
+    <button class="nav-button" data-tab="route" aria-label="Roteiro"><span>⌁</span><b>ROTEIRO</b></button>
+    <button class="nav-button" data-tab="wallet" aria-label="Carteira"><span>▣</span><b>CARTEIRA</b></button>
+    <button class="nav-button" data-tab="more" aria-label="Mais"><span>•••</span><b>MAIS</b></button>
+  </nav>
+
+  <div id="ticket-modal" class="ticket-modal" hidden>
+    <div class="ticket-modal__top">
+      <button id="ticket-close" class="icon-button" aria-label="Fechar ticket">×</button>
+      <div>
+        <div class="eyebrow">APRESENTAR CÓDIGO</div>
+        <h2 id="ticket-title"></h2>
+      </div>
+      <span class="brightness-hint">☀︎ brilho alto</span>
+    </div>
+    <div class="ticket-modal__body">
+      <img id="ticket-code" alt="Código de embarque ou ingresso" hidden>
+      <div id="ticket-note" class="ticket-note"></div>
+      <button id="ticket-full-toggle" class="secondary-button" hidden>VER TICKET COMPLETO</button>
+      <img id="ticket-full" class="ticket-full" alt="Ticket completo" hidden>
+    </div>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
