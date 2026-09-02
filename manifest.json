@@ -1,0 +1,19 @@
+{
+  "name": "Adriático 2026 · Henrique & Cibele",
+  "short_name": "Adriático 2026",
+  "description": "Companheiro offline da viagem Croácia, Hungria e Eslovênia · setembro de 2026.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f2ead7",
+  "theme_color": "#f2ead7",
+  "icons": [
+    {
+      "src": "assets/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
