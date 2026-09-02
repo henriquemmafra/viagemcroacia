@@ -1,4 +1,4 @@
-name: Deploy travel app to GitHub Pages
+name: Validate travel app
 
 on:
   push:
@@ -7,30 +7,24 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  validate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Check required files
+        run: |
+          test -f index.html
+          test -f manifest.json
+          test -f service-worker.js
+          test -f css/app.css
+          test -f js/core.js
+          test -f js/trip-data.js
+          test -f js/app.js
+      - name: Check JavaScript syntax
+        run: |
+          node --check js/core.js
+          node --check js/trip-data.js
+          node --check js/app.js
