@@ -85,3 +85,16 @@ export function decideSwipeDay(dx, dy, width = 390) {
   if (horizontal < vertical * 1.25) return 0;
   return dx < 0 ? 1 : -1;
 }
+
+export function getTicketSlides(items, id) {
+  const current = (items ?? []).find((item) => item.id === id);
+  if (!current) return [];
+  if (!current.groupId) return [current];
+  const grouped = items.filter((item) => item.groupId === current.groupId && (item.codeAsset || item.ticketAsset));
+  return grouped.length ? grouped : [current];
+}
+
+export function wrapCarouselIndex(index, delta, total) {
+  if (!Number.isFinite(total) || total <= 1) return 0;
+  return ((index + delta) % total + total) % total;
+}
