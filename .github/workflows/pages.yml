@@ -28,3 +28,5 @@ jobs:
           node --check js/core.js
           node --check js/trip-data.js
           node --check js/app.js
+      - name: Run tests
+        run: node --test tests/*.test.mjs
