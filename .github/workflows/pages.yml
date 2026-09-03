@@ -20,13 +20,16 @@ jobs:
           test -f manifest.json
           test -f service-worker.js
           test -f css/app.css
+          test -f css/speech.css
           test -f js/core.js
           test -f js/trip-data.js
           test -f js/app.js
+          test -f js/speech.js
       - name: Check JavaScript syntax
         run: |
           node --check js/core.js
           node --check js/trip-data.js
           node --check js/app.js
+          node --check js/speech.js
       - name: Run tests
         run: node --test tests/*.test.mjs
