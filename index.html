@@ -12,6 +12,22 @@
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
   <link rel="stylesheet" href="css/app.css">
+  <style>
+    .ticket-pair-hint{font-family:"Courier New",monospace;font-size:8.5px;color:#c85a3a;margin-top:5px;font-weight:700}
+    .ticket-carousel-meta{max-width:430px;margin:8px auto 0;display:grid;grid-template-columns:48px 1fr 48px;align-items:center;gap:8px}
+    .ticket-carousel-meta[hidden]{display:none}
+    .ticket-carousel-arrow{width:44px;height:44px;border:1px solid #ddd;border-radius:50%;background:#f7f7f7;font-size:25px;display:grid;place-items:center;cursor:pointer}
+    .ticket-carousel-center{text-align:center;min-width:0}
+    .ticket-position{font-family:"Courier New",monospace;font-size:12px;font-weight:700;letter-spacing:1px;color:#777}
+    .ticket-holder{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;font-size:18px;font-weight:800;color:#111;margin-top:2px}
+    .ticket-dots{display:flex;justify-content:center;gap:7px;margin-top:7px;min-height:8px}
+    .ticket-dot{width:7px;height:7px;border:0;border-radius:50%;padding:0;background:#cfcfcf}
+    .ticket-dot.is-active{background:#111;transform:scale(1.18)}
+    .ticket-swipe-surface{touch-action:pan-y;will-change:transform;transition:transform .18s cubic-bezier(.22,.76,.25,1);max-width:720px;margin:0 auto;text-align:center}
+    .ticket-swipe-surface.is-touching{transition:none}
+    .ticket-swipe-hint{font-family:"Courier New",monospace;font-size:9px;color:#888;margin:8px 0 0;letter-spacing:.4px}
+    #ticket-code{display:block;width:min(82vw,420px);max-height:58vh;object-fit:contain;margin:14px auto;background:#fff;padding:14px;border:1px solid #eee;border-radius:18px;box-shadow:0 5px 22px rgba(0,0,0,.06)}
+  </style>
 </head>
 <body>
   <div class="paper-noise" aria-hidden="true"></div>
@@ -41,7 +57,19 @@
       </div>
       <span class="brightness-hint">☀︎ brilho alto</span>
     </div>
-    <div class="ticket-modal__body">
+
+    <div id="ticket-carousel-meta" class="ticket-carousel-meta" hidden>
+      <button id="ticket-prev" class="ticket-carousel-arrow" aria-label="Ingresso anterior">‹</button>
+      <div class="ticket-carousel-center">
+        <div id="ticket-position" class="ticket-position">1/2</div>
+        <div id="ticket-holder" class="ticket-holder"></div>
+        <div id="ticket-dots" class="ticket-dots" aria-label="Posição do ingresso"></div>
+      </div>
+      <button id="ticket-next" class="ticket-carousel-arrow" aria-label="Próximo ingresso">›</button>
+    </div>
+
+    <div id="ticket-swipe-surface" class="ticket-swipe-surface">
+      <div class="ticket-swipe-hint">← deslize para trocar de passageiro →</div>
       <img id="ticket-code" alt="Código de embarque ou ingresso" hidden>
       <div id="ticket-note" class="ticket-note"></div>
       <button id="ticket-full-toggle" class="secondary-button" hidden>VER TICKET COMPLETO</button>
