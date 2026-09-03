@@ -1,24 +1,24 @@
-# Adriático 2026 — Travel Companion PWA
+# Adriático 2026
 
-PWA iPhone-first para a viagem de Henrique & Cibele (7–21 setembro de 2026).
+PWA mobile-first para a viagem de Henrique & Cibele em setembro de 2026.
 
-## Publicação
+## Roteiro atual
 
-O app é publicado automaticamente no GitHub Pages pelo workflow em `.github/workflows/pages.yml`.
+- 7–9 set · Dubrovnik
+- 9–11 set · Budapest
+- 11–13 set · Ljubljana + Bled, sem carro
+- 13 set · Postojna + Predjama → Koper → Rovinj
+- 14 set · ônibus Rovinj → Pula; retirada SIXT às 09:30
+- 14–17 set · Ístria → Rastoke → Plitvice de carro
+- 17 set · devolução SIXT Split Airport às 19:30
+- 17–21 set · Split + Krka + Vis, sem carro
 
-URL prevista: `https://henriquemmafra.github.io/viagemcroacia/`
+## PWA
 
-## Instalar no iPhone
+- tela **Hoje** com Agora/Próximo, swipe entre dias, vestir/levar, timeline e dicas;
+- tela **Roteiro** com visão geral da viagem;
+- **Carteira** offline com QR codes, boarding passes, reservas e PINs;
+- Maps/Waze/Uber por deeplink;
+- service worker para funcionamento offline.
 
-1. Abra a URL no Safari.
-2. Toque em Compartilhar.
-3. Escolha Adicionar à Tela de Início / Abrir como App da Web.
-4. Abra uma vez com internet para preencher o cache offline.
-
-## Estrutura
-
-- Home contextual pelo dia da viagem
-- Roteiro dos 15 dias
-- Carteira de tickets e confirmações
-- Links Uber, Google Maps e Waze
-- Service worker para funcionamento offline
+Dados de cartão, CVV, documentos digitalizados e dados bancários não fazem parte do app.

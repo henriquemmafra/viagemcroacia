@@ -76,3 +76,12 @@ export function uberUrl(location) {
   });
   return `https://m.uber.com/ul/?${params.toString()}`;
 }
+
+export function decideSwipeDay(dx, dy, width = 390) {
+  const horizontal = Math.abs(dx);
+  const vertical = Math.abs(dy);
+  const threshold = Math.max(58, Math.min(110, width * 0.18));
+  if (horizontal < threshold) return 0;
+  if (horizontal < vertical * 1.25) return 0;
+  return dx < 0 ? 1 : -1;
+}
