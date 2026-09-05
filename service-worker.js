@@ -1,4 +1,4 @@
-const CACHE = 'adriatico-2026-v10';
+const CACHE = 'adriatico-2026-v11';
 const PRECACHE = [
   './',
   './index.html',
