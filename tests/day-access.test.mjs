@@ -41,3 +41,14 @@ test('renders quick-access buttons with current/next emphasis and ticket ids', (
   assert.match(html, /BOARDING/);
   assert.match(html, /2 códigos/);
 });
+
+test('keeps a grouped boarding pass highlighted when a later event using the same ticket is current', () => {
+  const boarding = { id:'wizz-h', groupId:'wizz', groupTitle:'Wizz Air · DBV → BUD', category:'Voos', codeAsset:'qr-h' };
+  const day = { events:[
+    { time:'13:00', title:'Aeroporto', ticketId:'wizz-h' },
+    { time:'14:10', title:'Voo', ticketId:'wizz-h' }
+  ]};
+  const items = core.getDayQuickAccessItems(day, [boarding], { current:day.events[1] });
+  assert.equal(items[0].emphasis, 'current');
+  assert.equal(items[0].time, '14:10');
+});
