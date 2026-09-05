@@ -102,31 +102,36 @@ export function wrapCarouselIndex(index, delta, total) {
 export const WEATHER_CARD_SCALE = 0.6;
 
 export function getDayQuickAccessItems(day, items = [], temporal = {}) {
-  const seen = new Set();
-  const result = [];
+  const byGroup = new Map();
   for (const event of day?.events ?? []) {
     if (!event?.ticketId) continue;
     const item = items.find((candidate) => candidate.id === event.ticketId);
     if (!item) continue;
     const groupKey = item.groupId || item.id;
-    if (seen.has(groupKey)) continue;
     const slides = item.groupId
       ? items.filter((candidate) => candidate.groupId === item.groupId && (candidate.codeAsset || candidate.ticketAsset))
       : (item.codeAsset || item.ticketAsset ? [item] : []);
     if (!slides.length) continue;
-    seen.add(groupKey);
-    const emphasis = temporal.current === event ? 'current' : temporal.next === event ? 'next' : '';
-    result.push({
-      ticketId: item.id,
-      groupKey,
-      title: item.groupTitle || item.title,
-      category: item.category,
-      time: event.time || '',
-      count: slides.length,
-      emphasis
-    });
+    const eventEmphasis = temporal.current === event ? 'current' : temporal.next === event ? 'next' : '';
+    const existing = byGroup.get(groupKey);
+    if (!existing) {
+      byGroup.set(groupKey, {
+        ticketId: item.id,
+        groupKey,
+        title: item.groupTitle || item.title,
+        category: item.category,
+        time: event.time || '',
+        count: slides.length,
+        emphasis: eventEmphasis
+      });
+      continue;
+    }
+    if (eventEmphasis === 'current' || (eventEmphasis === 'next' && existing.emphasis !== 'current')) {
+      existing.emphasis = eventEmphasis;
+      existing.time = event.time || existing.time;
+    }
   }
-  return result;
+  return [...byGroup.values()];
 }
 
 export function formatDayQuickAccessLabel(item = {}) {
