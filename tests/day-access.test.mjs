@@ -27,3 +27,8 @@ test('ignores event ticket ids that have no QR or ticket asset', () => {
 test('defines the requested 40 percent weather-card reduction scale', () => {
   assert.equal(core.WEATHER_CARD_SCALE, 0.6);
 });
+
+test('formats a compact boarding-pass quick-access label', () => {
+  assert.equal(typeof core.formatDayQuickAccessLabel, 'function');
+  assert.equal(core.formatDayQuickAccessLabel({ category:'Voos', time:'13:00', title:'Wizz Air · DBV → BUD', count:2 }), '✈️ 13:00 · Wizz Air · DBV → BUD · 2 códigos');
+});
