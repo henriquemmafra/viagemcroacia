@@ -128,3 +128,9 @@ export function getDayQuickAccessItems(day, items = [], temporal = {}) {
   }
   return result;
 }
+
+export function formatDayQuickAccessLabel(item = {}) {
+  const icon = item.category === 'Voos' ? '✈️' : '🎟️';
+  const count = Number(item.count) > 1 ? ` · ${item.count} códigos` : '';
+  return `${icon} ${item.time || ''} · ${item.title || ''}${count}`.replace(/\s+·\s+·/g, ' ·').trim();
+}
