@@ -134,3 +134,16 @@ export function formatDayQuickAccessLabel(item = {}) {
   const count = Number(item.count) > 1 ? ` · ${item.count} códigos` : '';
   return `${icon} ${item.time || ''} · ${item.title || ''}${count}`.replace(/\s+·\s+·/g, ' ·').trim();
 }
+
+export function renderDayQuickAccessMarkup(items = []) {
+  const escapeHtml = (value = '') => String(value).replace(/[&<>"']/g, (char) => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#039;'
+  }[char]));
+  return items.map((item) => {
+    const icon = item.category === 'Voos' ? '✈️' : '🎟️';
+    const kind = item.category === 'Voos' ? 'BOARDING' : 'INGRESSO';
+    const emphasis = item.emphasis === 'current' ? ' is-current' : item.emphasis === 'next' ? ' is-next' : '';
+    const count = Number(item.count) > 1 ? ` · ${item.count} códigos` : '';
+    return `<button class="day-ticket-button${emphasis}" type="button" data-quick-ticket="${escapeHtml(item.ticketId)}" aria-label="${escapeHtml(formatDayQuickAccessLabel(item))}"><span>${icon} ${kind}</span><b>${escapeHtml(item.title)}</b><small>${escapeHtml(item.time || '')}${escapeHtml(count)}</small></button>`;
+  }).join('');
+}
