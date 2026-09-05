@@ -32,3 +32,12 @@ test('formats a compact boarding-pass quick-access label', () => {
   assert.equal(typeof core.formatDayQuickAccessLabel, 'function');
   assert.equal(core.formatDayQuickAccessLabel({ category:'Voos', time:'13:00', title:'Wizz Air · DBV → BUD', count:2 }), '✈️ 13:00 · Wizz Air · DBV → BUD · 2 códigos');
 });
+
+test('renders quick-access buttons with current/next emphasis and ticket ids', () => {
+  assert.equal(typeof core.renderDayQuickAccessMarkup, 'function');
+  const html = core.renderDayQuickAccessMarkup([{ ticketId:'wizz-h', title:'Wizz Air · DBV → BUD', category:'Voos', time:'13:00', count:2, emphasis:'next' }]);
+  assert.match(html, /data-quick-ticket="wizz-h"/);
+  assert.match(html, /day-ticket-button is-next/);
+  assert.match(html, /BOARDING/);
+  assert.match(html, /2 códigos/);
+});
