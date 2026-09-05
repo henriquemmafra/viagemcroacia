@@ -62,6 +62,8 @@ export const TRIP_WEATHER_STOPS = {
 };
 
 const HOURLY_FIELDS = ['temperature_2m','apparent_temperature','precipitation_probability','precipitation','weather_code','wind_speed_10m','uv_index'];
+const CURRENT_FIELDS = ['temperature_2m','apparent_temperature','precipitation','weather_code','wind_speed_10m'];
+const DAILY_FIELDS = ['temperature_2m_min','temperature_2m_max','weather_code'];
 const round1 = (n) => Math.round((Number(n) || 0) * 10) / 10;
 const finite = (values) => values.map(Number).filter(Number.isFinite);
 const lower = (value) => String(value || '').trim().toLocaleLowerCase('pt-BR');
@@ -79,6 +81,8 @@ export function buildForecastUrl({ lat, lon, date, timeZone }) {
   url.searchParams.set('latitude', String(lat));
   url.searchParams.set('longitude', String(lon));
   url.searchParams.set('hourly', HOURLY_FIELDS.join(','));
+  url.searchParams.set('current', CURRENT_FIELDS.join(','));
+  url.searchParams.set('daily', DAILY_FIELDS.join(','));
   url.searchParams.set('temperature_unit', 'celsius');
   url.searchParams.set('wind_speed_unit', 'kmh');
   url.searchParams.set('precipitation_unit', 'mm');
@@ -111,6 +115,18 @@ export function weatherCodeLabel(code) {
   return 'Céu limpo';
 }
 
+export function weatherVisual(code) {
+  const n = Number(code);
+  if ([95,96,99].includes(n)) return { icon:'⛈️', theme:'storm', label:'Trovoada' };
+  if ([71,73,75,77,85,86].includes(n)) return { icon:'❄️', theme:'snow', label:'Neve' };
+  if ([61,63,65,66,67,80,81,82].includes(n)) return { icon:'🌧️', theme:'rain', label:'Chuva' };
+  if ([51,53,55,56,57].includes(n)) return { icon:'🌦️', theme:'drizzle', label:'Garoa' };
+  if ([45,48].includes(n)) return { icon:'🌫️', theme:'fog', label:'Nevoeiro' };
+  if (n === 3) return { icon:'☁️', theme:'cloudy', label:'Nublado' };
+  if ([1,2].includes(n)) return { icon:'🌤️', theme:'partly', label:'Parcialmente nublado' };
+  return { icon:'☀️', theme:'clear', label:'Céu limpo' };
+}
+
 function minuteOfDay(hhmm) {
   const [h,m] = String(hhmm || '00:00').split(':').map(Number);
   return h * 60 + m;
@@ -122,9 +138,11 @@ export function summarizeHourlyForecast(payload, { date, from='00:00', to='23:59
   const start = minuteOfDay(from);
   const end = minuteOfDay(to);
   const indexes = [];
+  const dayIndexes = [];
   for (let i = 0; i < hourly.time.length; i += 1) {
     const stamp = hourly.time[i];
     if (!stamp?.startsWith(`${date}T`)) continue;
+    dayIndexes.push(i);
     const hourStart = minuteOfDay(stamp.slice(11,16));
     const hourEnd = hourStart + 60;
     if (hourEnd > start && hourStart <= end) indexes.push(i);
@@ -140,13 +158,46 @@ export function summarizeHourlyForecast(payload, { date, from='00:00', to='23:59
   const codes = finite(pick('weather_code'));
   if (!temps.length || !apparent.length) throw new Error('Temperatura indisponível para o período.');
   const worstCode = [...codes].sort((a,b) => severity(b) - severity(a))[0] ?? 0;
+
+  const daily = payload?.daily;
+  const dailyIndex = Array.isArray(daily?.time) ? daily.time.indexOf(date) : -1;
+  const allDayTemps = finite(dayIndexes.map(i => hourly.temperature_2m?.[i]));
+  const dayMinRaw = dailyIndex >= 0 ? Number(daily.temperature_2m_min?.[dailyIndex]) : NaN;
+  const dayMaxRaw = dailyIndex >= 0 ? Number(daily.temperature_2m_max?.[dailyIndex]) : NaN;
+  const dayMinTemp = Number.isFinite(dayMinRaw) ? round1(dayMinRaw) : round1(Math.min(...allDayTemps));
+  const dayMaxTemp = Number.isFinite(dayMaxRaw) ? round1(dayMaxRaw) : round1(Math.max(...allDayTemps));
+
+  const current = payload?.current;
+  const currentIsSelectedDay = Boolean(current?.time?.startsWith(`${date}T`));
+  const currentTemp = currentIsSelectedDay && Number.isFinite(Number(current?.temperature_2m)) ? round1(current.temperature_2m) : null;
+  const currentApparent = currentIsSelectedDay && Number.isFinite(Number(current?.apparent_temperature)) ? round1(current.apparent_temperature) : null;
+  const currentWeatherCode = currentIsSelectedDay && Number.isFinite(Number(current?.weather_code)) ? Number(current.weather_code) : null;
+
+  const focusIndex = indexes.reduce((best, i) => {
+    const hhmm = hourly.time[i]?.slice(11,16) || '00:00';
+    const distance = Math.abs(minuteOfDay(hhmm) - start);
+    if (!best || distance < best.distance) return { i, distance };
+    return best;
+  }, null)?.i ?? indexes[0];
+  const forecastDisplayTemp = Number.isFinite(Number(hourly.temperature_2m?.[focusIndex])) ? round1(hourly.temperature_2m[focusIndex]) : round1(temps[0]);
+  const forecastDisplayCode = Number.isFinite(Number(hourly.weather_code?.[focusIndex])) ? Number(hourly.weather_code[focusIndex]) : worstCode;
+  const forecastDisplayTime = hourly.time?.[focusIndex]?.slice(11,16) || from;
+  const displayTemp = currentTemp ?? forecastDisplayTemp;
+  const displayWeatherCode = currentWeatherCode ?? forecastDisplayCode;
+  const displayLabel = currentTemp !== null ? 'AGORA' : forecastDisplayTime;
+
   return {
     minTemp: round1(Math.min(...temps)), maxTemp: round1(Math.max(...temps)),
     minApparent: round1(Math.min(...apparent)), maxApparent: round1(Math.max(...apparent)),
+    dayMinTemp, dayMaxTemp,
+    currentTemp, currentApparent, currentWeatherCode,
+    displayTemp, displayWeatherCode, displayLabel,
     precipProbability: round1(Math.max(0, ...precipProb)),
     precipitation: round1(precip.reduce((sum,v) => sum + v, 0)),
     maxWind: round1(Math.max(0, ...winds)), maxUv: round1(Math.max(0, ...uv)),
-    condition: weatherCodeLabel(worstCode), weatherCode: worstCode
+    condition: weatherCodeLabel(worstCode),
+    displayCondition: weatherCodeLabel(displayWeatherCode),
+    weatherCode: worstCode
   };
 }
 
