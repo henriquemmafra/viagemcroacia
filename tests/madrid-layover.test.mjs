@@ -15,6 +15,6 @@ test('September 7 shows the Madrid layover and safe return-to-airport plan', () 
   assert.match(byTime.get('16:05')?.title || '', /Dubrovnik/i);
   assert.match(byTime.get('19:00')?.title || '', /Dubrovnik/i);
 
-  assert.ok(day.alerts.some((alert) => /bagagem|mala/i.test(alert) && /DBV|Dubrovnik/i.test(alert)));
+  assert.ok(day.alerts.some((alert) => /bagage[mn]|mala/i.test(alert) && /DBV|Dubrovnik/i.test(alert)));
   assert.ok(day.alerts.some((alert) => /12:15/.test(alert) && /retorn|voltar/i.test(alert)));
 });
