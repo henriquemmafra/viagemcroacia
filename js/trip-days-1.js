@@ -3,13 +3,23 @@ const ev = (time, title, options = {}) => ({ time, title, ...options });
 
 export const tripDays1 = [
   {
-    date: '2026-09-07', city: 'Dubrovnik', title: 'Chegada Dubrovnik',
-    summary: 'Chegada ao Adriático, check-in na Old Town e jantar leve.',
-    theme:'dubrovnik', heroIcon:'🏰', heroLabel:'DUBROVNIK · ADRIATIC',
+    date: '2026-09-07', city: 'Madrid → Dubrovnik', title: 'Escala Madrid + chegada Dubrovnik',
+    summary: 'Conexão longa em Madrid com passeio curto e retorno conservador ao aeroporto antes do voo para Dubrovnik.',
+    theme:'dubrovnik', heroIcon:'✈️', heroLabel:'MADRID → DUBROVNIK',
     wear: ['Roupa de viagem confortável', 'Tênis', 'Moletom leve'],
-    bring: ['Passaporte', 'Celular + carregador', 'Confirmação do hotel'],
-    alerts: ['Não ativar o Dubrovnik Pass hoje; o livreto orienta ativá-lo amanhã para aproveitar as 72h.'],
+    bring: ['Passaporte', 'Celular + carregador', 'Boarding pass MAD → DBV', 'Confirmação do hotel'],
+    alerts: [
+      '⏰ 12:15 é a hora-limite planejada para começar o retorno ao aeroporto; meta: estar novamente na T4 às 13:00 para o voo das 16:05.',
+      'Em GRU, confirmar que as bagagens despachadas foram etiquetadas diretamente até DBV/Dubrovnik.',
+      'Não ativar o Dubrovnik Pass hoje; o livreto orienta ativá-lo amanhã para aproveitar as 72h.'
+    ],
     events: [
+      ev('05:25', 'Pouso em Madrid (MAD) · T4S', { end:'06:15', icon:'🛬', location:loc('Madrid-Barajas T4S','Adolfo Suárez Madrid–Barajas Airport Terminal 4S, Madrid, Spain'), note:'Chegada prevista do LA1579/IB268. Fazer imigração Schengen e seguir T4S → T4/saída.' }),
+      ev('06:45', 'Saída prevista do aeroporto para Madrid', { end:'07:30', icon:'🚆', location:loc('Madrid centro','Madrid, Spain'), note:'Janela conservadora considerando desembarque, imigração e deslocamento interno desde a T4S.' }),
+      ev('07:30', 'Madrid centro · café + passeio leve', { end:'11:45', icon:'🇪🇸', location:loc('Madrid centro','Puerta del Sol, Madrid, Spain'), tip:'Mantenha o passeio concentrado no centro e acompanhe o trânsito/tempo de deslocamento de volta. Não estique o roteiro por causa da conexão.' }),
+      ev('12:15', 'COMEÇAR retorno ao aeroporto', { end:'13:00', icon:'⏰', location:loc('Madrid-Barajas T4','Adolfo Suárez Madrid–Barajas Airport Terminal 4, Madrid, Spain'), perrengue:'Este é o horário de segurança do roteiro. Mesmo se o passeio estiver ótimo, sair às 12:15 para preservar margem para transporte, segurança e portão.' }),
+      ev('13:00', 'ESTAR na T4 · margem de segurança', { end:'15:15', icon:'🛫', location:loc('Madrid-Barajas T4','Adolfo Suárez Madrid–Barajas Airport Terminal 4, Madrid, Spain'), note:'Objetivo: estar na T4 cerca de 3h antes da saída. Conferir portão no painel/app da companhia e seguir para o embarque sem pressa.' }),
+      ev('16:05', 'Voo Madrid → Dubrovnik', { end:'19:00', icon:'✈️', note:'LA1815 / IB937 · saída prevista de Madrid às 16:05.' }),
       ev('19:00', 'Pouso em Dubrovnik (DBV)', { end:'19:30', icon:'✈️', location:loc('Aeroporto de Dubrovnik','Dubrovnik Airport, Čilipi, Croatia'), note:'Chegada prevista 19h.' }),
       ev('19:30', 'Táxi ou Uber para a Old Town', { end:'20:20', icon:'🚕', location:loc('Lausa Dubrovnik Rooms','Lausa Dubrovnik Rooms, Dubrovnik, Croatia'), perrengue:'Com bagagem grande e cansaço, o livreto recomenda não usar ônibus.' }),
       ev('20:30', 'Check-in Lausa Dubrovnik Rooms', { end:'21:00', icon:'🏨', location:loc('Lausa Dubrovnik Rooms','Lausa Dubrovnik Rooms, Dubrovnik, Croatia'), ticketId:'hotel-lausa' }),
