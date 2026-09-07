@@ -1,4 +1,9 @@
 import { speakPhrase } from './speech.js';
+import {
+  conversationLanguageForDay,
+  requestConversationTranslation,
+  createHoldToTalkController
+} from './conversation-audio.js';
 
 export const TRANSLATOR_TARGETS = Object.freeze({
   hr: Object.freeze({ label:'Croata', flag:'🇭🇷', speechLanguage:'Croata' }),
@@ -46,6 +51,21 @@ export function translatorMarkup() {
         ${Object.entries(TRANSLATOR_TARGETS).map(([code, item], index) => `<button type="button" class="translator-target" data-translator-target="${code}" aria-pressed="${index === 0 ? 'true' : 'false'}">${item.flag} ${item.label}</button>`).join('')}
       </div>
     </div>
+    <div class="conversation-panel" data-conversation-panel>
+      <div class="conversation-kicker">SEGURE O MICROFONE PARA OUVIR O IDIOMA LOCAL</div>
+      <button type="button" class="conversation-mic" data-conversation-mic aria-label="Segure para falar em croata">
+        <span data-conversation-mic-content>🇭🇷 🎙️</span>
+      </button>
+      <div class="conversation-state" data-conversation-state aria-live="polite"></div>
+      <div class="conversation-result" data-conversation-result hidden>
+        <div class="conversation-line conversation-line--original" data-conversation-original></div>
+        <div class="conversation-line conversation-line--portuguese" data-conversation-portuguese></div>
+        <div class="conversation-actions">
+          <button type="button" data-conversation-listen>🔊 OUVIR ORIGINAL</button>
+          <button type="button" data-conversation-reply>RESPONDER</button>
+        </div>
+      </div>
+    </div>
     <form data-translator-form>
       <label class="translator-label" for="translator-input">Escreva em português</label>
       <textarea id="translator-input" class="translator-input" data-translator-input maxlength="500" rows="3" placeholder="Ex.: Onde fica a estação de ônibus?"></textarea>
@@ -82,6 +102,7 @@ export function bindTranslator(root, {
   if (!card || card.dataset.translatorBound === 'true') return false;
   card.dataset.translatorBound = 'true';
 
+  const doc = card.ownerDocument || document;
   const form = card.querySelector('[data-translator-form]');
   const input = card.querySelector('[data-translator-input]');
   const submit = card.querySelector('[data-translator-submit]');
@@ -92,8 +113,18 @@ export function bindTranslator(root, {
   const speakButton = card.querySelector('[data-translator-speak]');
   const copyButton = card.querySelector('[data-translator-copy]');
   const targetButtons = [...card.querySelectorAll('[data-translator-target]')];
+  const mic = card.querySelector('[data-conversation-mic]');
+  const micContent = card.querySelector('[data-conversation-mic-content]');
+  const conversationState = card.querySelector('[data-conversation-state]');
+  const conversationResult = card.querySelector('[data-conversation-result]');
+  const conversationOriginal = card.querySelector('[data-conversation-original]');
+  const conversationPortuguese = card.querySelector('[data-conversation-portuguese]');
+  const conversationListen = card.querySelector('[data-conversation-listen]');
+  const conversationReply = card.querySelector('[data-conversation-reply]');
   let target = targetButtons.find((button) => button.getAttribute('aria-pressed') === 'true')?.dataset.translatorTarget || 'hr';
   let pending = false;
+  let voiceTranscript = '';
+  let voiceLanguage = conversationLanguageForDay({ date:doc.documentElement?.dataset?.tripDate }, target);
 
   const clearResult = () => {
     result.textContent = '';
@@ -104,10 +135,66 @@ export function bindTranslator(root, {
     status.textContent = '';
   };
 
+  const selectTarget = (code, { clear = true } = {}) => {
+    if (!TRANSLATOR_TARGETS[code]) return;
+    target = code;
+    targetButtons.forEach((item) => item.setAttribute('aria-pressed', String(item.dataset.translatorTarget === code)));
+    if (clear) clearResult();
+  };
+
+  const updateVoiceLanguage = () => {
+    voiceLanguage = conversationLanguageForDay({ date:doc.documentElement?.dataset?.tripDate }, target);
+    if (!mic.disabled) mic.setAttribute('aria-label', `Segure para falar em ${voiceLanguage.label.toLowerCase()}`);
+    if (!mic.classList.contains('is-recording') && !mic.classList.contains('is-processing')) micContent.textContent = `${voiceLanguage.flag} 🎙️`;
+  };
+
+  const setVoiceStatus = (value) => {
+    mic.classList.remove('is-recording', 'is-processing');
+    if (value === 'ESTOU OUVINDO') {
+      mic.disabled = false;
+      mic.classList.add('is-recording');
+      micContent.textContent = '🔴 ESTOU OUVINDO';
+      conversationState.textContent = '';
+      return;
+    }
+    if (value === 'TRADUZINDO…') {
+      mic.disabled = true;
+      mic.classList.add('is-processing');
+      micContent.textContent = '⏳ TRADUZINDO…';
+      conversationState.textContent = '';
+      return;
+    }
+    mic.disabled = false;
+    updateVoiceLanguage();
+    conversationState.textContent = value === 'IDLE' ? '' : String(value || '');
+  };
+
+  const showConversation = ({ transcript, translation }) => {
+    voiceTranscript = transcript;
+    conversationOriginal.textContent = `${voiceLanguage.flag} ${transcript}`;
+    conversationPortuguese.textContent = `🇧🇷 ${translation}`;
+    conversationResult.hidden = false;
+  };
+
+  const controller = createHoldToTalkController({
+    online,
+    setStatus:setVoiceStatus,
+    onAudio:async (blob) => {
+      const response = await requestConversationTranslation({
+        blob,
+        locale:voiceLanguage.speechLocale,
+        endpoint,
+        fetchImpl
+      });
+      showConversation(response);
+    }
+  });
+
+  updateVoiceLanguage();
+
   targetButtons.forEach((button) => button.addEventListener('click', () => {
-    target = button.dataset.translatorTarget;
-    targetButtons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
-    clearResult();
+    selectTarget(button.dataset.translatorTarget);
+    updateVoiceLanguage();
   }));
 
   form.addEventListener('submit', async (event) => {
@@ -150,6 +237,55 @@ export function bindTranslator(root, {
     } catch {
       status.textContent = 'Não foi possível copiar automaticamente.';
     }
+  });
+
+  const beginHold = async (event) => {
+    if (!endpoint) {
+      setVoiceStatus('Tradutor de áudio ainda não configurado.');
+      return;
+    }
+    event?.preventDefault?.();
+    try { if (event?.pointerId !== undefined) mic.setPointerCapture?.(event.pointerId); } catch {}
+    await controller.start();
+  };
+  const endHold = (event) => {
+    event?.preventDefault?.();
+    controller.stop({ submit:true });
+  };
+  const cancelHold = () => controller.cancel();
+
+  mic.addEventListener('pointerdown', beginHold);
+  mic.addEventListener('pointerup', endHold);
+  mic.addEventListener('pointercancel', cancelHold);
+  mic.addEventListener('contextmenu', (event) => event.preventDefault());
+
+  mic.addEventListener('keydown', (event) => {
+    if ((event.key === ' ' || event.key === 'Enter') && !event.repeat) void beginHold(event);
+  });
+  mic.addEventListener('keyup', (event) => {
+    if (event.key === ' ' || event.key === 'Enter') endHold(event);
+  });
+
+  conversationListen.addEventListener('click', () => {
+    if (voiceTranscript) speak(voiceTranscript, voiceLanguage.label, conversationListen);
+  });
+
+  conversationReply.addEventListener('click', () => {
+    selectTarget(voiceLanguage.target, { clear:false });
+    input.focus();
+    input.scrollIntoView?.({ block:'center', behavior:'smooth' });
+  });
+
+  const disconnectObserver = new MutationObserver(() => {
+    if (!card.isConnected) {
+      controller.cancel();
+      disconnectObserver.disconnect();
+    }
+  });
+  disconnectObserver.observe(root, { childList:true, subtree:true });
+
+  doc.addEventListener('visibilitychange', () => {
+    if (doc.visibilityState === 'hidden') controller.cancel();
   });
 
   return true;
