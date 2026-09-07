@@ -7,10 +7,22 @@ const source = await readFile(new URL('../js/trip-data.js', import.meta.url), 'u
 const expected = [
   ["Com licença","Oprostite"], ["Desculpa","Žao mi je"], ["Sim","Da"], ["Não","Ne"],
   ["Com licença","Elnézést"], ["Desculpa","Bocsánat"], ["Sim","Igen"], ["Não","Nem"],
-  ["Com licença","Oprostite"], ["Desculpa","Žal mi je"]
+  ["Com licença","Oprostite"], ["Desculpa","Žal mi je"],
+
+  ["Bom dia","Dobro jutro"], ["Boa tarde","Dobar dan"],
+  ["Boa noite (cumprimento)","Dobra večer"], ["Boa noite (despedida)","Laku noć"],
+  ["Tchau","Bok / Doviđenja"], ["Desculpa, não falo croata","Oprostite, ne govorim hrvatski"],
+
+  ["Bom dia","Jó reggelt"], ["Boa tarde","Jó napot"],
+  ["Boa noite (cumprimento)","Jó estét"], ["Boa noite (despedida)","Jó éjszakát"],
+  ["Tchau","Szia / Viszontlátásra"], ["Desculpa, não falo húngaro","Bocsánat, nem beszélek magyarul"],
+
+  ["Bom dia","Dobro jutro"], ["Boa tarde","Dober dan"],
+  ["Boa noite (cumprimento)","Dober večer"], ["Boa noite (despedida)","Lahko noč"],
+  ["Tchau","Adijo / Nasvidenje"], ["Desculpa, não falo esloveno","Oprostite, ne govorim slovensko"]
 ];
 
-test('includes the approved new essential phrases for all three languages', () => {
+test('includes the approved essential and greeting phrases for all three languages', () => {
   for (const [pt, local] of expected) {
     assert.ok(source.includes(`['${pt}','${local}']`), `${pt} → ${local} missing`);
   }

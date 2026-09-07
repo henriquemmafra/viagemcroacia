@@ -64,7 +64,55 @@ export const pendingItems = [
 ];
 
 export const phrases = {
-  Croata: [['Olá','Bok / Dobar dan'],['Obrigado','Hvala'],['Por favor','Molim'],['A conta','Račun, molim'],['Onde fica...?','Gdje je...?'],['Com licença','Oprostite'],['Desculpa','Žao mi je'],['Sim','Da'],['Não','Ne']],
-  Húngaro: [['Olá','Szia'],['Obrigado','Köszönöm'],['Por favor','Kérem'],['A conta','A számlát kérem'],['Onde fica metrô?','Hol a metró?'],['Com licença','Elnézést'],['Desculpa','Bocsánat'],['Sim','Igen'],['Não','Nem']],
-  Esloveno: [['Olá','Živijo / Dober dan'],['Obrigado','Hvala'],['Por favor','Prosim'],['A conta','Račun, prosim'],['Onde fica...?','Kje je...?'],['Com licença','Oprostite'],['Desculpa','Žal mi je'],['Sim','Da'],['Não','Ne']]
+  Croata: [
+    ['Olá','Bok / Dobar dan'],
+    ['Bom dia','Dobro jutro'],
+    ['Boa tarde','Dobar dan'],
+    ['Boa noite (cumprimento)','Dobra večer'],
+    ['Boa noite (despedida)','Laku noć'],
+    ['Tchau','Bok / Doviđenja'],
+    ['Obrigado','Hvala'],
+    ['Por favor','Molim'],
+    ['A conta','Račun, molim'],
+    ['Onde fica...?','Gdje je...?'],
+    ['Com licença','Oprostite'],
+    ['Desculpa','Žao mi je'],
+    ['Desculpa, não falo croata','Oprostite, ne govorim hrvatski'],
+    ['Sim','Da'],
+    ['Não','Ne']
+  ],
+  Húngaro: [
+    ['Olá','Szia'],
+    ['Bom dia','Jó reggelt'],
+    ['Boa tarde','Jó napot'],
+    ['Boa noite (cumprimento)','Jó estét'],
+    ['Boa noite (despedida)','Jó éjszakát'],
+    ['Tchau','Szia / Viszontlátásra'],
+    ['Obrigado','Köszönöm'],
+    ['Por favor','Kérem'],
+    ['A conta','A számlát kérem'],
+    ['Onde fica metrô?','Hol a metró?'],
+    ['Com licença','Elnézést'],
+    ['Desculpa','Bocsánat'],
+    ['Desculpa, não falo húngaro','Bocsánat, nem beszélek magyarul'],
+    ['Sim','Igen'],
+    ['Não','Nem']
+  ],
+  Esloveno: [
+    ['Olá','Živijo / Dober dan'],
+    ['Bom dia','Dobro jutro'],
+    ['Boa tarde','Dober dan'],
+    ['Boa noite (cumprimento)','Dober večer'],
+    ['Boa noite (despedida)','Lahko noč'],
+    ['Tchau','Adijo / Nasvidenje'],
+    ['Obrigado','Hvala'],
+    ['Por favor','Prosim'],
+    ['A conta','Račun, prosim'],
+    ['Onde fica...?','Kje je...?'],
+    ['Com licença','Oprostite'],
+    ['Desculpa','Žal mi je'],
+    ['Desculpa, não falo esloveno','Oprostite, ne govorim slovensko'],
+    ['Sim','Da'],
+    ['Não','Ne']
+  ]
 };
