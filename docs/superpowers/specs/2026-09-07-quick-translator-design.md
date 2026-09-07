@@ -24,11 +24,12 @@ The selected target remains visually highlighted.
 The card contains:
 
 1. Portuguese text input / textarea with placeholder such as `Escreva em português…`.
-2. `TRADUZIR` action.
+2. `TRADUZIR COM GOOGLE` action.
 3. Translation result area.
-4. `🔊 OUVIR` action that speaks the translated text.
-5. `COPIAR` action that copies only the translated text.
-6. Compact loading and error states.
+4. Google Translate attribution adjacent to the translated result, following the current Cloud Translation attribution requirements.
+5. `🔊 OUVIR` action that speaks the translated text.
+6. `COPIAR` action that copies only the translated text.
+7. Compact loading and error states.
 
 Example flow:
 
@@ -40,9 +41,11 @@ Pressing Enter may submit on a single-line interaction; the interface must remai
 
 The current application is a static GitHub Pages PWA. Google translation credentials must **not** be stored in `trip-data.js`, frontend JavaScript, HTML, the repository, or the service worker cache.
 
-Use a small HTTPS translation proxy between the PWA and Google Cloud Translation:
+Use a small **Cloudflare Worker** as the HTTPS translation proxy between the PWA and Google Cloud Translation Basic v2:
 
-`PWA -> translator endpoint -> Google Cloud Translation -> translated text -> PWA`
+`GitHub Pages PWA -> Cloudflare Worker -> Google Cloud Translation Basic v2 -> Worker -> PWA`
+
+Cloud Translation Basic v2 is chosen because it supports API-key authentication. The Worker stores that key as a deployment secret; the browser never receives it.
 
 The frontend sends only:
 
@@ -61,25 +64,38 @@ Accepted target values are strictly limited to:
 
 Source language is always `pt`.
 
-The server-side translator keeps the Google credential in its deployment secret/environment configuration and never returns it to the browser.
-
 The frontend endpoint URL will live in a small configuration constant. It is not a secret.
 
-### Server behavior
+### Worker behavior
 
-The proxy will:
+The Worker will:
 
 - accept POST requests only;
 - validate `text` and `target`;
 - reject unsupported target languages;
 - trim empty input;
 - enforce a practical maximum input size;
-- call Google Cloud Translation with source `pt` and the requested target;
+- call `POST https://translation.googleapis.com/language/translate/v2` with source `pt`, the requested target, and plain-text format;
+- authenticate to Google using a Worker secret passed via the `x-goog-api-key` request header;
 - return a minimal JSON payload such as `{ "translation": "..." }`;
 - return generic user-safe errors without leaking credentials or upstream internals;
-- allow CORS only for the production GitHub Pages origin plus local development origin if needed.
+- allow CORS only for the production GitHub Pages origin plus a local development origin if needed;
+- apply a lightweight rate limit / abuse guard suitable for a small personal travel app.
 
-A lightweight rate limit is desirable to prevent a public endpoint from being abused.
+The Worker implementation should live in the repository under a dedicated directory (for example `worker/`) so its code can be versioned, while the actual Google API key exists only in the Worker deployment secret store.
+
+## Google attribution
+
+Because the app displays unmodified Google translation results directly to users, the UI must comply with Google Cloud Translation attribution requirements current at implementation time.
+
+At minimum:
+
+- the translation action is labeled `Traduzir com Google`;
+- the result area includes the required Google Translate attribution/badge adjacent to the translated text;
+- the badge links to Google Translate as required;
+- the app/help documentation states that Google Translate powers the dynamic translation feature.
+
+Do not imitate the Google Translate product UI or modify Google brand assets beyond what the attribution guidance permits.
 
 ## Audio
 
@@ -104,7 +120,7 @@ Dynamic translation is explicitly **online-only**.
 If offline:
 
 - keep the translator card visible;
-- disable or gracefully reject `TRADUZIR` with a clear message such as `Tradução livre precisa de internet.`;
+- disable or gracefully reject `TRADUZIR COM GOOGLE` with a clear message such as `Tradução livre precisa de internet.`;
 - keep the fixed phrase cards fully usable;
 - keep fixed-phrase audio using local speech synthesis when supported by the device.
 
@@ -139,21 +155,22 @@ These entries automatically receive the existing 🔊 buttons because `enhancePh
 
 ## Frontend structure
 
-Prefer keeping responsibilities separated:
+Keep responsibilities separated:
 
 - `js/trip-data.js` — fixed essential phrases only.
 - `js/speech.js` — pronunciation / speech only.
 - new `js/translator.js` — target-language configuration, request validation, HTTP translation call, and translator UI event handling.
 - `js/app.js` — render the translator card in `renderMore()` and initialize/bind it after rendering.
-- new or existing CSS file — translator layout, flag selector, loading/error/result states.
+- new or existing CSS file — translator layout, flag selector, loading/error/result states and attribution placement.
 - `service-worker.js` — precache the new frontend asset(s) and increment the cache version so the installed PWA receives the update.
+- `worker/` — Cloudflare Worker translation proxy and its tests/configuration, with no secrets committed.
 
 Avoid putting network translation logic directly into `app.js`.
 
 ## Interaction details
 
-- Default target: 🇭🇷 Croatian, because Dubrovnik/Croatia is the first country in the trip flow.
-- Changing target after a result is shown does not silently relabel the old result. Clear the old result or require a new translation.
+- Default target: 🇭🇷 Croatian, because Croatia is the first country in the trip flow.
+- Changing target after a result is shown clears the old result; it must never silently relabel a translation from a different language.
 - Disable duplicate submissions while a request is pending.
 - Preserve the typed Portuguese text after errors so it can be retried.
 - `COPIAR` is disabled until a result exists.
@@ -165,9 +182,9 @@ Avoid putting network translation logic directly into `app.js`.
 
 Do not send anything except the text the user explicitly submits and the selected target language.
 
-Do not add analytics, translation history, geolocation, clipboard reads, or background requests.
+Do not add analytics, translation history, geolocation, clipboard reads, or background translation requests.
 
-Do not expose Google credentials in browser-delivered assets, GitHub commits, Pages configuration, or query strings.
+Do not expose Google credentials in browser-delivered assets, GitHub commits, Pages configuration, service-worker files, or query strings.
 
 ## Testing
 
@@ -181,7 +198,10 @@ Add tests that verify at minimum:
 6. `Com licença`, `Desculpa`, `Sim`, and `Não` exist for all three languages;
 7. the translator frontend asset is included in the PWA precache;
 8. the service-worker cache version changes;
-9. existing speech tests continue to pass.
+9. the Worker accepts only the three target codes and does not leak upstream error details;
+10. the Worker sends the Google key in `x-goog-api-key`, never in a query string;
+11. Google attribution is present with dynamic translation results;
+12. existing speech tests continue to pass.
 
 ## Success criteria
 
@@ -189,9 +209,16 @@ The feature is complete when, on iPhone:
 
 - the user can open `Mais`, type Portuguese, select 🇭🇷/🇭🇺/🇸🇮, and receive a Google-powered translation;
 - the translated result can be copied and spoken with one tap;
-- no credential is visible in browser source or repository files;
+- Google attribution is displayed correctly;
+- no Google credential is visible in browser source or repository files;
 - fixed phrases continue to work without internet and include the four new essentials;
 - installing/opening the updated PWA does not remain stuck on the previous cached version.
+
+## Deployment prerequisite
+
+One external deployment step is required because GitHub Pages cannot safely hold the Google credential: deploy the versioned `worker/` code to a Cloudflare Worker, add the Google API key as a Worker secret, and set the resulting public Worker URL in the frontend configuration.
+
+The repository implementation can be completed and tested without committing any secret, but live dynamic translation will only work after that Worker endpoint is deployed and configured.
 
 ## Out of scope
 
