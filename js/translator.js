@@ -69,13 +69,17 @@ function targetForDocument(doc, now = new Date()) {
 export function updateTranslatorCard(card, target) {
   if (!card || !TRANSLATOR_TARGETS[target]) return false;
   const item = TRANSLATOR_TARGETS[target];
-  card.dataset.translatorTarget = target;
+  const headingText = `🇧🇷 Português ↔ ${item.flag} ${item.label}`;
+  const linkHref = googleTranslateUrl(target);
+  const linkText = `${item.flag} ABRIR GOOGLE TRADUTOR`;
+
+  if (card.dataset.translatorTarget !== target) card.dataset.translatorTarget = target;
   const heading = card.querySelector('h3');
   const link = card.querySelector('[data-translator-open]');
-  if (heading) heading.textContent = `🇧🇷 Português ↔ ${item.flag} ${item.label}`;
+  if (heading && heading.textContent !== headingText) heading.textContent = headingText;
   if (link) {
-    link.href = googleTranslateUrl(target);
-    link.textContent = `${item.flag} ABRIR GOOGLE TRADUTOR`;
+    if (link.href !== linkHref) link.href = linkHref;
+    if (link.textContent !== linkText) link.textContent = linkText;
   }
   return true;
 }
