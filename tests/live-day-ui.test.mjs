@@ -13,23 +13,34 @@ test('live day enhancer builds one smart status card and timeline states', async
 });
 
 test('smart status update does not rewrite identical HTML', async () => {
-  const { updateSmartStatusElement } = await import('../js/live-day.js');
-  let html = '<div>same</div>';
-  let htmlWrites = 0;
-  const status = {
-    className:'smart-status-card is-next',
-    dataset:{ liveDay:'true' },
-    get innerHTML() { return html; },
-    set innerHTML(value) { htmlWrites += 1; html = value; }
+  const previousDocument = globalThis.document;
+  globalThis.document = {
+    querySelector:() => null,
+    readyState:'complete',
+    documentElement:{ dataset:{} }
   };
+  try {
+    const { updateSmartStatusElement } = await import('../js/live-day.js?touch-regression');
+    let html = '<div>same</div>';
+    let htmlWrites = 0;
+    const status = {
+      className:'smart-status-card is-next',
+      dataset:{ liveDay:'true' },
+      get innerHTML() { return html; },
+      set innerHTML(value) { htmlWrites += 1; html = value; }
+    };
 
-  const changed = updateSmartStatusElement(status, { className:'is-next', html:'<div>same</div>' });
-  assert.equal(changed, false);
-  assert.equal(htmlWrites, 0);
+    const changed = updateSmartStatusElement(status, { className:'is-next', html:'<div>same</div>' });
+    assert.equal(changed, false);
+    assert.equal(htmlWrites, 0);
 
-  const changedAgain = updateSmartStatusElement(status, { className:'is-next', html:'<div>changed</div>' });
-  assert.equal(changedAgain, true);
-  assert.equal(htmlWrites, 1);
+    const changedAgain = updateSmartStatusElement(status, { className:'is-next', html:'<div>changed</div>' });
+    assert.equal(changedAgain, true);
+    assert.equal(htmlWrites, 1);
+  } finally {
+    if (previousDocument === undefined) delete globalThis.document;
+    else globalThis.document = previousDocument;
+  }
 });
 
 test('live day stylesheet defines smart card, faded past events and progress rail', async () => {
