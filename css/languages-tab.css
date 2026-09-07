@@ -1,0 +1,4 @@
+.bottom-nav{grid-template-columns:repeat(5,1fr)}
+.languages-grid{display:grid;gap:8px}
+.language-card h3{display:flex;align-items:center;gap:7px}
+@media(max-width:390px){.bottom-nav{padding-left:4px;padding-right:4px}.nav-button{font-size:18px;gap:1px}.nav-button b{font-size:7.5px;letter-spacing:.45px}}
