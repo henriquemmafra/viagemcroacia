@@ -12,6 +12,26 @@ test('live day enhancer builds one smart status card and timeline states', async
   assert.doesNotMatch(liveDay, /setInterval\(/, 'reuse app minute refresh instead of creating a duplicate interval');
 });
 
+test('smart status update does not rewrite identical HTML', async () => {
+  const { updateSmartStatusElement } = await import('../js/live-day.js');
+  let html = '<div>same</div>';
+  let htmlWrites = 0;
+  const status = {
+    className:'smart-status-card is-next',
+    dataset:{ liveDay:'true' },
+    get innerHTML() { return html; },
+    set innerHTML(value) { htmlWrites += 1; html = value; }
+  };
+
+  const changed = updateSmartStatusElement(status, { className:'is-next', html:'<div>same</div>' });
+  assert.equal(changed, false);
+  assert.equal(htmlWrites, 0);
+
+  const changedAgain = updateSmartStatusElement(status, { className:'is-next', html:'<div>changed</div>' });
+  assert.equal(changedAgain, true);
+  assert.equal(htmlWrites, 1);
+});
+
 test('live day stylesheet defines smart card, faded past events and progress rail', async () => {
   const css = await readFile(new URL('../css/live-day.css', import.meta.url), 'utf8');
   assert.match(css, /\.smart-status-card/);
