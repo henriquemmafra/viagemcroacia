@@ -15,12 +15,15 @@ test('index loads translator styling, translator module and nav icon module', as
   assert.match(index, /name="adriatico-translator-endpoint"/);
 });
 
-test('PWA cache refreshes and precaches new travel enhancement assets', async () => {
+test('PWA cache refreshes and precaches travel enhancement assets', async () => {
   const worker = await read('../service-worker.js');
-  assert.match(worker, /adriatico-2026-v15/);
+  assert.match(worker, /adriatico-2026-v16/);
   assert.match(worker, /\.\/css\/translator\.css/);
   assert.match(worker, /\.\/js\/translator\.js/);
   assert.match(worker, /\.\/js\/nav-icons\.js/);
+  assert.match(worker, /\.\/css\/live-day\.css/);
+  assert.match(worker, /\.\/js\/live-day\.js/);
+  assert.match(worker, /\.\/js\/conversation-audio\.js/);
 });
 
 test('translator stylesheet includes touch-friendly target and action controls', async () => {
