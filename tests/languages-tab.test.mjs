@@ -4,25 +4,25 @@ import { readFile } from 'node:fs/promises';
 
 test('moves language tools into a dedicated bottom navigation tab', async () => {
   const index = await readFile(new URL('../index.html', import.meta.url), 'utf8');
-  const app = await readFile(new URL('../js/app.js', import.meta.url), 'utf8');
-  const css = await readFile(new URL('../css/app.css', import.meta.url), 'utf8');
+  const css = await readFile(new URL('../css/languages-tab.css', import.meta.url), 'utf8');
+  const moduleSource = await readFile(new URL('../js/languages-tab.js', import.meta.url), 'utf8');
 
   const navTabs = [...index.matchAll(/data-tab="([^"]+)"/g)].map((match) => match[1]);
   assert.deepEqual(navTabs, ['today', 'route', 'wallet', 'languages', 'more']);
   assert.match(index, /data-tab="languages"[^>]*>[\s\S]*?<b>LÍNGUAS<\/b>/);
+  assert.match(index, /css\/languages-tab\.css/);
+  assert.match(index, /js\/languages-tab\.js/);
   assert.match(css, /\.bottom-nav\{[^}]*grid-template-columns:repeat\(5,1fr\)/);
 
-  assert.match(app, /function renderLanguages\(\)/);
-  assert.match(app, /state\.tab === 'languages'\) renderLanguages\(\)/);
-
-  const languagesBlock = app.match(/function renderLanguages\(\) \{([\s\S]*?)\n\}\nfunction renderMore\(\)/)?.[1] || '';
-  const moreBlock = app.match(/function renderMore\(\) \{([\s\S]*?)\n\}\nfunction render\(\)/)?.[1] || '';
-  assert.match(languagesBlock, /Object\.entries\(phrases\)/);
-  assert.match(languagesBlock, /Línguas/);
-  assert.doesNotMatch(moreBlock, /Object\.entries\(phrases\)/);
+  assert.match(moduleSource, /function languagesPageMarkup|export function languagesPageMarkup/);
+  assert.match(moduleSource, /Object\.entries\(phrases\)/);
+  assert.match(moduleSource, /translatorMarkup/);
+  assert.match(moduleSource, /stripLanguagesFromMore/);
 });
 
-test('refreshes the PWA cache for the dedicated languages tab', async () => {
+test('refreshes the PWA cache and precaches the dedicated languages tab assets', async () => {
   const worker = await readFile(new URL('../service-worker.js', import.meta.url), 'utf8');
   assert.match(worker, /adriatico-2026-v21/);
+  assert.match(worker, /\.\/js\/languages-tab\.js/);
+  assert.match(worker, /\.\/css\/languages-tab\.css/);
 });
