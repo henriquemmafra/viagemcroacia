@@ -36,3 +36,32 @@ test('translator card is a single Google Translate shortcut with no custom trans
   assert.match(html, /translate\.google\.com/);
   assert.doesNotMatch(html, /textarea|ESTOU OUVINDO|data-conversation-mic|TRADUZIR COM GOOGLE/);
 });
+
+test('translator update does not rewrite identical text nodes', async () => {
+  const { updateTranslatorCard, googleTranslateUrl } = await loadTranslator();
+  let headingText = '🇧🇷 Português ↔ 🇭🇷 Croata';
+  let linkText = '🇭🇷 ABRIR GOOGLE TRADUTOR';
+  let headingWrites = 0;
+  let linkWrites = 0;
+  const heading = {
+    get textContent() { return headingText; },
+    set textContent(value) { headingWrites += 1; headingText = value; }
+  };
+  const link = {
+    href:googleTranslateUrl('hr'),
+    get textContent() { return linkText; },
+    set textContent(value) { linkWrites += 1; linkText = value; }
+  };
+  const card = {
+    dataset:{ translatorTarget:'hr' },
+    querySelector(selector) {
+      if (selector === 'h3') return heading;
+      if (selector === '[data-translator-open]') return link;
+      return null;
+    }
+  };
+
+  assert.equal(updateTranslatorCard(card, 'hr'), true);
+  assert.equal(headingWrites, 0);
+  assert.equal(linkWrites, 0);
+});
