@@ -20,28 +20,62 @@ function eventDate(dayDate, hhmm) {
   return new Date(year, month - 1, day, hour, minute, 0, 0);
 }
 
-export function getDayTemporalState(day, now = new Date()) {
+function timedEventRanges(day) {
   const timed = (day?.events ?? []).filter((event) => /^\d{2}:\d{2}$/.test(event.time ?? ''));
+  return timed.map((event, index) => {
+    const start = eventDate(day.date, event.time);
+    const nextStart = timed[index + 1] ? eventDate(day.date, timed[index + 1].time) : null;
+    const end = event.end
+      ? eventDate(day.date, event.end)
+      : nextStart || new Date(start.getTime() + 60 * 60 * 1000);
+    return { event, start, end };
+  });
+}
+
+export function getDayTemporalState(day, now = new Date()) {
+  const ranges = timedEventRanges(day);
   let current = null;
   let next = null;
   let nextAt = null;
 
-  for (const event of timed) {
-    const start = eventDate(day.date, event.time);
-    const end = event.end ? eventDate(day.date, event.end) : new Date(start.getTime() + 60 * 60 * 1000);
-    if (now >= start && now < end) current = event;
-    if (!next && start > now) {
-      next = event;
-      nextAt = start;
+  for (const range of ranges) {
+    if (now >= range.start && now < range.end) current = range.event;
+    if (!next && range.start > now) {
+      next = range.event;
+      nextAt = range.start;
     }
   }
 
-  if (!current && timed.length && now < eventDate(day.date, timed[0].time)) {
-    next = timed[0];
-    nextAt = eventDate(day.date, timed[0].time);
+  const eventStates = new Map();
+  for (const range of ranges) {
+    let state = 'future';
+    if (now >= range.end) state = 'past';
+    else if (range.event === current) state = 'current';
+    else if (range.event === next) state = 'next';
+    eventStates.set(range.event, state);
   }
 
-  return { current, next, nextAt };
+  let progress = 0;
+  if (ranges.length) {
+    const firstStart = ranges[0].start;
+    const lastEnd = ranges.at(-1).end;
+    if (now <= firstStart) progress = 0;
+    else if (now >= lastEnd) progress = 100;
+    else progress = Math.max(0, Math.min(100, ((now - firstStart) / (lastEnd - firstStart)) * 100));
+  }
+
+  return { current, next, nextAt, eventStates, progress };
+}
+
+export function getLeaveCue(day, event, now = new Date()) {
+  const minutes = Number(event?.leaveBeforeMinutes);
+  if (!Number.isFinite(minutes) || minutes <= 0 || !/^\d{2}:\d{2}$/.test(event?.time ?? '')) return null;
+  const start = eventDate(day.date, event.time);
+  if (now >= start) return null;
+  const leaveAt = new Date(start.getTime() - minutes * 60000);
+  if (now >= leaveAt) return 'HORA DE SAIR';
+  const remaining = Math.max(1, Math.round((leaveAt - now) / 60000));
+  return `SAIR EM ${remaining} MIN`;
 }
 
 export function formatCountdown(ms) {
