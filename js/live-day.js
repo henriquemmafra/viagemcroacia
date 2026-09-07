@@ -110,6 +110,27 @@ export function smartStatusCard(day, temporal, now = new Date()) {
   };
 }
 
+export function updateSmartStatusElement(status, smart) {
+  if (!status || !smart) return false;
+  const nextClassName = `smart-status-card ${smart.className}`;
+  const nextHtml = String(smart.html ?? '');
+  let changed = false;
+
+  if (status.className !== nextClassName) {
+    status.className = nextClassName;
+    changed = true;
+  }
+  if (status.dataset?.liveDay !== 'true') {
+    status.dataset.liveDay = 'true';
+    changed = true;
+  }
+  if (status.innerHTML !== nextHtml) {
+    status.innerHTML = nextHtml;
+    changed = true;
+  }
+  return changed;
+}
+
 function bindSmartTicketActions() {
   main?.querySelectorAll('[data-live-ticket]').forEach((button) => {
     button.addEventListener('click', () => {
@@ -148,11 +169,10 @@ export function enhanceLiveDay(now = new Date()) {
   document.documentElement.dataset.tripDate = day.date;
   const temporal = temporalForSelectedDay(day, now);
   const smart = smartStatusCard(day, temporal, now);
-  status.className = `smart-status-card ${smart.className}`;
-  status.dataset.liveDay = 'true';
-  status.innerHTML = smart.html;
+  const smartHtmlChanged = status.innerHTML !== smart.html;
+  updateSmartStatusElement(status, smart);
   applyTimelineStates(day, temporal);
-  bindSmartTicketActions();
+  if (smartHtmlChanged) bindSmartTicketActions();
   return true;
 }
 
