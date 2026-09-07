@@ -15,6 +15,17 @@ test('maps itinerary dates to Croatian, Hungarian and Slovenian speech locales',
   assert.equal(conversationLanguageForDay({ date:'2026-09-30' }, 'sl').speechLocale, 'sl-SI');
 });
 
+test('switches the mixed September 13 itinerary from Slovenian to Croatian at Rovinj arrival', () => {
+  assert.equal(
+    conversationLanguageForDay({ date:'2026-09-13' }, 'hr', new Date(2026, 8, 13, 17, 30)).speechLocale,
+    'sl-SI'
+  );
+  assert.equal(
+    conversationLanguageForDay({ date:'2026-09-13' }, 'sl', new Date(2026, 8, 13, 18, 5)).speechLocale,
+    'hr-HR'
+  );
+});
+
 test('sends only audio and locale and returns transcript plus Portuguese translation', async () => {
   const blob = new Blob(['voice'], { type:'audio/webm' });
   const fetchImpl = async (_url, options) => {
