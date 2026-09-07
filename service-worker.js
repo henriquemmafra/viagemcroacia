@@ -1,4 +1,4 @@
-const CACHE = 'adriatico-2026-v16';
+const CACHE = 'adriatico-2026-v17';
 const PRECACHE = [
   './',
   './index.html',
@@ -10,7 +10,6 @@ const PRECACHE = [
   './js/core.js',
   './js/speech.js',
   './js/translator.js',
-  './js/conversation-audio.js',
   './js/live-day.js',
   './js/nav-icons.js',
   './js/vintgar-patch.js',
