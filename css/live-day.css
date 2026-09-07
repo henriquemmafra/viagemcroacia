@@ -1,25 +1,68 @@
+:root{--readable-muted:#5c3d1e}
 .smart-status-card{margin:10px 0 14px;border:1px solid var(--ink);border-radius:16px;padding:14px;background:var(--ink);color:var(--paper);box-shadow:0 4px 18px rgba(45,26,10,.08)}
-.smart-status-card.is-next{background:var(--white);color:var(--ink);border-color:rgba(26,92,122,.35)}
+.smart-status-card.is-next{background:var(--white);color:var(--ink);border-color:rgba(26,92,122,.42)}
 .smart-status-card.is-done{background:rgba(251,248,242,.72);color:var(--ink2);border-color:var(--border);box-shadow:none}
-.smart-status-card__tag{font-family:"Courier New",monospace;font-size:9px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:var(--paper2)}
-.smart-status-card.is-next .smart-status-card__tag,.smart-status-card.is-done .smart-status-card__tag{color:var(--ink3)}
-.smart-status-card__title{margin-top:7px;font-size:19px;font-weight:700;line-height:1.15}
-.smart-status-card__meta,.smart-status-card__location{margin-top:5px;font-family:"Courier New",monospace;font-size:10px;line-height:1.4;color:var(--paper2)}
-.smart-status-card.is-next .smart-status-card__meta,.smart-status-card.is-next .smart-status-card__location,.smart-status-card.is-done .smart-status-card__meta{color:var(--ink3)}
+.smart-status-card__tag{font-family:"Courier New",monospace;font-size:10px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:var(--paper2)}
+.smart-status-card.is-next .smart-status-card__tag,.smart-status-card.is-done .smart-status-card__tag{color:var(--readable-muted)}
+.smart-status-card__title{margin-top:7px;font-size:21px;font-weight:700;line-height:1.15}
+.smart-status-card__meta,.smart-status-card__location{margin-top:5px;font-family:"Courier New",monospace;font-size:11px;line-height:1.45;color:var(--paper2)}
+.smart-status-card.is-next .smart-status-card__meta,.smart-status-card.is-next .smart-status-card__location,.smart-status-card.is-done .smart-status-card__meta{color:var(--readable-muted)}
 .smart-status-card__countdown{display:inline-block;margin-left:5px;border-radius:7px;padding:3px 7px;background:var(--med-blue);color:#fff;font-weight:700}
 .smart-status-card__actions{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px}
-.smart-status-card__actions .tl-btn{min-height:42px}
-.smart-status-card__next{display:grid;grid-template-columns:auto 1fr;gap:4px 8px;align-items:center;margin-top:12px;padding-top:10px;border-top:1px solid rgba(242,232,208,.25);font-family:"Courier New",monospace}
-.smart-status-card__next span{font-size:8px;font-weight:700;letter-spacing:.8px;color:var(--paper2)}
-.smart-status-card__next b{min-width:0;font-size:10px;line-height:1.3}
-.smart-status-card__next small{grid-column:2;font-size:9px;color:var(--paper2)}
+.smart-status-card__actions .tl-btn{min-height:44px}
+.smart-status-card__next{display:grid;grid-template-columns:auto 1fr;gap:4px 8px;align-items:center;margin-top:12px;padding-top:10px;border-top:1px solid rgba(242,232,208,.32);font-family:"Courier New",monospace}
+.smart-status-card__next span{font-size:9.5px;font-weight:700;letter-spacing:.8px;color:var(--paper2)}
+.smart-status-card__next b{min-width:0;font-size:11.5px;line-height:1.35}
+.smart-status-card__next small{grid-column:2;font-size:10.5px;color:var(--paper2)}
 .timeline{--timeline-progress:0%;position:relative}
 .timeline::after{content:"";position:absolute;left:41px;top:14px;width:2px;height:var(--timeline-progress);max-height:calc(100% - 28px);background:var(--med-blue);pointer-events:none;z-index:1;border-radius:2px}
 .tl-dot{position:relative;z-index:2}
-.tl-item.is-past{opacity:.48}
-.tl-item.is-past .tl-card{box-shadow:none}
+.tl-item.is-past{opacity:.68;margin-bottom:0}
+.tl-item.is-past .tl-card{padding:6px 9px;box-shadow:none;background:rgba(251,248,242,.58);border-color:rgba(45,26,10,.07);margin-bottom:1px}
+.tl-item.is-past .tl-card-sub{display:none}
+.tl-item.is-past .tl-card-note{display:none}
+.tl-item.is-past .event-tip{display:none}
+.tl-item.is-past .alert-strip{display:none}
+.tl-item.is-past .tl-nav{display:none}
+.tl-item.is-past .status-badge{display:none}
+.tl-item.is-past .tl-card h3{font-size:11.5px;font-weight:600;line-height:1.15;color:var(--ink2)}
+.tl-item.is-past .tl-time{font-size:9px;padding-top:8px;color:var(--ink3);font-weight:700}
+.tl-item.is-past .tl-dot{margin-top:10px;transform:scale(.82)}
 .tl-item.is-past .tl-dot::after{content:attr(data-state-cue);position:absolute;left:-3px;top:-8px;font-family:"Courier New",monospace;font-size:8px;color:var(--olive)}
 .tl-item.is-current{opacity:1}
 .tl-item.is-current .tl-card{border-color:var(--ink);box-shadow:0 3px 15px rgba(45,26,10,.10)}
-.tl-item.is-next .tl-card{border-color:rgba(26,92,122,.38)}
-@media(max-width:390px){.smart-status-card__title{font-size:17px}.smart-status-card{padding:12px}}
+.tl-item.is-next .tl-card{border-color:rgba(26,92,122,.48)}
+
+.eyebrow,.hero__date,.hero-daynum,.hero-date,.section-title,.tl-time,.tl-card-sub{color:var(--readable-muted)}
+.eyebrow,.hero__date,.hero-daynum,.section-title{font-size:10.5px;font-weight:700}
+.device-date,.hero-date{font-size:12px}
+.network-pill{font-size:10px}
+.hero p{font-size:13.5px;line-height:1.45;color:var(--ink2)}
+.section-title{letter-spacing:1.8px}
+.tl-time{font-size:10.5px;font-weight:700}
+.tl-card h3{font-size:14.5px;line-height:1.22}
+.tl-card-sub{font-size:10.5px;line-height:1.45}
+.tl-card-note{font-size:12px;line-height:1.45;color:var(--ink2)}
+.status-badge{font-size:8.5px}
+.event-tip summary{font-size:10px}
+.event-tip p{font-size:12px}
+.alert-strip{font-size:10.5px;color:#7f3525}
+.alert-strip b{font-size:9.5px}
+.tl-btn{font-size:10px;min-height:42px}
+.nav-button b{font-size:9.5px}
+
+body .weather-section-head p{font-size:13px;color:#51483d;line-height:1.4}
+body .weather-refresh{font-size:11px;color:#463f36}
+body .weather-stop-head b{font-size:15px}
+body .weather-stop-head small{font-size:11px;color:#5f5548}
+body .weather-live-clock{font-size:13px;color:#9e3f28}
+body .weather-current-label{font-size:10px;color:#fff}
+body .weather-current-feels{font-size:12.5px;color:#fff}
+body .weather-day-range small{font-size:9px;color:#fff}
+body .weather-condition b{font-size:14px}
+body .weather-condition span{font-size:11px;color:#5f5548}
+body .weather-metrics span{font-size:10.5px;color:#463f36}
+body .weather-advice{font-size:13px;color:#40382f}
+body .weather-advice b{font-size:10.5px}
+
+@media(max-width:390px){.smart-status-card__title{font-size:20px}.smart-status-card{padding:13px}.hero p{font-size:13px}.tl-card h3{font-size:14px}.tl-item.is-past .tl-card h3{font-size:11.5px}}
