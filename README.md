@@ -22,16 +22,13 @@ PWA mobile-first para a viagem de Henrique & Cibele em setembro de 2026.
 - **Carteira** offline com QR codes, boarding passes, reservas e PINs;
 - Maps/Waze/Uber por deeplink, com iconografia rápida para Maps e Waze;
 - frases essenciais em croata, húngaro e esloveno com pronúncia local quando disponível;
-- tradutor digitado de português para croata, húngaro e esloveno por meio de proxy seguro;
-- modo conversa com botão **bandeira + 🎙️**: segure para gravar, `ESTOU OUVINDO` durante a fala e `TRADUZINDO…` após soltar;
-- idioma de conversa escolhido pelo contexto do roteiro, com croata, húngaro e esloveno suportados;
-- resultado de conversa mostra a transcrição original e a tradução em português, com **OUVIR ORIGINAL** e **RESPONDER**;
+- atalho inteligente para **Google Tradutor**, abrindo Português ↔ Croata/Húngaro/Esloveno conforme o dia da viagem;
+- em 13 de setembro, o atalho troca de esloveno para croata após a chegada planejada a Rovinj às 18:05;
+- no Google Tradutor, o viajante pode usar texto, câmera, microfone e modo conversa sem nenhuma API própria do PWA;
 - service worker para funcionamento offline dos arquivos e informações locais do app.
 
 ## Internet e privacidade
 
-A tradução digitada e a conversa por áudio requerem internet. As frases essenciais, roteiro e arquivos precacheados permanecem disponíveis offline.
+Roteiro, tickets precacheados e frases essenciais continuam disponíveis offline. O atalho do Google Tradutor requer internet para abrir e usar os recursos online do Google.
 
-O áudio é capturado somente enquanto o controle de microfone está sendo segurado, limitado a 20 segundos e não é persistido pelo app. Transcrições e traduções também não são armazenadas como histórico.
-
-As chaves das APIs Google ficam somente no Cloudflare Worker como secrets. Dados de cartão, CVV, documentos digitalizados, chaves de API e dados bancários não fazem parte dos arquivos públicos do app.
+O PWA não mantém chave de API, Cloudflare Worker, gravação própria de áudio ou histórico de traduções. Dados de cartão, CVV, documentos digitalizados, chaves de API e dados bancários não fazem parte dos arquivos públicos do app.
