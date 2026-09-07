@@ -64,7 +64,7 @@ export const pendingItems = [
 ];
 
 export const phrases = {
-  Croata: [['Olá','Bok / Dobar dan'],['Obrigado','Hvala'],['Por favor','Molim'],['A conta','Račun, molim'],['Onde fica...?','Gdje je...?']],
-  Húngaro: [['Olá','Szia'],['Obrigado','Köszönöm'],['Por favor','Kérem'],['A conta','A számlát kérem'],['Onde fica metrô?','Hol a metró?']],
-  Esloveno: [['Olá','Živijo / Dober dan'],['Obrigado','Hvala'],['Por favor','Prosim'],['A conta','Račun, prosim'],['Onde fica...?','Kje je...?']]
+  Croata: [['Olá','Bok / Dobar dan'],['Obrigado','Hvala'],['Por favor','Molim'],['A conta','Račun, molim'],['Onde fica...?','Gdje je...?'],['Com licença','Oprostite'],['Desculpa','Žao mi je'],['Sim','Da'],['Não','Ne']],
+  Húngaro: [['Olá','Szia'],['Obrigado','Köszönöm'],['Por favor','Kérem'],['A conta','A számlát kérem'],['Onde fica metrô?','Hol a metró?'],['Com licença','Elnézést'],['Desculpa','Bocsánat'],['Sim','Igen'],['Não','Nem']],
+  Esloveno: [['Olá','Živijo / Dober dan'],['Obrigado','Hvala'],['Por favor','Prosim'],['A conta','Račun, prosim'],['Onde fica...?','Kje je...?'],['Com licença','Oprostite'],['Desculpa','Žal mi je'],['Sim','Da'],['Não','Ne']]
 };
