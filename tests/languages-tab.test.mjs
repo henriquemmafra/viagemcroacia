@@ -20,6 +20,17 @@ test('moves language tools into a dedicated bottom navigation tab', async () => 
   assert.match(moduleSource, /stripLanguagesFromMore/);
 });
 
+test('language page renders translator plus all three phrase groups', async () => {
+  const { languagesPageMarkup } = await import('../js/languages-tab.js');
+  const html = languagesPageMarkup('hu');
+  assert.match(html, /<h1>Línguas<\/h1>/);
+  assert.match(html, /🇭🇺 Húngaro/);
+  assert.match(html, /<h3>Croata<\/h3>/);
+  assert.match(html, /<h3>Húngaro<\/h3>/);
+  assert.match(html, /<h3>Esloveno<\/h3>/);
+  assert.match(html, /ABRIR GOOGLE TRADUTOR/);
+});
+
 test('refreshes the PWA cache and precaches the dedicated languages tab assets', async () => {
   const worker = await readFile(new URL('../service-worker.js', import.meta.url), 'utf8');
   assert.match(worker, /adriatico-2026-v21/);
