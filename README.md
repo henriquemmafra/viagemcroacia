@@ -18,7 +18,11 @@ PWA mobile-first para a viagem de Henrique & Cibele em setembro de 2026.
 - tela **Hoje** com Agora/Próximo, swipe entre dias, vestir/levar, timeline e dicas;
 - tela **Roteiro** com visão geral da viagem;
 - **Carteira** offline com QR codes, boarding passes, reservas e PINs;
-- Maps/Waze/Uber por deeplink;
+- Maps/Waze/Uber por deeplink, com iconografia rápida para Maps e Waze;
+- frases essenciais em croata, húngaro e esloveno com pronúncia local quando disponível;
+- tradutor rápido de português para croata, húngaro e esloveno, alimentado pelo [Google Translate](https://translate.google.com) por meio de um proxy seguro;
 - service worker para funcionamento offline.
 
-Dados de cartão, CVV, documentos digitalizados e dados bancários não fazem parte do app.
+A tradução livre requer internet. As frases essenciais permanecem disponíveis offline. O Google Translate fornece traduções automáticas e pode produzir imprecisões.
+
+Dados de cartão, CVV, documentos digitalizados, chaves de API e dados bancários não fazem parte dos arquivos públicos do app.
