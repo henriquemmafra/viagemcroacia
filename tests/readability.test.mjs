@@ -25,6 +25,6 @@ test('minimizes past timeline items instead of leaving full cards faded', () => 
   assert.match(css, /\.tl-item\.is-past \.tl-card[^}]*padding:6px 9px/);
 });
 
-test('refreshes the PWA cache for the readability update', () => {
-  assert.match(worker, /adriatico-2026-v20/);
+test('keeps the readability update in the current PWA cache', () => {
+  assert.match(worker, /adriatico-2026-v21/);
 });
