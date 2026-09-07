@@ -164,13 +164,15 @@ including:
 
 ### New local-language voice input
 
-Above the Portuguese text input, add a prominent local-language voice button.
+Above the Portuguese text input, add a prominent press-and-hold microphone button.
 
-Examples by itinerary context:
+Idle examples by itinerary context:
 
-- Croatia: `🇭🇷 PODE FALAR`
-- Hungary: `🇭🇺 PODE FALAR`
-- Slovenia: `🇸🇮 PODE FALAR`
+- Croatia: `🇭🇷  🎙️`
+- Hungary: `🇭🇺  🎙️`
+- Slovenia: `🇸🇮  🎙️`
+
+The button should be visually obvious without requiring an idle text label. Its accessible label should describe the action and language, for example `Segure para falar em croata`.
 
 The local language is chosen automatically from the selected itinerary day, not from geolocation.
 
@@ -186,34 +188,36 @@ Expected trip context:
 
 If a day cannot be mapped confidently, default to the current manually selected translator target rather than guessing.
 
-### Voice-state copy
+### Hold-to-talk interaction and visible state
 
-The button text is intentionally communicative for the person holding/speaking toward the phone.
+The primary iPhone interaction is press-and-hold:
 
-State flow:
+1. idle: show only the local flag plus a large microphone icon, e.g. `🇭🇷  🎙️`;
+2. user presses and holds the microphone: recording starts and the control changes to `🔴 ESTOU OUVINDO`;
+3. user releases: recording stops immediately and the control changes to `⏳ TRADUZINDO…`;
+4. success: return to the idle local-flag + microphone state;
+5. error/cancel: return to idle and show a concise error message.
 
-1. idle: `🇭🇷 PODE FALAR`
-2. recording: `🔴 ESTOU OUVINDO`
-3. upload/transcription/translation: `⏳ TRADUZINDO…`
-4. success: return to `🇭🇷 PODE FALAR`
-5. error: return to idle and show a concise error message
+`ESTOU OUVINDO` is intentionally explicit because it tells the other person that the phone is actively listening.
 
-The recording state must be visibly unmistakable.
+Use Pointer Events where available so touch, mouse, and stylus share one lifecycle: `pointerdown` starts, `pointerup` stops, and `pointercancel` cancels safely. Keyboard press/release (`keydown`/`keyup` for Space or Enter while the button has focus) should provide the same hold-to-talk behavior for accessibility.
 
 ### Audio capture
 
 Do not depend solely on the browser's `SpeechRecognition` API.
 
-Use `MediaRecorder` / `getUserMedia({ audio:true })` when supported to record a short utterance after an explicit tap.
+Use `MediaRecorder` / `getUserMedia({ audio:true })` when supported to record only while the microphone control is being held.
 
 Rules:
 
-- microphone permission is requested only after the user taps `PODE FALAR`;
-- provide an explicit stop action while recording, or auto-stop at a conservative maximum duration;
-- maximum recording duration: 20 seconds;
+- microphone permission is requested only after a direct press on the microphone control;
+- release stops and submits the current utterance;
+- `pointercancel`, page interruption, or explicit cancellation stops recording without leaving the microphone active;
+- auto-stop at 20 seconds even if the user continues holding;
 - release microphone tracks immediately after recording or cancellation;
 - do not record in the background;
 - do not retain audio in browser storage;
+- if the user releases before microphone permission finishes, treat the pending request as cancelled and do not begin a hidden recording afterward;
 - show a clear unsupported-browser message if audio capture is unavailable.
 
 ### Server flow
@@ -262,7 +266,7 @@ Do not add persistent conversation history in this package.
 - Fixed phrase cards and their local browser speech remain available offline when supported by the device.
 - Typed dynamic translation remains online-only.
 - Local-language voice transcription/translation is online-only.
-- When offline, `PODE FALAR` remains visible but produces a clear `Áudio precisa de internet.` state rather than requesting microphone access.
+- When offline, the local flag + microphone control remains visible but does not request microphone permission; pressing it produces the clear state `Áudio precisa de internet.`.
 
 ---
 
@@ -305,6 +309,7 @@ Own existing typed translator and conversation-mode UI/state wiring.
 Own:
 
 - itinerary language mapping helpers;
+- hold-to-talk pointer/keyboard lifecycle;
 - audio recording lifecycle;
 - MediaRecorder support detection;
 - audio request construction/client call.
@@ -321,14 +326,15 @@ Use existing app visual variables and add only scoped styles needed for:
 
 - smart-card states;
 - timeline past/current/next/progress states;
-- conversation button/result states.
+- conversation microphone/result states.
 
 ---
 
 ## Privacy and safety
 
 - No geolocation is required for selecting the spoken language.
-- Microphone access occurs only after a direct tap.
+- Microphone access occurs only after a direct press on the microphone control.
+- Audio is captured only while the user intentionally holds the control, subject to the 20-second cap.
 - Recorded audio is sent only for the requested transcription/translation action.
 - Do not store audio, transcripts, translations, or conversation history persistently.
 - Do not add analytics or background recording.
@@ -338,9 +344,11 @@ Use existing app visual variables and add only scoped styles needed for:
 
 ## Accessibility and iPhone behavior
 
-- Keep touch targets at least 44px high.
+- Keep touch targets at least 44px high; the microphone control should be substantially larger than the minimum because it is the primary conversation action.
+- The idle control uses a recognizable microphone icon plus the local flag, with an `aria-label` that names the language and says to hold to speak.
 - Voice status changes use `aria-live` so state is announced.
 - `ESTOU OUVINDO` must not rely on color alone; the text itself conveys state.
+- Holding and releasing Space/Enter while the microphone button has keyboard focus mirrors the press-and-hold interaction.
 - Past timeline events remain legible enough to read.
 - Respect reduced-motion preferences; timeline progress does not require animation.
 - When microphone permission is denied, return the UI to a usable idle state without breaking typed translation.
@@ -378,25 +386,30 @@ Add/extend tests for at least:
 ### Audio client
 
 16. unsupported MediaRecorder/getUserMedia produces a safe message;
-17. recording is capped at 20 seconds;
-18. microphone tracks are stopped after completion/cancel/error;
-19. offline state prevents microphone request;
-20. UI state sequence uses exactly `PODE FALAR`, `ESTOU OUVINDO`, `TRADUZINDO…`.
+17. pressing/holding starts recording and displays `ESTOU OUVINDO`;
+18. releasing stops recording and enters `TRADUZINDO…`;
+19. recording is capped at 20 seconds;
+20. microphone tracks are stopped after completion/cancel/error;
+21. `pointercancel` cancels safely;
+22. release-before-permission-completes does not start a hidden recording;
+23. offline state prevents microphone request;
+24. keyboard keydown/keyup mirrors hold-to-talk behavior;
+25. idle state contains the resolved local flag plus microphone icon without the old `PODE FALAR` copy.
 
 ### Worker
 
-21. only `hr-HR`, `hu-HU`, and `sl-SI` speech input is accepted;
-22. oversized/invalid audio is rejected before Google calls;
-23. Google credential is never sent in query strings or returned to client;
-24. speech transcript is translated to Portuguese and only safe fields are returned;
-25. upstream speech/translation error detail is not leaked.
+26. only `hr-HR`, `hu-HU`, and `sl-SI` speech input is accepted;
+27. oversized/invalid audio is rejected before Google calls;
+28. Google credential is never sent in query strings or returned to client;
+29. speech transcript is translated to Portuguese and only safe fields are returned;
+30. upstream speech/translation error detail is not leaked.
 
 ### Regression
 
-26. existing typed translator tests still pass;
-27. existing speech/phrase tests still pass;
-28. existing navigation/ticket/day tests still pass;
-29. service-worker cache version increments and new frontend asset is precached.
+31. existing typed translator tests still pass;
+32. existing speech/phrase tests still pass;
+33. existing navigation/ticket/day tests still pass;
+34. service-worker cache version increments and new frontend asset is precached.
 
 ---
 
@@ -409,7 +422,8 @@ The feature is complete when:
 - the timeline rail indicates day progress;
 - the view updates as time passes without page reload;
 - the translator automatically shows the correct local flag/language for the selected itinerary day;
-- a local speaker can tap `PODE FALAR`, see `ESTOU OUVINDO`, speak, and receive a Portuguese translation;
+- a local speaker can press and hold the microphone, see `ESTOU OUVINDO`, speak, release, see `TRADUZINDO…`, and receive a Portuguese translation;
+- the idle microphone control is icon-first rather than displaying `PODE FALAR`;
 - the user can listen to the original transcript and immediately switch to typing a Portuguese reply;
 - typed translation and fixed phrases continue to work as before;
 - no microphone recording, transcript, or Google credential is persisted in the app;
