@@ -5,19 +5,19 @@ import { tripDays3 } from './trip-days-3.js';
 export const tripDays = [...tripDays1, ...tripDays2, ...tripDays3];
 
 export const routeOverview = [
-  { dates:'7–9 set', city:'Dubrovnik', detail:'Old Town · muralhas · Lokrum', next:'✈️ voo para Budapest' },
-  { dates:'9–11 set', city:'Budapest', detail:'Buda · Széchenyi · Jewish Quarter', next:'🚌 FlixBus 06:45 para Ljubljana' },
-  { dates:'11–13 set', city:'Ljubljana + Bled', detail:'Eslovênia sem carro · Bled/Vintgar de ônibus', next:'🚌 Postojna · Predjama · Koper' },
-  { dates:'13–14 set', city:'Rovinj', detail:'Chegada de ônibus às ~18:05 · noite na Old Town', next:'🚌 08:00 para Pula' },
-  { dates:'14–17 set', city:'Pula · Ístria · Plitvice', detail:'🚗 SIXT desde Pula 14/set 09:30', next:'🚗 devolução Split Airport 17/set 19:30' },
-  { dates:'17–21 set', city:'Split + Krka + Vis', detail:'Sem carro · cidade, parques e ferry', next:'🚌 Split → Dubrovnik · ✈️ Brasil' }
+  { dates:'7–9 set', city:'Dubrovnik', detail:'Old Town · muralhas · museus · Srđ', next:'✈️ voo para Budapest' },
+  { dates:'9–11 set', city:'Budapest', detail:'Buda · Danúbio · Jewish Quarter · termas', next:'🚌 FlixBus 06:45 para Ljubljana' },
+  { dates:'11–13 set', city:'Ljubljana + Bled', detail:'Ljubljana a pé · Bled/Vintgar de ônibus e shuttle', next:'🚌 Postojna · Predjama · Koper' },
+  { dates:'13–16 set', city:'Rovinj + Ístria', detail:'Pula/Kamenjak de ônibus + táxi · Motovun/Grožnjan com motorista', next:'🚐 transfer via Rastoke para Plitvice' },
+  { dates:'16–17 set', city:'Rastoke + Plitvice', detail:'Transfer até a hospedagem · Programa H cedo', next:'🚌 direto Plitvice → Split' },
+  { dates:'17–21 set', city:'Split + Krka + Vis', detail:'Cidade, parques, ônibus e ferry', next:'🚌 Split → Dubrovnik · ✈️ Brasil' }
 ];
 
 export const walletItems = [
-  { id:'sixt-pula-split', category:'Carro', title:'SIXT · BMW 1 Series ou similar', subtitle:'Pula Rodoviária → Split Airport · 14–17 set', date:'14 set 09:30 → 17 set 19:30', locator:'9738865814', status:'confirmed', note:'€532,40 · proteção sem franquia · caução €1.700 · pneus/vidros + roadside assistance incluídos.' },
-  { id:'bus-rovinj-pula', category:'Ônibus', title:'Rovinj → Pula', subtitle:'Arriva · planejado 08:00 → 08:40', date:'14 set', status:'planned', note:'Comprar depois de confirmar o horário final; a retirada SIXT é 09:30.' },
+  { id:'bus-rovinj-pula', category:'Ônibus', title:'Rovinj → Pula', subtitle:'Arriva/Brioni · meta 08:00 → ~08:45', date:'14 set', status:'planned', note:'Confirmar a saída exata na véspera; há várias ligações diárias entre Rovinj e Pula.' },
   { id:'flixbus-koper-rovinj', category:'Ônibus', title:'Koper → Rovinj', subtitle:'FlixBus · planejado 16:30 → ~18:05', date:'13 set', status:'planned', note:'Não comprar sem garantir o transfer Postojna → Koper.' },
-  { id:'vintgar-pass', category:'Atrações', title:'Vintgar Gorge', subtitle:'All-in-One Pass · meta 09:30', date:'12 set', status:'to-book', note:'Shuttle oficial de Bled incluído no passe.' },
+  { id:'bus-plitvice-split', category:'Ônibus', title:'Plitvice → Split', subtitle:'Direto · meta 16:20 → ~20:50', date:'17 set', status:'to-book', note:'Confirmar o ponto exato de embarque junto à Entrada 1/2 no bilhete final.' },
+  { id:'vintgar-pass', category:'Atrações', title:'Vintgar Gorge', subtitle:'All-in-One Pass · tour 09:00', date:'12 set', status:'to-book', note:'Shuttle oficial de Bled incluído no passe.' },
   { id:'postojna-predjama', category:'Atrações', title:'Postojna Cave + Predjama', subtitle:'Two Adventures · Postojna 13:00', date:'13 set', status:'to-book', note:'Predjama primeiro: shuttle 10:40 ida / 12:05 volta.' },
   { id:'dubrovnik-pass-henrique', groupId:'dubrovnik-pass', groupTitle:'Dubrovnik Pass · 3 dias', groupSubtitle:'Henrique + Cibele', holder:'Henrique', category:'Passes', title:'Dubrovnik Pass - Henrique', subtitle:'3 dias · código FW321KW4', date:'08–09 set', codeAsset:'assets/tickets/dubrovnik-pass-henrique.png', note:'Ônibus: após o primeiro uso, guardar o ticket impresso.' },
   { id:'dubrovnik-pass-cibele', groupId:'dubrovnik-pass', groupTitle:'Dubrovnik Pass · 3 dias', groupSubtitle:'Henrique + Cibele', holder:'Cibele', category:'Passes', title:'Dubrovnik Pass - Cibele', subtitle:'3 dias · código JL67A7MI', date:'08–09 set', codeAsset:'assets/tickets/dubrovnik-pass-cibele.png', note:'Ônibus: após o primeiro uso, guardar o ticket impresso.' },
@@ -53,12 +53,17 @@ export const packingChecklist = [
 ];
 
 export const pendingItems = [
-  'Vintgar: comprar All-in-One Pass para 12/set, meta de entrada 09:30.',
+  'Budapest: comprar/reservar pelo botão 🎟️ das atrações pagas e do cruzeiro.',
+  'Vintgar: ingresso já comprado; usar o QR salvo na Carteira.',
   'Postojna + Predjama: comprar Two Adventures para 13/set, Postojna Cave 13:00.',
   'Postojna → Koper: fechar transfer/táxi que chegue a Koper antes das 15:45.',
   'FlixBus Koper → Rovinj: comprar 13/set 16:30 depois de travar o transfer.',
-  'Ônibus Rovinj → Pula: comprar 14/set, meta 08:00 → 08:40.',
-  'Plitvice: confirmar ingresso, Entrance 1 e horário definitivo.',
+  'Rovinj ↔ Pula: confirmar/comprar ônibus de 14/set.',
+  'Pula ↔ Kamenjak: fechar táxi/transfer de ida e volta para 14/set.',
+  'Ístria interior: fechar motorista/tour Rovinj → Motovun → Grožnjan → Rovinj para 15/set.',
+  'Rovinj → Plitvice: fechar transfer de 16/set com parada em Rastoke.',
+  'Plitvice: comprar ingresso para 17/set, Entrada 2 / Programa H.',
+  'Ônibus Plitvice → Split: comprar saída direta planejada 16:20 de 17/set.',
   'Ferry Vis/Jadrolinija: confirmar ida e volta de 20/set.',
   'Krka: confirmar tour, ponto de encontro e regras atuais do parque.'
 ];
