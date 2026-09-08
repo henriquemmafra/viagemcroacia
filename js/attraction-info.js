@@ -21,10 +21,20 @@ function externalLink(className, href, text, ariaLabel) {
   return link;
 }
 
+function updateRouteCopy(main) {
+  const paragraph = main?.querySelector?.('.page-header p');
+  if (!paragraph) return false;
+  const next = 'A viagem inteira em uma linha: ônibus, ferry, táxi e transfers — sem aluguel de carro.';
+  if (paragraph.textContent === next) return false;
+  if (!paragraph.textContent?.includes('carro só a partir de Pula')) return false;
+  paragraph.textContent = next;
+  return true;
+}
+
 export function enhanceAttractionInfo(root = document) {
   const main = root.querySelector?.('#app-main') || root;
   if (!main?.querySelectorAll) return 0;
-  let added = 0;
+  let added = updateRouteCopy(main) ? 1 : 0;
 
   main.querySelectorAll('.tl-card').forEach((card) => {
     const nav = card.querySelector('.tl-nav');
