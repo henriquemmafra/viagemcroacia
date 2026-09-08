@@ -107,5 +107,5 @@ test('major attractions expose an official info link for the same action row as 
 
 test('refreshes the PWA cache for the rebuilt itinerary and info actions', async () => {
   const worker = await readFile(new URL('../service-worker.js', import.meta.url), 'utf8');
-  assert.match(worker, /adriatico-2026-v25/);
+  assert.match(worker, /adriatico-2026-v26/);
 });
