@@ -35,6 +35,7 @@ export const tripDays1 = [
     bring: ['Dubrovnik Pass', '1 L de água/pessoa', 'Protetor 50+'],
     alerts: ['QR do ônibus do Dubrovnik Pass funciona uma vez; guardar o ticket impresso entregue pelo motorista.'],
     events: [
+      ev('07:00','Café da manhã · Bakery Mokošica',{ end:'07:25', icon:'☕', location:loc('Bakery Mokošica','Boškovićeva 7, Dubrovnik, Croatia'), note:'Padaria local dentro da Old Town. Café rápido antes de seguir para a Porta Pile e as muralhas.', tip:'Pegue algo rápido como croissant, burek ou sanduíche para não perder a abertura das muralhas.'}),
       ev('07:30','Ativar Dubrovnik Pass na Porta Pile',{ end:'07:45', icon:'🎟️', location:loc('Pile Gate','Pile Gate, Dubrovnik, Croatia'), ticketId:'dubrovnik-pass-henrique', perrengue:'Ativar aqui, não no dia anterior.'}),
       ev('07:45','Muralhas Medievais',{ end:'09:30', icon:'🏰', location:loc('Dubrovnik City Walls - Pile Gate','Dubrovnik City Walls, Pile Gate, Dubrovnik, Croatia'), ticketId:'dubrovnik-pass-henrique', perrengue:'O livreto recomenda entrar antes das 8h para evitar calor e lotação.', tip:'Na primeira metade do circuito, pare nos pontos que enquadram telhados + Adriático; depois a luz fica mais dura.'}),
       ev('09:30','Fortaleza Lovrijenac + Stradun',{ end:'10:30', icon:'🏯', location:loc('Fort Lovrijenac','Fort Lovrijenac, Dubrovnik, Croatia'), ticketId:'dubrovnik-pass-henrique'}),
