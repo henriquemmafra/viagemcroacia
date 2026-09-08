@@ -17,7 +17,7 @@ test('index loads translator shortcut styling, module and nav icon module', asyn
 
 test('PWA cache refreshes and precaches travel enhancement assets', async () => {
   const worker = await read('../service-worker.js');
-  assert.match(worker, /adriatico-2026-v26/);
+  assert.match(worker, /adriatico-2026-v27/);
   assert.match(worker, /\.\/css\/translator\.css/);
   assert.match(worker, /\.\/js\/translator\.js/);
   assert.match(worker, /\.\/js\/nav-icons\.js/);
