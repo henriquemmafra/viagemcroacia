@@ -115,6 +115,6 @@ test('major attractions expose an official info link beside Uber, Maps and Waze'
 
 test('refreshes the PWA cache for the rebuilt itinerary and info actions', async () => {
   const worker = await read('../service-worker.js');
-  assert.match(worker, /adriatico-2026-v26/);
+  assert.match(worker, /adriatico-2026-v27/);
   assert.match(worker, /\.\/js\/attraction-info\.js/);
 });
