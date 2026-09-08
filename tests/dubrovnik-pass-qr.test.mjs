@@ -18,8 +18,10 @@ test('uses the verified official Dubrovnik Pass QR images', async () => {
   assert.match(data, /codeAsset:'assets\/tickets\/dubrovnik-pass-henrique\.png'/);
   assert.match(data, /codeAsset:'assets\/tickets\/dubrovnik-pass-cibele\.png'/);
 
-  assert.equal(await sha256('../assets/tickets/dubrovnik-pass-henrique.png'), 'c5a5c57191f36d03f1a31ac7e9b10b61f9284f29726d06aee0fdb0e35a4aef72');
-  assert.equal(await sha256('../assets/tickets/dubrovnik-pass-cibele.png'), '0392a417c39b99464308540d3c2b7bf521dcbfa20614f82a3f900e7e21698dbb');
+  // Henrique: official QR payload c0572227-7ff7-41b9-8177-35aca3f55fc3
+  assert.equal(await sha256('../assets/tickets/dubrovnik-pass-henrique.png'), '04e616fd1e0f44ad82e871968db3de091179e074ffd5709dcbf534a2f930ad32');
+  // Cibele: official QR payload e5f52e1e-3e4d-4a4d-8976-561dfdd38f3c
+  assert.equal(await sha256('../assets/tickets/dubrovnik-pass-cibele.png'), 'dda89e3b8e41cc3cf476a6c4e017d238960e3b0a5b732fba39aed1db218802c5');
 });
 
 test('refreshes the PWA cache while keeping both Dubrovnik Pass QR assets offline', async () => {
