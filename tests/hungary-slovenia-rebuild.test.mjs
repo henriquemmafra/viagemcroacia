@@ -87,7 +87,7 @@ test('Postojna day uses the morning gap for Vivarium or EXPO before Predjama and
   ]);
 });
 
-test('major attractions expose an official info link for the same action row as navigation', async () => {
+test('major attractions expose an official info link beside Uber, Maps and Waze', async () => {
   const days = [...tripDays1, ...tripDays2].filter((day) => day.date >= '2026-09-09' && day.date <= '2026-09-13');
   const attractionTitles = [
     'New York Café','Fisherman’s Bastion','Matthias Church','Széchenyi Thermal Bath',
@@ -99,13 +99,16 @@ test('major attractions expose an official info link for the same action row as 
     assert.match(event.infoUrl || '', /^https:\/\//, `${title} should have an official infoUrl`);
   }
 
-  const app = await readFile(new URL('../js/app.js', import.meta.url), 'utf8');
-  assert.match(app, /class=\\?"tl-btn info\\?"/);
-  assert.match(app, /ⓘ Sobre/);
-  assert.match(app, /tl-nav[\s\S]*infoAction/);
+  const index = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+  const moduleSource = await readFile(new URL('../js/attraction-info.js', import.meta.url), 'utf8');
+  assert.match(index, /js\/attraction-info\.js/);
+  assert.match(moduleSource, /tl-btn info/);
+  assert.match(moduleSource, /ⓘ Sobre/);
+  assert.match(moduleSource, /\.tl-nav/);
 });
 
 test('refreshes the PWA cache for the rebuilt itinerary and info actions', async () => {
   const worker = await readFile(new URL('../service-worker.js', import.meta.url), 'utf8');
   assert.match(worker, /adriatico-2026-v26/);
+  assert.match(worker, /\.\/js\/attraction-info\.js/);
 });
