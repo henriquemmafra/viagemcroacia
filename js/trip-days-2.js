@@ -9,7 +9,7 @@ export const tripDays2 = [
     wear:['Roupa confortável de viagem','Tênis','Moletom leve'],
     bring:['Passaporte à mão','Ticket FlixBus','Powerbank'],
     alerts:[
-      'Não há carro alugado na Eslovênia.',
+      'Toda a Eslovênia segue sem aluguel de carro.',
       'Controles de fronteira podem atrasar o FlixBus; se a chegada atrasar, preserve Castelo + eixo do rio.',
       'Open Kitchen acontece nesta sexta no Central Market; aproveitar como almoço tardio sem sair da rota.'
     ],
@@ -21,7 +21,7 @@ export const tripDays2 = [
       ev('13:20','Deixar malas · Under The Castle Apartments',{ end:'13:40', icon:'🏨', location:loc('Under The Castle Apartments','Under The Castle Apartments, Ljubljana, Slovenia'), ticketId:'hotel-under-castle', note:'Check-in rápido / deixar bagagem e sair leve para o centro.'}),
       ev('13:45','Open Kitchen + Central Market',{ end:'14:40', icon:'🍴', location:loc('Open Kitchen · Pogačarjev trg','Pogačarjev trg, Ljubljana, Slovenia'), note:'Feira gastronômica de sexta-feira com cozinhas locais e internacionais no coração do mercado.', tip:'Almoçar aqui resolve a refeição sem quebrar o sentido geográfico do passeio.', infoUrl:'https://www.odprtakuhna.si/en/events/511/open-kitchen'}),
       ev('14:40','Dragon Bridge',{ end:'14:55', icon:'🐉', location:loc('Dragon Bridge','Zmajski most, Ljubljana, Slovenia'), note:'A ponte dos quatro dragões é um dos símbolos de Ljubljana e uma referência marcante da arquitetura do início do século XX.', infoUrl:'https://www.visitljubljana.com/en/poi/dragon-bridge/'}),
-      ev('15:00','Funicular + Ljubljana Castle',{ end:'17:00', icon:'🏰', location:loc('Ljubljana Castle Funicular','Krekov trg 4, Ljubljana, Slovenia'), note:'Fortaleza no alto da colina com exposições, pátios e vistas abertas sobre o centro e os Alpes ao fundo.', tip:'Subir de funicular e descer a pé apenas se ainda estiverem dispostos; o restante da rota é todo em descida/terreno plano.', infoUrl:'https://www.ljubljanskigrad.si/en/'}),
+      ev('15:00','Funicular + Ljubljana Castle',{ end:'17:00', icon:'🏰', location:loc('Ljubljana Castle Funicular','Krekov trg 4, Ljubljana, Slovenia'), status:'to-book', note:'Fortaleza no alto da colina com exposições, pátios e vistas abertas sobre o centro e os Alpes ao fundo.', tip:'Subir de funicular e descer a pé apenas se ainda estiverem dispostos; o restante da rota é todo em descida/terreno plano.', infoUrl:'https://www.ljubljanskigrad.si/en/', buyUrl:'https://www.ljubljanskigrad.si/en/tickets/'}),
       ev('17:10','St Nicholas Cathedral',{ end:'17:25', icon:'⛪', location:loc('Ljubljana Cathedral','Dolničarjeva ulica 1, Ljubljana, Slovenia'), note:'Catedral barroca de Ljubljana, conhecida pela cúpula verde e pelas portas de bronze.', infoUrl:'https://www.visitljubljana.com/en/poi/the-cathedral-church-of-st-nicholas'}),
       ev('17:25','Town Hall + Robba Fountain + Mestni trg',{ end:'17:45', icon:'🏛️', location:loc('Ljubljana Town Hall','Mestni trg 1, Ljubljana, Slovenia'), note:'Praça cívica do centro antigo, com a prefeitura e a fonte barroca de Robba.'}),
       ev('17:45','Cobblers’ Bridge',{ end:'18:00', icon:'🌉', location:loc('Cobblers’ Bridge','Čevljarski most, Ljubljana, Slovenia'), note:'Uma das pontes mais características de Plečnik, marcada por colunas e balaustradas que transformam a travessia em uma pequena praça.', infoUrl:'https://www.visitljubljana.com/en/poi/cobblers-bridge'}),
@@ -52,7 +52,7 @@ export const tripDays2 = [
       ev('07:30','VINTGAR Shuttle saindo de Bled',{ end:'08:15', icon:'🚌', location:loc('Bled Central Bus Station','Bled Bus Station, Slovenia'), status:'planned', note:'Shuttle oficial de Bled para Vintgar; seguir a sinalização/conexão do serviço oficial.', infoUrl:'https://www.bled.si/en/information/getting-around-bled/2024081213233767/vintgar-shuttle/'}),
       ev('09:00','Vintgar Gorge',{ end:'12:00', icon:'🥾', location:loc('Vintgar Gorge','Vintgar Gorge Visitor Centre, Podhom, Slovenia'), status:'confirmed', ticketId:'vintgar-henrique', note:'Guided Tour confirmado; passarelas acompanham o rio Radovna entre paredes rochosas, corredeiras e quedas d’água.', perrengue:'Meeting point 08:50; tênis confortável, água e roupa adequada ao clima.', infoUrl:'https://www.vintgar.si/'}),
       ev('12:00','Shuttle Vintgar → Bled',{ end:'12:25', icon:'🚌', location:loc('Bled Central Bus Station','Bled Bus Station, Slovenia'), status:'planned'}),
-      ev('12:40','Bled Castle + mirantes',{ end:'13:40', icon:'🏰', location:loc('Bled Castle','Grajska cesta 61, Bled, Slovenia'), note:'Castelo medieval erguido sobre a falésia acima do lago; o principal prêmio é a vista panorâmica da ilha e dos Alpes.', tip:'Priorizar os terraços e mirantes; não gastar a maior parte da hora em interiores.', infoUrl:'https://www.blejski-grad.si/en/'}),
+      ev('12:40','Bled Castle + mirantes',{ end:'13:40', icon:'🏰', location:loc('Bled Castle','Grajska cesta 61, Bled, Slovenia'), status:'to-book', note:'Castelo medieval erguido sobre a falésia acima do lago; o principal prêmio é a vista panorâmica da ilha e dos Alpes.', tip:'Priorizar os terraços e mirantes; não gastar a maior parte da hora em interiores.', infoUrl:'https://www.blejski-grad.si/en/', buyUrl:'https://blejski-grad.mojekarte.si/en/all.html'}),
       ev('13:50','Almoço + kremšnita em Bled',{ end:'14:30', icon:'🍰', location:loc('Lake Bled Promenade','Cesta svobode, Bled, Slovenia'), note:'Kremšnita é o clássico bolo de creme de Bled; almoço compacto para continuar o circuito do lago.'}),
       ev('14:30','Caminhada pela margem até Mlino',{ end:'15:00', icon:'🚶', location:loc('Mlino','Mlino, Bled, Slovenia'), note:'Seguir pela margem sul em direção ao embarque tradicional das pletnas.'}),
       ev('15:00','Pletna + Ilha de Bled',{ end:'16:30', icon:'🚣', location:loc('Bled Island','Bled Island, Slovenia'), note:'Travessia no barco tradicional pletna até a única ilha natural da Eslovênia, com igreja e escadaria histórica.', tip:'Na ida, olhar para trás para ver o castelo enquadrado sobre a água.', infoUrl:'https://www.bled.si/en/what-to-see-do/attractions/2/bled-island/'}),
@@ -78,12 +78,12 @@ export const tripDays2 = [
     events:[
       ev('07:20','Checkout + Ljubljana Bus Station',{ end:'07:50', icon:'🧳', location:loc('Ljubljana Bus Station','Ljubljana Bus Station, Trg Osvobodilne fronte 4, Ljubljana, Slovenia')}),
       ev('08:00','Ônibus Ljubljana → Postojna Cave',{ end:'09:00', icon:'🚌', location:loc('Postojna Cave','Jamska cesta 30, Postojna, Slovenia'), status:'planned', perrengue:'Guardar bagagem nos lockers do complexo assim que chegar.'}),
-      ev('09:05','Vivarium / EXPO Cave Karst + café',{ end:'10:20', icon:'🐉', location:loc('Postojna Cave Park','Jamska cesta 30, Postojna, Slovenia'), note:'Usar a antiga espera da manhã para conhecer o mundo subterrâneo, o proteus e a exposição sobre o carste.', tip:'Se o tempo apertar, priorizar Vivarium/EXPO mais próximo e deixar o café para algo rápido.', infoUrl:'https://www.postojnska-jama.eu/en/'}),
+      ev('09:05','Vivarium / EXPO Cave Karst + café',{ end:'10:20', icon:'🐉', location:loc('Postojna Cave Park','Jamska cesta 30, Postojna, Slovenia'), status:'to-book', note:'Usar a antiga espera da manhã para conhecer o mundo subterrâneo, o proteus e a exposição sobre o carste.', tip:'Se o tempo apertar, priorizar Vivarium/EXPO mais próximo e deixar o café para algo rápido.', infoUrl:'https://www.postojnska-jama.eu/en/', buyUrl:'https://www.postojnska-jama.eu/en/information/tickets/'}),
       ev('10:40','Shuttle Postojna → Predjama',{ end:'11:00', icon:'🚌', location:loc('Predjama Castle','Predjama 1, Postojna, Slovenia'), status:'planned', perrengue:'Levar dinheiro se o shuttle exigir pagamento em espécie e estar no ponto alguns minutos antes.', infoUrl:'https://www.postojnska-jama.eu/en/information/shuttle-bus/'}),
-      ev('11:00','Predjama Castle',{ end:'12:00', icon:'🏰', location:loc('Predjama Castle','Predjama 1, Postojna, Slovenia'), note:'Castelo construído na boca de uma caverna, encaixado diretamente no paredão de rocha; é uma das imagens mais marcantes da Eslovênia.', tip:'Fazer a foto ampla da fachada antes de entrar, porque o shuttle de volta é fixo.', infoUrl:'https://www.postojnska-jama.eu/en/'}),
+      ev('11:00','Predjama Castle',{ end:'12:00', icon:'🏰', location:loc('Predjama Castle','Predjama 1, Postojna, Slovenia'), status:'to-book', note:'Castelo construído na boca de uma caverna, encaixado diretamente no paredão de rocha; é uma das imagens mais marcantes da Eslovênia.', tip:'Fazer a foto ampla da fachada antes de entrar, porque o shuttle de volta é fixo.', infoUrl:'https://www.postojnska-jama.eu/en/', buyUrl:'https://www.postojnska-jama.eu/en/information/tickets/'}),
       ev('12:05','Shuttle Predjama → Postojna',{ end:'12:25', icon:'🚌', location:loc('Postojna Cave','Jamska cesta 30, Postojna, Slovenia'), status:'planned'}),
       ev('12:25','Lanche + chegar ao embarque da caverna',{ end:'12:50', icon:'🥪', location:loc('Postojna Cave','Jamska cesta 30, Postojna, Slovenia'), perrengue:'Não sentar para almoço longo. A prioridade é estar pronto para o tour das 13h.'}),
-      ev('13:00','Postojna Cave',{ end:'14:30', icon:'🚂', location:loc('Postojna Cave','Jamska cesta 30, Postojna, Slovenia'), status:'planned', note:'Sistema de cavernas visitado parcialmente de trem e parcialmente a pé, com grandes salões e formações calcárias.', perrengue:'Casaco acessível; o ambiente subterrâneo é frio mesmo no verão.', infoUrl:'https://www.postojnska-jama.eu/en/'}),
+      ev('13:00','Postojna Cave',{ end:'14:30', icon:'🚂', location:loc('Postojna Cave','Jamska cesta 30, Postojna, Slovenia'), status:'to-book', note:'Sistema de cavernas visitado parcialmente de trem e parcialmente a pé, com grandes salões e formações calcárias.', perrengue:'Casaco acessível; o ambiente subterrâneo é frio mesmo no verão.', infoUrl:'https://www.postojnska-jama.eu/en/', buyUrl:'https://www.postojnska-jama.eu/en/information/tickets/'}),
       ev('14:35','Transfer/táxi Postojna → Koper',{ end:'15:30', icon:'🚕', location:loc('Koper Bus Station','Kolodvorska cesta 11, Koper, Slovenia'), status:'to-finalize', perrengue:'Trecho crítico da conexão: não substituir por opção lenta sem recalcular a margem para o ônibus das 16:30.'}),
       ev('15:30','Koper · margem de segurança / mini-passeio',{ end:'16:10', icon:'🌊', location:loc('Koper Bus Station','Kolodvorska cesta 11, Koper, Slovenia'), note:'Primeiro garantir o terminal e a plataforma. Só caminhar nas proximidades se malas e horário estiverem sob controle.'}),
       ev('16:30','FlixBus Koper → Rovinj',{ end:'18:05', icon:'🚌', location:loc('Rovinj Bus Station','Trg na lokvi 6, Rovinj, Croatia'), status:'planned', perrengue:'Estar no terminal com antecedência.'}),
@@ -93,24 +93,28 @@ export const tripDays2 = [
     ]
   },
   {
-    date:'2026-09-14', city:'Rovinj → Pula · Motovun · Grožnjan', title:'Ônibus para Pula · SIXT · Ístria',
-    summary:'Ônibus cedo para Pula, retirada do carro confirmada e roadtrip pelas vilas da Ístria.',
-    theme:'pula', heroIcon:'🏛️', heroLabel:'PULA · ISTRIA',
-    wear:['Tênis','Roupa leve','Óculos de sol'],
-    bring:['Reserva SIXT','CNH + PID','Cartão físico do locatário','Água'],
-    alerts:['Carro começa somente hoje, em Pula.','Retirada SIXT confirmada às 09:30.','Depósito informado pela SIXT: €1.700.'],
+    date:'2026-09-14', city:'Rovinj → Pula + Kamenjak', title:'Pula romana → Kamenjak · sem carro',
+    summary:'Ônibus até Pula, centro romano a pé e tarde no Cabo Kamenjak usando táxi/transfer; volta a Rovinj sem aluguel de carro.',
+    theme:'pula', heroIcon:'🏛️', heroLabel:'PULA · KAMENJAK',
+    wear:['Tênis','Roupa de banho por baixo','Óculos de sol'],
+    bring:['Toalha','Aqua-shoes','Protetor 50+','Água','Powerbank'],
+    alerts:[
+      'Aluguel de carro cancelado: este dia é ônibus + táxi/transfer.',
+      'Rovinj ↔ Pula tem várias saídas diárias; confirmar os horários escolhidos no dia anterior.',
+      'Fechar o táxi/transfer Pula ↔ Kamenjak antes de sair para evitar perder tempo em Premantura.'
+    ],
     events:[
-      ev('07:30','Caminhar até Rovinj Bus Station',{ end:'07:50', icon:'🚶', location:loc('Rovinj Bus Station','Rovinj Bus Station, Trg na lokvi 6, Rovinj, Croatia')}),
-      ev('08:00','Ônibus Rovinj → Pula',{ end:'08:40', icon:'🚌', location:loc('Pula Bus Station','Pula Bus Station, Trg I istarske brigade 1, Pula, Croatia'), status:'planned', perrengue:'Ônibus ainda deve ser comprado; manter chegada com folga para a SIXT.'}),
-      ev('09:30','Retirar carro SIXT — Pula Rodoviária',{ end:'10:00', icon:'🚗', location:loc('SIXT Pula Bus Station','Trg I istarske brigade 1, Pula, Croatia'), ticketId:'sixt-pula-split', status:'confirmed', perrengue:'Levar CNH/PID e o cartão físico usado na reserva. Fotografar o carro na retirada.'}),
-      ev('10:10','Arena de Pula + centro romano',{ end:'11:45', icon:'🏛️', location:loc('Pula Arena','Pula Arena, Flavijevska ul., Pula, Croatia'), tip:'Entre cedo na Arena e faça a foto externa antes do fluxo maior. Depois, siga a pé pelo Arco dos Sérgios e Fórum.'}),
-      ev('11:45','Café/almoço leve em Pula',{ end:'12:35', icon:'🍽️', location:loc('Pula Old Town','Pula Old Town, Croatia'), tip:'Coma leve: a tarde tem estrada e ladeiras em Motovun.'}),
-      ev('12:40','Drive Pula → Motovun',{ end:'13:45', icon:'🚗', location:loc('Motovun','Motovun, Croatia')}),
-      ev('13:45','Motovun',{ end:'15:15', icon:'🏰', location:loc('Motovun','Motovun, Croatia'), tip:'Procure massas ou pratos com trufas. Para fotos, as muralhas e os mirantes sobre o vale do Mirna são o ponto alto.'}),
-      ev('15:20','Drive Motovun → Grožnjan',{ end:'16:00', icon:'🚗', location:loc('Grožnjan','Grožnjan, Croatia')}),
-      ev('16:00','Grožnjan',{ end:'17:15', icon:'🎨', location:loc('Grožnjan','Grožnjan, Croatia'), tip:'Caminhe sem roteiro pelas ruelas e ateliês; as melhores fotos aparecem nas portas, escadas e vistas entre as casas.'}),
-      ev('17:20','Drive Grožnjan → Rovinj',{ end:'18:30', icon:'🚗', location:loc('Rovinj','Rovinj, Croatia')}),
-      ev('20:00','Jantar Puntulina',{ icon:'🍽️', location:loc('Puntulina','Puntulina, Svetog Križa 38, Rovinj, Croatia'), tip:'Se houver escolha, peça mesa voltada para o mar/rochas; é a graça do lugar.', perrengue:'Reservar.'})
+      ev('07:30','Caminhar até Rovinj Bus Station',{ end:'07:50', icon:'🚶', location:loc('Rovinj Bus Station','Trg na lokvi 6, Rovinj, Croatia')}),
+      ev('08:00','Ônibus Rovinj → Pula',{ end:'08:45', icon:'🚌', location:loc('Pula Bus Station','Trg I istarske brigade 1, Pula, Croatia'), status:'planned', perrengue:'Confirmar a saída exata na Arriva/rodoviária na véspera.'}),
+      ev('09:00','Arena de Pula + centro romano',{ end:'10:45', icon:'🏛️', location:loc('Pula Arena','Flavijevska ul., Pula, Croatia'), note:'Arena primeiro, depois Arco dos Sérgios, Fórum e Templo de Augusto em sequência a pé.', tip:'Fazer a foto externa da Arena antes de entrar e depois seguir sempre em direção ao Fórum.'}),
+      ev('10:45','Mercado de Pula + café',{ end:'11:20', icon:'☕', location:loc('Pula Market','Narodni trg 9, Pula, Croatia'), note:'Parada curta no caminho, sem voltar para a rodoviária.'}),
+      ev('11:30','Almoço leve em Pula',{ end:'12:20', icon:'🍽️', location:loc('Pula Old Town','Pula, Croatia'), tip:'Comer leve antes da tarde de praia.'}),
+      ev('12:30','Táxi/transfer Pula → Cabo Kamenjak',{ end:'13:00', icon:'🚕', location:loc('Cape Kamenjak','Cape Kamenjak, Premantura, Croatia'), status:'to-finalize', perrengue:'Combinar também a hora/local da volta antes de descer do carro.'}),
+      ev('13:00','Cabo Kamenjak · nadar + snorkel',{ end:'17:00', icon:'🤿', location:loc('Cape Kamenjak','Cape Kamenjak, Premantura, Croatia'), note:'Tarde inteira de enseadas, rochas e água clara no extremo sul da Ístria.', perrengue:'Aqua-shoes recomendados por rochas/ouriços.'}),
+      ev('17:00','Táxi/transfer Kamenjak → Pula',{ end:'17:35', icon:'🚕', location:loc('Pula Bus Station','Trg I istarske brigade 1, Pula, Croatia'), status:'to-finalize'}),
+      ev('18:00','Ônibus Pula → Rovinj',{ end:'18:45', icon:'🚌', location:loc('Rovinj Bus Station','Trg na lokvi 6, Rovinj, Croatia'), status:'planned', perrengue:'Usar a melhor saída confirmada; 18:00 é a meta de planejamento, não um ticket emitido.'}),
+      ev('19:00','Rovinj · orla + pôr do sol',{ end:'19:45', icon:'🌅', location:loc('Rovinj Waterfront','Rovinj, Croatia'), note:'Volta leve pela orla antes do jantar.'}),
+      ev('20:00','Jantar Puntulina',{ icon:'🍽️', location:loc('Puntulina','Puntulina, Svetog Križa 38, Rovinj, Croatia'), tip:'Se houver escolha, pedir mesa voltada para o mar/rochas.', perrengue:'Reservar.'})
     ]
   },
 ];
