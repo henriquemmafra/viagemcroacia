@@ -92,13 +92,15 @@ test('Postojna day uses the morning gap for Vivarium or EXPO before Predjama and
 });
 
 test('major attractions expose an official info link beside Uber, Maps and Waze', async () => {
-  const days = [...tripDays1, ...tripDays2].filter((day) => day.date >= '2026-09-09' && day.date <= '2026-09-13');
+  const events = [...tripDays1, ...tripDays2]
+    .filter((day) => day.date >= '2026-09-09' && day.date <= '2026-09-13')
+    .flatMap((day) => day.events);
   const attractionTitles = [
     'New York Café','Fisherman’s Bastion','Matthias Church','Széchenyi Thermal Bath',
     'Open Kitchen','Ljubljana Castle','Vintgar Gorge','Bled Castle','Ojstrica','Predjama','Postojna Cave'
   ];
   for (const title of attractionTitles) {
-    const event = days.flatMap((day) => day.events).find((item) => item.title.includes(title));
+    const event = events.find((item) => item.title === title) || events.find((item) => item.title.includes(title));
     assert.ok(event, `missing attraction ${title}`);
     assert.match(event.infoUrl || '', /^https:\/\//, `${title} should have an official infoUrl`);
   }
