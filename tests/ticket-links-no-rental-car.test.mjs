@@ -7,7 +7,10 @@ import { tripDays3 } from '../js/trip-days-3.js';
 import { walletItems, routeOverview } from '../js/trip-data.js';
 
 const allDays = [...tripDays1, ...tripDays2, ...tripDays3];
-const event = (date, title) => allDays.find((day) => day.date === date)?.events.find((item) => item.title.includes(title));
+const event = (date, title) => {
+  const events = allDays.find((day) => day.date === date)?.events || [];
+  return events.find((item) => item.title === title) || events.find((item) => item.title.includes(title));
+};
 const read = (path) => readFile(new URL(path, import.meta.url), 'utf8');
 
 test('paid Hungary and Slovenia attractions expose direct purchase links', () => {
