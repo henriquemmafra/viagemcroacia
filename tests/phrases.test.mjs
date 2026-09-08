@@ -12,14 +12,17 @@ const expected = [
   ["Bom dia","Dobro jutro"], ["Boa tarde","Dobar dan"],
   ["Boa noite (cumprimento)","Dobra večer"], ["Boa noite (despedida)","Laku noć"],
   ["Tchau","Bok / Doviđenja"], ["Desculpa, não falo croata","Oprostite, ne govorim hrvatski"],
+  ["Eu gostaria de...","Želio bih... / Željela bih..."],
 
   ["Bom dia","Jó reggelt"], ["Boa tarde","Jó napot"],
   ["Boa noite (cumprimento)","Jó estét"], ["Boa noite (despedida)","Jó éjszakát"],
   ["Tchau","Szia / Viszontlátásra"], ["Desculpa, não falo húngaro","Bocsánat, nem beszélek magyarul"],
+  ["Eu gostaria de...","Szeretnék..."],
 
   ["Bom dia","Dobro jutro"], ["Boa tarde","Dober dan"],
   ["Boa noite (cumprimento)","Dober večer"], ["Boa noite (despedida)","Lahko noč"],
-  ["Tchau","Adijo / Nasvidenje"], ["Desculpa, não falo esloveno","Oprostite, ne govorim slovensko"]
+  ["Tchau","Adijo / Nasvidenje"], ["Desculpa, não falo esloveno","Oprostite, ne govorim slovensko"],
+  ["Eu gostaria de...","Rad bi... / Rada bi..."]
 ];
 
 test('includes the approved essential and greeting phrases for all three languages', () => {
