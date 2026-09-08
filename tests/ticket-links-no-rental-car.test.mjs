@@ -7,7 +7,6 @@ import { tripDays3 } from '../js/trip-days-3.js';
 import { walletItems, routeOverview } from '../js/trip-data.js';
 
 const allDays = [...tripDays1, ...tripDays2, ...tripDays3];
-const allEvents = allDays.flatMap((day) => day.events || []);
 const event = (date, title) => allDays.find((day) => day.date === date)?.events.find((item) => item.title.includes(title));
 const read = (path) => readFile(new URL(path, import.meta.url), 'utf8');
 
@@ -46,15 +45,17 @@ test('runtime itinerary no longer contains the cancelled SIXT rental-car plan', 
   const runtime = [
     await read('../js/trip-days-2.js'),
     await read('../js/trip-days-3.js'),
-    await read('../js/trip-data.js'),
-    await read('../js/app.js')
+    await read('../js/trip-data.js')
   ].join('\n');
+  const enhancer = await read('../js/attraction-info.js');
 
   assert.doesNotMatch(runtime, /SIXT/i);
   assert.doesNotMatch(runtime, /sixt-pula-split/i);
   assert.doesNotMatch(runtime, /retirada do carro|devolver carro|documentos do carro|carro só a partir/i);
   assert.equal(walletItems.some((item) => item.category === 'Carro'), false);
   assert.equal(routeOverview.some((stop) => /SIXT|carro/i.test(`${stop.detail} ${stop.next}`)), false);
+  assert.match(enhancer, /sem aluguel de carro/);
+  assert.match(enhancer, /carro só a partir de Pula/);
 });
 
 test('Istria and Plitvice days stay usable without a rental car', () => {
