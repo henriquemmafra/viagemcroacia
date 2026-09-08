@@ -57,46 +57,62 @@ export const tripDays1 = [
     ]
   },
   {
-    date:'2026-09-09', city:'Dubrovnik → Budapest', title:'Rupe + voo + Budapest',
-    summary:'Manhã leve na Old Town, visita ao Rupe, checkout cedo e ida ao aeroporto com margem segura para o voo Wizz Air.',
+    date:'2026-09-09', city:'Dubrovnik → Budapest', title:'Rupe · voo · Budapest iluminada',
+    summary:'Manhã segura em Dubrovnik, voo Wizz e primeira noite cheia em Pest: café histórico, bairro judeu, ruin bar e Danúbio iluminado.',
     theme:'budapest', heroIcon:'✈️', heroLabel:'DUBROVNIK → BUDAPEST',
     wear:['Roupa leve','Tênis confortável','Casaco leve para a noite'],
     bring:['Passaporte','Boarding pass Wizz Air','Powerbank'],
     alerts:[
       '🚨 W6 2256 sai às 14h10 e a porta de embarque fecha às 13h40.',
-      'Meta segura: sair do hotel às 11h30 e estar no DBV por volta de 12h10; o cartão da Wizz indica chegada ao aeroporto às 12h40.',
-      'Lokrum retirado: depois da Blue Cave, não vale depender de ferry antes de um voo.',
-      'Archaeological Museum · Revelin fica fechado às quartas-feiras; não tentar encaixar amanhã.'
+      'Meta segura: sair do hotel às 11h30 e estar no DBV por volta de 12h10.',
+      'O cruzeiro noturno ainda depende de reserva/horário disponível; manter o restante da noite no mesmo eixo central de Pest.'
     ],
     events:[
       ev('08:00','Café da manhã sem pressa na Old Town',{ end:'08:50', icon:'☕', location:loc('Old Town Dubrovnik','Old Town, Dubrovnik, Croatia'), note:'Manhã propositalmente leve: nada de barco ou deslocamento longo antes do voo.'}),
-      ev('09:00','Ethnographic Museum Rupe',{ end:'09:40', icon:'🏛️', location:loc('Ethnographic Museum Rupe','Od Rupa 3, 20000 Dubrovnik, Croatia'), ticketId:'dubrovnik-pass-henrique', note:'Abre às 09h e estava fechado hoje por ser terça-feira. Visita curta para completar uma das atrações que ficaram de fora.'}),
+      ev('09:00','Ethnographic Museum Rupe',{ end:'09:40', icon:'🏛️', location:loc('Ethnographic Museum Rupe','Od Rupa 3, 20000 Dubrovnik, Croatia'), ticketId:'dubrovnik-pass-henrique', note:'Abre às 09h e estava fechado ontem por ser terça-feira.'}),
       ev('09:45','Última volta pela Old Town + café/lembranças',{ end:'10:35', icon:'🚶', location:loc('Stradun','Stradun, Dubrovnik, Croatia'), tip:'Ficar dentro da Old Town e não iniciar nenhuma atração com fila ou transporte.'}),
       ev('10:40','Voltar ao hotel · malas + checkout',{ end:'11:20', icon:'🧳', location:loc('Lausa Dubrovnik Rooms','Garište ul. 4, 20000 Dubrovnik, Croatia'), note:'Deixar passaportes e cartões de embarque já separados antes de sair.'}),
-      ev('11:30','SAIR para o aeroporto DBV',{ end:'12:10', icon:'🚕', location:loc('Aeroporto de Dubrovnik','Dubrovnik Airport, Čilipi, Croatia'), ticketId:'wizz-henrique', perrengue:'Não atrasar esta saída. A viagem de carro costuma levar cerca de 25–40 min, dependendo do trânsito.'}),
-      ev('12:10','ESTAR no aeroporto DBV · segurança + portão',{ end:'13:20', icon:'🛫', location:loc('Aeroporto de Dubrovnik','Dubrovnik Airport, Čilipi, Croatia'), ticketId:'wizz-henrique', note:'Chegada planejada cerca de 30 min antes do horário de aeroporto indicado no cartão da Wizz. Sem bagagem despachada.'}),
-      ev('13:20','Estar no portão de embarque',{ end:'13:40', icon:'⏰', location:loc('Aeroporto de Dubrovnik','Dubrovnik Airport, Čilipi, Croatia'), ticketId:'wizz-henrique', perrengue:'Porta fecha às 13h40. Não usar esta janela para compras ou refeição longe do portão.'}),
+      ev('11:30','SAIR para o aeroporto DBV',{ end:'12:10', icon:'🚕', location:loc('Aeroporto de Dubrovnik','Dubrovnik Airport, Čilipi, Croatia'), ticketId:'wizz-henrique', perrengue:'Não atrasar esta saída.'}),
+      ev('12:10','ESTAR no aeroporto DBV · segurança + portão',{ end:'13:20', icon:'🛫', location:loc('Aeroporto de Dubrovnik','Dubrovnik Airport, Čilipi, Croatia'), ticketId:'wizz-henrique', note:'Chegada planejada com margem confortável.'}),
+      ev('13:20','Estar no portão de embarque',{ end:'13:40', icon:'⏰', location:loc('Aeroporto de Dubrovnik','Dubrovnik Airport, Čilipi, Croatia'), ticketId:'wizz-henrique', perrengue:'Porta fecha às 13h40.'}),
       ev('14:10','W6 2256 Dubrovnik → Budapest',{ end:'15:30', icon:'✈️', ticketId:'wizz-henrique', note:'Henrique 4B · Cibele 4A · confirmação KWKWWW.'}),
       ev('15:30','Chegada Budapest Terminal 2B',{ end:'16:20', icon:'🛬', location:loc('Budapest Airport Terminal 2B','Budapest Ferenc Liszt International Airport Terminal 2B, Hungary')}),
-      ev('16:30','Check-in Up Hotel Budapest',{ end:'18:00', icon:'🏨', location:loc('Up Hotel Budapest','Up Hotel Budapest, Csengery utca 31, Budapest, Hungary'), ticketId:'hotel-up'}),
-      ev('20:00','Jewish Quarter + Szimpla Kert',{ icon:'🌙', location:loc('Szimpla Kert','Szimpla Kert, Kazinczy utca 14, Budapest, Hungary')})
+      ev('16:30','Check-in Up Hotel Budapest',{ end:'17:15', icon:'🏨', location:loc('Up Hotel Budapest','Up Hotel Budapest, Csengery utca 31, Budapest, Hungary'), ticketId:'hotel-up'}),
+      ev('17:30','New York Café',{ end:'18:30', icon:'☕', location:loc('New York Café','New York Café, Erzsébet körút 9-11, Budapest, Hungary'), note:'Salão histórico Belle Époque; aqui a atração é tanto a arquitetura quanto o café.', tip:'Peça algo simples e aproveite o salão sem transformar a parada em jantar.', infoUrl:'https://newyorkcafe.hu/en/'}),
+      ev('18:40','Grande Sinagoga · exterior + Dohány utca',{ end:'19:00', icon:'🕍', location:loc('Dohány Street Synagogue','Dohány u. 2, Budapest, Hungary'), note:'Primeiro contato com a Grande Sinagoga e o coração histórico do bairro judeu; visita interna fica para amanhã.', infoUrl:'https://dohany-zsinagoga.hu/'}),
+      ev('19:00','Jewish Quarter · Kazinczy utca',{ end:'19:40', icon:'🚶', location:loc('Kazinczy utca','Kazinczy utca, Budapest, Hungary'), note:'Ruas do antigo bairro judeu, hoje cheias de bares, pátios, arte urbana e vida noturna.'}),
+      ev('19:40','Szimpla Kert',{ end:'20:20', icon:'🍻', location:loc('Szimpla Kert','Szimpla Kert, Kazinczy utca 14, Budapest, Hungary'), note:'O ruin bar mais emblemático de Budapest, instalado em um prédio antigo cheio de ambientes e objetos reaproveitados.', infoUrl:'https://szimpla.hu/'}),
+      ev('20:25','Gozsdu Udvar + jantar',{ end:'21:20', icon:'🍽️', location:loc('Gozsdu Udvar','Gozsdu Udvar, Király u. 13, Budapest, Hungary'), note:'Sequência de pátios entre Király e Dob, com restaurantes e movimento noturno; continua no mesmo eixo do Jewish Quarter.'}),
+      ev('21:40','Cruzeiro noturno no Danúbio',{ end:'22:50', icon:'🚢', location:loc('Danube Promenade','Danube Promenade, Budapest, Hungary'), status:'to-book', note:'Fechar o dia com Parlamento, Chain Bridge e Buda iluminados vistos da água.', perrengue:'Escolher o píer somente depois de confirmar a empresa/horário; não correr pela cidade para um embarque distante.'}),
+      ev('23:10','Voltar ao Up Hotel',{ icon:'🌙', location:loc('Up Hotel Budapest','Up Hotel Budapest, Csengery utca 31, Budapest, Hungary'), note:'Dormir: amanhã o roteiro começa cedo em Buda.'})
     ]
   },
   {
-    date:'2026-09-10', city:'Budapest', title:'Castelo · Széchenyi · Ruin Bars',
-    summary:'Café histórico, Buda, termas e noite no bairro judeu.',
+    date:'2026-09-10', city:'Budapest', title:'Buda → Danúbio → Pest → City Park',
+    summary:'Dia cheio em fluxo geográfico: nascer da cidade em Buda, descida ao Danúbio, centro monumental de Pest, bairro judeu e termas no City Park.',
     theme:'budapest', heroIcon:'♨️', heroLabel:'BUDAPEST · DANUBE',
     wear:['Tênis','Roupa confortável','Casaco para a noite'],
-    bring:['Roupa de banho','Toalha','Bilhete/transporte BKK'],
-    alerts:['Amanhã sair do hotel às 05h45 para o FlixBus das 06h45.'],
+    bring:['Roupa de banho','Toalha','Bilhete/transporte BKK','Powerbank'],
+    alerts:[
+      'Amanhã sair do hotel às 05h45 para o FlixBus das 06h45.',
+      'Parlamento: interior somente se houver ingresso; sem ingresso, manter exterior + Kossuth Square.',
+      'Széchenyi fecha às 20h na quinta; a piscina externa de lazer P3 está em manutenção entre 7–18/set, mas as piscinas termais seguem funcionando.'
+    ],
     events:[
-      ev('08:30','Café da manhã New York Café',{ end:'09:45', icon:'☕', location:loc('New York Café','New York Café, Erzsébet körút 9-11, Budapest, Hungary'), tip:'Aqui a experiência é o salão: peça algo simples e aproveite a arquitetura, sem transformar o café em uma refeição longa.'}),
-      ev('10:00','Castelo de Buda + Bastião dos Pescadores',{ end:'11:30', icon:'🏰', location:loc('Fisherman’s Bastion','Fisherman’s Bastion, Budapest, Hungary'), tip:'Para a foto clássica do Parlamento, procure os arcos do Bastião que enquadram o Danúbio.'}),
-      ev('11:30','Palácio Real + Igreja de Matias',{ end:'13:00', icon:'⛪', location:loc('Matthias Church','Matthias Church, Budapest, Hungary')}),
-      ev('14:30','Széchenyi Thermal Bath',{ end:'16:15', icon:'♨️', location:loc('Széchenyi Thermal Bath','Széchenyi Thermal Bath, Budapest, Hungary'), perrengue:'Levar roupa de banho e toalha.', tip:'Comece pelas piscinas externas; são as mais icônicas e você evita ficar molhado procurando caminho depois.'}),
-      ev('16:30','Grande Sinagoga',{ end:'18:00', icon:'🕍', location:loc('Dohány Street Synagogue','Dohány Street Synagogue, Budapest, Hungary')}),
-      ev('18:30','Szimpla Kert',{ end:'19:45', icon:'🍻', location:loc('Szimpla Kert','Szimpla Kert, Kazinczy utca 14, Budapest, Hungary')}),
-      ev('20:00','Jantar Borkonyha',{ icon:'🍽️', location:loc('Borkonyha Winekitchen','Borkonyha Winekitchen, Sas utca 3, Budapest, Hungary'), perrengue:'O livreto recomenda reservar.', tip:'Se quiser vinho, peça sugestão de taça húngara para acompanhar o prato em vez de fechar uma garrafa.'})
+      ev('07:15','Sair do hotel para Buda',{ end:'07:40', icon:'🚕', location:loc('Fisherman’s Bastion','Fisherman’s Bastion, Budapest, Hungary'), note:'Começar no alto e depois descer progressivamente para Pest evita zigue-zague.'}),
+      ev('07:45','Fisherman’s Bastion',{ end:'08:40', icon:'🏰', location:loc('Fisherman’s Bastion','Fisherman’s Bastion, Budapest, Hungary'), note:'Terraços neorromânicos com uma das vistas clássicas do Parlamento e do Danúbio.', tip:'Antes das 09h há muito menos gente e o acesso às áreas abertas é mais simples.', infoUrl:'https://fishermansbastion.com/'}),
+      ev('09:00','Matthias Church',{ end:'09:40', icon:'⛪', location:loc('Matthias Church','Szentháromság tér 2, Budapest, Hungary'), note:'Igreja histórica do Castle District, ligada a coroações e marcada pelo telhado colorido de cerâmica.', infoUrl:'https://matyas-templom.hu/'}),
+      ev('09:45','Buda Castle · Palácio Real e pátios',{ end:'10:40', icon:'👑', location:loc('Buda Castle','Buda Castle, Szent György tér, Budapest, Hungary'), note:'Complexo do antigo palácio real, hoje ocupado por importantes instituições culturais e mirantes sobre Pest.', infoUrl:'https://www.budacastle.hu/'}),
+      ev('10:40','Castle Garden + descer e atravessar Chain Bridge',{ end:'11:10', icon:'🌉', location:loc('Széchenyi Chain Bridge','Széchenyi Chain Bridge, Budapest, Hungary'), note:'Descida natural de Castle Hill até o Danúbio e travessia pela ponte histórica para Pest.'}),
+      ev('11:15','Shoes on the Danube Bank',{ end:'11:35', icon:'👞', location:loc('Shoes on the Danube Bank','Shoes on the Danube Bank, Id. Antall József rkp., Budapest, Hungary'), note:'Memorial às vítimas judias assassinadas às margens do Danúbio durante a Segunda Guerra Mundial.', infoUrl:'https://www.budapest.com/en/locations/shoes-on-the-danube-bank'}),
+      ev('11:40','Parlamento + Kossuth Square',{ end:'12:50', icon:'🏛️', location:loc('Hungarian Parliament Building','Kossuth Lajos tér 1-3, Budapest, Hungary'), status:'to-book', note:'O Parlamento é o grande marco neogótico do Danúbio; a visita interna dura cerca de 45 min quando há ingresso.', perrengue:'Sem ingresso, não perder tempo em fila: fazer exterior, Kossuth Square e Visitor Centre.', infoUrl:'https://www.parlament.hu/web/orszaghaz/latogatoi-utvonal'}),
+      ev('13:00','Almoço rápido perto da Basílica',{ end:'13:40', icon:'🍽️', location:loc('St Stephen’s Basilica','Szent István tér 1, Budapest, Hungary'), note:'Almoço no caminho; nada de deslocamento extra.'}),
+      ev('13:45','St Stephen’s Basilica + terraço panorâmico',{ end:'14:45', icon:'⛪', location:loc('St Stephen’s Basilica','Szent István tér 1, Budapest, Hungary'), note:'Maior igreja de Budapest, dedicada a Santo Estêvão; a cúpula/terraço oferece visão 360° de Pest.', infoUrl:'https://bazilikabudapest.hu/en/'}),
+      ev('15:00','Grande Sinagoga + complexo judaico',{ end:'16:10', icon:'🕍', location:loc('Dohány Street Synagogue','Dohány u. 2, Budapest, Hungary'), note:'Uma das maiores sinagogas do mundo, com memorial, cemitério e forte contexto da história judaica húngara.', infoUrl:'https://dohany-zsinagoga.hu/'}),
+      ev('16:25','Heroes’ Square + Vajdahunyad Castle + City Park',{ end:'17:10', icon:'🗿', location:loc('Heroes’ Square','Heroes’ Square, Hősök tere, Budapest, Hungary'), note:'Praça monumental do milênio, seguida pelo castelo e pelo parque; tudo já encostado no Széchenyi.', infoUrl:'https://www.budapest.com/en/locations/vajdahunyad-castle'}),
+      ev('17:15','Széchenyi Thermal Bath',{ end:'19:40', icon:'♨️', location:loc('Széchenyi Thermal Bath','Állatkerti krt. 9-11, Budapest, Hungary'), note:'Maior complexo termal de Budapest, famoso pelas piscinas externas e salões neobarrocos.', perrengue:'Levar roupa de banho e toalha. A piscina externa de lazer P3 está em manutenção 7–18/set.', tip:'Comece pelas piscinas externas ainda com luz e depois vá para as áreas termais internas.', infoUrl:'https://www.szechenyibath.hu/'}),
+      ev('20:10','Jantar perto do Up Hotel',{ end:'21:20', icon:'🍽️', location:loc('Up Hotel Budapest','Csengery utca 31, Budapest, Hungary'), note:'Encerrar perto do hotel para não criar deslocamento na véspera do ônibus cedo.'}),
+      ev('21:30','Hotel · banho + malas prontas',{ icon:'🧳', location:loc('Up Hotel Budapest','Csengery utca 31, Budapest, Hungary'), perrengue:'Alarme cedo: saída 05h45 para Népliget.'})
     ]
   },
 ];
