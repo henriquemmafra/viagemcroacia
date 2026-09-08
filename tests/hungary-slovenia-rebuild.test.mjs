@@ -13,6 +13,10 @@ const ordered = (actual, expected) => {
     cursor = index;
   }
 };
+const read = async (path) => {
+  try { return await readFile(new URL(path, import.meta.url), 'utf8'); }
+  catch { return ''; }
+};
 
 test('Budapest arrival evening is full and geographically grouped', () => {
   const day = tripDays1.find((item) => item.date === '2026-09-09');
@@ -99,8 +103,8 @@ test('major attractions expose an official info link beside Uber, Maps and Waze'
     assert.match(event.infoUrl || '', /^https:\/\//, `${title} should have an official infoUrl`);
   }
 
-  const index = await readFile(new URL('../index.html', import.meta.url), 'utf8');
-  const moduleSource = await readFile(new URL('../js/attraction-info.js', import.meta.url), 'utf8');
+  const index = await read('../index.html');
+  const moduleSource = await read('../js/attraction-info.js');
   assert.match(index, /js\/attraction-info\.js/);
   assert.match(moduleSource, /tl-btn info/);
   assert.match(moduleSource, /ⓘ Sobre/);
@@ -108,7 +112,7 @@ test('major attractions expose an official info link beside Uber, Maps and Waze'
 });
 
 test('refreshes the PWA cache for the rebuilt itinerary and info actions', async () => {
-  const worker = await readFile(new URL('../service-worker.js', import.meta.url), 'utf8');
+  const worker = await read('../service-worker.js');
   assert.match(worker, /adriatico-2026-v26/);
   assert.match(worker, /\.\/js\/attraction-info\.js/);
 });
