@@ -33,7 +33,7 @@ test('language page renders translator plus all three phrase groups', async () =
 
 test('refreshes the PWA cache and precaches the dedicated languages tab assets', async () => {
   const worker = await readFile(new URL('../service-worker.js', import.meta.url), 'utf8');
-  assert.match(worker, /adriatico-2026-v21/);
+  assert.match(worker, /adriatico-2026-v22/);
   assert.match(worker, /\.\/js\/languages-tab\.js/);
   assert.match(worker, /\.\/css\/languages-tab\.css/);
 });
