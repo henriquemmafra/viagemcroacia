@@ -16,7 +16,7 @@ test('records the official Dubrovnik Pass QR payloads next to each pass', async 
 
 test('refreshes the PWA cache while keeping both Dubrovnik Pass QR assets offline', async () => {
   const worker = await read('../service-worker.js');
-  assert.match(worker, /adriatico-2026-v22/);
+  assert.match(worker, /adriatico-2026-v24/);
   assert.match(worker, /\.\/assets\/tickets\/dubrovnik-pass-henrique\.png/);
   assert.match(worker, /\.\/assets\/tickets\/dubrovnik-pass-cibele\.png/);
 });
