@@ -16,19 +16,21 @@ const ordered = (actual, expected) => {
 
 const eventBy = (day, text) => day.events.find((event) => event.title.includes(text));
 
-test('9 September reaches Dock Zero well before boarding and only resumes nightlife after the cruise', () => {
+test('9 September activates Budapest Card first, reaches Dock Zero early and only resumes optional nightlife after the cruise', () => {
   const day = tripDays1.find((item) => item.date === '2026-09-09');
   ordered(titles(day), [
-    'Check-in Up Hotel Budapest',
-    'New York Café',
+    'Check-in rápido Up Hotel Budapest',
+    'Sair do hotel · Budapest Card',
+    'Retirar + ativar Budapest Card',
+    'Gozsdu + Jewish Quarter',
     'Sair para Dock Zero',
     'ESTAR no Dock Zero',
     'Cruzeiro no Danúbio',
-    'Gozsdu Udvar',
+    'New York Café',
     'Szimpla Kert',
     'Voltar ao Up Hotel'
   ]);
-  assert.equal(eventBy(day, 'ESTAR no Dock Zero').time, '18:45');
+  assert.equal(eventBy(day, 'ESTAR no Dock Zero').time, '18:20');
   assert.equal(eventBy(day, 'Cruzeiro no Danúbio').time, '19:15');
   assert.match(eventBy(day, 'Cruzeiro no Danúbio').location.destination, /Carl Lutz rkp/i);
   assert.equal(eventBy(day, 'Cruzeiro no Danúbio').bookingUrl, 'https://gyg.me/Wn4Sqie6');
@@ -92,6 +94,6 @@ test('booking links render as reservation actions and the PWA pre-caches the Bas
   const worker = await readFile(new URL('../service-worker.js', import.meta.url), 'utf8');
   assert.match(attractionInfo, /event\.bookingUrl/);
   assert.match(attractionInfo, /🎟️ Reserva/);
-  assert.match(worker, /adriatico-2026-v28/);
+  assert.match(worker, /adriatico-2026-v29/);
   assert.match(worker, /assets\/tickets\/basilica-entry-qr\.svg/);
 });
