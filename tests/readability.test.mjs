@@ -26,5 +26,5 @@ test('minimizes past timeline items instead of leaving full cards faded', () => 
 });
 
 test('keeps the readability update in the current PWA cache', () => {
-  assert.match(worker, /adriatico-2026-v28/);
+  assert.match(worker, /adriatico-2026-v29/);
 });
