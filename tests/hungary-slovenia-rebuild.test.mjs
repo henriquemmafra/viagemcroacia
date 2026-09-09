@@ -18,15 +18,17 @@ const read = async (path) => {
   catch { return ''; }
 };
 
-test('Budapest arrival evening prioritizes the confirmed cruise with safe boarding margin', () => {
+test('Budapest arrival evening activates the card first and prioritizes the confirmed cruise with safe boarding margin', () => {
   const day = tripDays1.find((item) => item.date === '2026-09-09');
   ordered(titles(day), [
-    'Check-in Up Hotel Budapest',
-    'New York Café',
+    'Check-in rápido Up Hotel Budapest',
+    'Sair do hotel · Budapest Card',
+    'Retirar + ativar Budapest Card',
+    'Gozsdu + Jewish Quarter',
     'Sair para Dock Zero',
     'ESTAR no Dock Zero',
     'Cruzeiro no Danúbio',
-    'Gozsdu Udvar',
+    'New York Café',
     'Szimpla Kert'
   ]);
 });
@@ -116,6 +118,6 @@ test('major attractions expose an official info link beside Uber, Maps and Waze'
 
 test('refreshes the PWA cache for the rebuilt itinerary and info actions', async () => {
   const worker = await read('../service-worker.js');
-  assert.match(worker, /adriatico-2026-v28/);
+  assert.match(worker, /adriatico-2026-v29/);
   assert.match(worker, /\.\/js\/attraction-info\.js/);
 });
