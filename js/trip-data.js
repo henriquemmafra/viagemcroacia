@@ -6,7 +6,7 @@ export const tripDays = [...tripDays1, ...tripDays2, ...tripDays3];
 
 export const routeOverview = [
   { dates:'7–9 set', city:'Dubrovnik', detail:'Old Town · muralhas · museus · Srđ', next:'✈️ voo para Budapest' },
-  { dates:'9–11 set', city:'Budapest', detail:'Buda · Danúbio · Jewish Quarter · termas', next:'🚌 FlixBus 06:45 para Ljubljana' },
+  { dates:'9–11 set', city:'Budapest', detail:'Danúbio · Basílica · Jewish Quarter · Buda', next:'🚌 FlixBus 06:45 para Ljubljana' },
   { dates:'11–13 set', city:'Ljubljana + Bled', detail:'Ljubljana a pé · Bled/Vintgar de ônibus e shuttle', next:'🚌 Postojna · Predjama · Koper' },
   { dates:'13–16 set', city:'Rovinj + Ístria', detail:'Pula/Kamenjak de ônibus + táxi · Motovun/Grožnjan com motorista', next:'🚐 transfer via Rastoke para Plitvice' },
   { dates:'16–17 set', city:'Rastoke + Plitvice', detail:'Transfer até a hospedagem · Programa H cedo', next:'🚌 direto Plitvice → Split' },
@@ -14,7 +14,7 @@ export const routeOverview = [
 ];
 
 export const walletItems = [
-  { id:'budapest-danube-cruise', category:'Atrações', title:'Cruzeiro no Danúbio · Dock Zero', subtitle:'Duna-Weser Kft. · 75 min · embarque 19:00', date:'09 set · 19:15', status:'confirmed', note:'Meta do roteiro: estar no Dock Zero às 18:45, 30 min antes da saída. Píer inferior no Carl Lutz rakpart; procurar Rubin Group e a placa vermelha “0”.' },
+  { id:'budapest-danube-cruise', category:'Atrações', title:'Cruzeiro no Danúbio · Dock Zero', subtitle:'Duna-Weser Kft. · check-in 19:00 · saída 19:15', date:'09 set · 19:15', status:'confirmed', note:'Meta do roteiro: estar no Dock Zero às 18:45, 30 min antes da saída. Píer inferior no Carl Lutz rakpart; procurar Rubin Group e a placa vermelha “0”.' },
   { id:'basilica-entry', category:'Atrações', title:'Basílica de Santo Estêvão · Igreja + Panorâmico + Tesouro', subtitle:'GetYourGuide · collective', date:'10 set · a partir de 09:00', status:'confirmed', locator:'GYGKBR5RFY3N', codeAsset:'assets/tickets/basilica-entry-qr.svg', note:'Ingresso confirmado e QR salvo offline. Usar na visita da manhã.' },
   { id:'buda-castle-walk', category:'Atrações', title:'Buda Castle Walks', subtitle:'Dísz tér 15 · passeio guiado', date:'10 set · 14:30', status:'confirmed', note:'Fornecedor pede chegada até 14:15. O roteiro mira 13:40 para absorver trânsito e dificuldade para achar o portão verde.' },
   { id:'basilica-organ-concert', category:'Atrações', title:'Concerto de órgão · Basílica de Santo Estêvão', subtitle:'Hungaria Koncert Ltd.', date:'10 set · 20:00', status:'confirmed', note:'Instrução do fornecedor: estar na Basílica às 19:40. O roteiro mira 19:20.' },
