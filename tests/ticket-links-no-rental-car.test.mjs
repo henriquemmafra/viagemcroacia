@@ -13,20 +13,25 @@ const event = (date, title) => {
 };
 const read = (path) => readFile(new URL(path, import.meta.url), 'utf8');
 
-test('paid Hungary and Slovenia attractions expose direct purchase links', () => {
-  const required = [
-    ['2026-09-09', 'Cruzeiro noturno no Danúbio'],
-    ['2026-09-10', 'Matthias Church'],
-    ['2026-09-10', 'Parlamento'],
-    ['2026-09-10', 'St Stephen’s Basilica'],
-    ['2026-09-10', 'Grande Sinagoga'],
-    ['2026-09-10', 'Széchenyi Thermal Bath'],
+test('confirmed Budapest bookings expose reservation links while future Slovenia attractions keep purchase links', () => {
+  const booked = [
+    ['2026-09-09', 'Cruzeiro no Danúbio', 'https://gyg.me/Wn4Sqie6'],
+    ['2026-09-10', 'Buda Castle Walks', 'https://gyg.me/Ww3oPthA'],
+    ['2026-09-10', 'Concerto de órgão', 'https://gyg.me/RqH55aso']
+  ];
+  for (const [date, title, url] of booked) {
+    const item = event(date, title);
+    assert.ok(item, `missing ${date} ${title}`);
+    assert.equal(item.bookingUrl, url, `${title} should keep its confirmed reservation link`);
+  }
+
+  const futurePaid = [
     ['2026-09-11', 'Ljubljana Castle'],
     ['2026-09-12', 'Bled Castle'],
     ['2026-09-13', 'Predjama Castle'],
     ['2026-09-13', 'Postojna Cave']
   ];
-  for (const [date, title] of required) {
+  for (const [date, title] of futurePaid) {
     const item = event(date, title);
     assert.ok(item, `missing ${date} ${title}`);
     assert.match(item.buyUrl || '', /^https:\/\//, `${title} should have a direct buyUrl`);
@@ -36,10 +41,12 @@ test('paid Hungary and Slovenia attractions expose direct purchase links', () =>
   assert.equal(vintgar?.ticketId, 'vintgar-henrique');
 });
 
-test('attraction action row adds an Ingresso button only when a buyUrl exists', async () => {
+test('attraction action row distinguishes purchase and confirmed reservation actions', async () => {
   const source = await read('../js/attraction-info.js');
   assert.match(source, /event\.buyUrl/);
   assert.match(source, /🎟️ Ingresso/);
+  assert.match(source, /event\.bookingUrl/);
+  assert.match(source, /🎟️ Reserva/);
   assert.match(source, /tl-btn ticket-link/);
   assert.match(source, /target = '_blank'/);
 });
@@ -78,5 +85,5 @@ test('Istria and Plitvice days stay usable without a rental car', () => {
 
 test('refreshes the PWA cache after ticket-link and no-car changes', async () => {
   const worker = await read('../service-worker.js');
-  assert.match(worker, /adriatico-2026-v27/);
+  assert.match(worker, /adriatico-2026-v28/);
 });
