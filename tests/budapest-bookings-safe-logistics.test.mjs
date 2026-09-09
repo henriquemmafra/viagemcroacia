@@ -77,6 +77,16 @@ test('confirmed Basilica entry is stored offline with its QR and booking code', 
   assert.match(qr, /<rect[^>]+fill="#fff"/i, 'offline QR needs an explicit white background so scanners can read it');
 });
 
+test('concert reservation stays in the app while its QR remains only in Apple Wallet', () => {
+  const item = walletItems.find((entry) => entry.id === 'basilica-organ-concert');
+  assert.ok(item, 'missing organ concert wallet item');
+  assert.equal(item.status, 'confirmed');
+  assert.equal(item.locator, '439041269');
+  assert.equal(item.bookingUrl, 'https://gyg.me/RqH55aso');
+  assert.equal(item.codeAsset, undefined);
+  assert.match(item.note, /Apple Wallet/i);
+});
+
 test('booking links render as reservation actions and the PWA pre-caches the Basilica QR', async () => {
   const attractionInfo = await readFile(new URL('../js/attraction-info.js', import.meta.url), 'utf8');
   const worker = await readFile(new URL('../service-worker.js', import.meta.url), 'utf8');
