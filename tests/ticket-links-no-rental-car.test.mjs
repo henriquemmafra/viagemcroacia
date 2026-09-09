@@ -85,5 +85,5 @@ test('Istria and Plitvice days stay usable without a rental car', () => {
 
 test('refreshes the PWA cache after ticket-link and no-car changes', async () => {
   const worker = await read('../service-worker.js');
-  assert.match(worker, /adriatico-2026-v28/);
+  assert.match(worker, /adriatico-2026-v29/);
 });
