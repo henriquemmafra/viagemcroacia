@@ -67,12 +67,14 @@ test('10 September protects both booked meeting times with generous transit buff
   assert.ok(!titles(day).some((title) => title.includes('Széchenyi Thermal Bath')), 'thermal bath must not be squeezed between fixed bookings');
 });
 
-test('confirmed Basilica entry is stored offline with its QR and booking code', () => {
+test('confirmed Basilica entry is stored offline with its QR and booking code', async () => {
   const item = walletItems.find((entry) => entry.id === 'basilica-entry');
   assert.ok(item, 'missing Basilica entry wallet item');
   assert.equal(item.status, 'confirmed');
   assert.equal(item.locator, 'GYGKBR5RFY3N');
   assert.equal(item.codeAsset, 'assets/tickets/basilica-entry-qr.svg');
+  const qr = await readFile(new URL('../assets/tickets/basilica-entry-qr.svg', import.meta.url), 'utf8');
+  assert.match(qr, /<rect[^>]+fill="#fff"/i, 'offline QR needs an explicit white background so scanners can read it');
 });
 
 test('booking links render as reservation actions and the PWA pre-caches the Basilica QR', async () => {
