@@ -26,7 +26,7 @@ test('uses the verified official Dubrovnik Pass QR images', async () => {
 
 test('refreshes the PWA cache while keeping both Dubrovnik Pass QR assets offline', async () => {
   const worker = await read('../service-worker.js');
-  assert.match(worker, /adriatico-2026-v27/);
+  assert.match(worker, /adriatico-2026-v28/);
   assert.match(worker, /\.\/assets\/tickets\/dubrovnik-pass-henrique\.png/);
   assert.match(worker, /\.\/assets\/tickets\/dubrovnik-pass-cibele\.png/);
 });
