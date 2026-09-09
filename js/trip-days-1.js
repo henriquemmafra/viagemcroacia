@@ -57,15 +57,15 @@ export const tripDays1 = [
     ]
   },
   {
-    date:'2026-09-09', city:'Dubrovnik → Budapest', title:'Rupe · voo · Budapest iluminada',
-    summary:'Manhã segura em Dubrovnik, voo Wizz e primeira noite cheia em Pest: café histórico, bairro judeu, ruin bar e Danúbio iluminado.',
+    date:'2026-09-09', city:'Dubrovnik → Budapest', title:'Rupe · voo · cruzeiro reservado',
+    summary:'Manhã segura em Dubrovnik, voo Wizz e primeira noite em Budapest organizada em torno do cruzeiro confirmado no Dock Zero, com margem real para localizar o píer.',
     theme:'budapest', heroIcon:'✈️', heroLabel:'DUBROVNIK → BUDAPEST',
-    wear:['Roupa leve','Tênis confortável','Casaco leve para a noite'],
-    bring:['Passaporte','Boarding pass Wizz Air','Powerbank'],
+    wear:['Roupa leve','Tênis confortável','Casaco leve para o Danúbio'],
+    bring:['Passaporte','Boarding pass Wizz Air','Powerbank','Reserva GetYourGuide do cruzeiro'],
     alerts:[
       '🚨 W6 2256 sai às 14h10 e a porta de embarque fecha às 13h40.',
       'Meta segura: sair do hotel às 11h30 e estar no DBV por volta de 12h10.',
-      'O cruzeiro noturno ainda depende de reserva/horário disponível; manter o restante da noite no mesmo eixo central de Pest.'
+      '🚢 Cruzeiro confirmado: saída 19h15. O fornecedor pede chegada 19h00; o roteiro mira 18h45 para haver margem para descer ao cais e localizar a placa vermelha “0”.'
     ],
     events:[
       ev('08:00','Café da manhã sem pressa na Old Town',{ end:'08:50', icon:'☕', location:loc('Old Town Dubrovnik','Old Town, Dubrovnik, Croatia'), note:'Manhã propositalmente leve: nada de barco ou deslocamento longo antes do voo.'}),
@@ -78,41 +78,46 @@ export const tripDays1 = [
       ev('14:10','W6 2256 Dubrovnik → Budapest',{ end:'15:30', icon:'✈️', ticketId:'wizz-henrique', note:'Henrique 4B · Cibele 4A · confirmação KWKWWW.'}),
       ev('15:30','Chegada Budapest Terminal 2B',{ end:'16:20', icon:'🛬', location:loc('Budapest Airport Terminal 2B','Budapest Ferenc Liszt International Airport Terminal 2B, Hungary')}),
       ev('16:30','Check-in Up Hotel Budapest',{ end:'17:15', icon:'🏨', location:loc('Up Hotel Budapest','Up Hotel Budapest, Csengery utca 31, Budapest, Hungary'), ticketId:'hotel-up'}),
-      ev('17:30','New York Café',{ end:'18:30', icon:'☕', location:loc('New York Café','New York Café, Erzsébet körút 9-11, Budapest, Hungary'), note:'Salão histórico Belle Époque; aqui a atração é tanto a arquitetura quanto o café.', tip:'Peça algo simples e aproveite o salão sem transformar a parada em jantar.', infoUrl:'https://newyorkcafe.hu/en/'}),
-      ev('18:40','Grande Sinagoga · exterior + Dohány utca',{ end:'19:00', icon:'🕍', location:loc('Dohány Street Synagogue','Dohány u. 2, Budapest, Hungary'), note:'Primeiro contato com a Grande Sinagoga e o coração histórico do bairro judeu; visita interna fica para amanhã.', infoUrl:'https://dohany-zsinagoga.hu/'}),
-      ev('19:00','Jewish Quarter · Kazinczy utca',{ end:'19:40', icon:'🚶', location:loc('Kazinczy utca','Kazinczy utca, Budapest, Hungary'), note:'Ruas do antigo bairro judeu, hoje cheias de bares, pátios, arte urbana e vida noturna.'}),
-      ev('19:40','Szimpla Kert',{ end:'20:20', icon:'🍻', location:loc('Szimpla Kert','Szimpla Kert, Kazinczy utca 14, Budapest, Hungary'), note:'O ruin bar mais emblemático de Budapest, instalado em um prédio antigo cheio de ambientes e objetos reaproveitados.', infoUrl:'https://szimpla.hu/'}),
-      ev('20:25','Gozsdu Udvar + jantar',{ end:'21:20', icon:'🍽️', location:loc('Gozsdu Udvar','Gozsdu Udvar, Király u. 13, Budapest, Hungary'), note:'Sequência de pátios entre Király e Dob, com restaurantes e movimento noturno; continua no mesmo eixo do Jewish Quarter.'}),
-      ev('21:40','Cruzeiro noturno no Danúbio',{ end:'22:50', icon:'🚢', location:loc('Legenda City Cruises','Legenda City Cruises, Dock 7, Jane Haining rakpart, Budapest, Hungary'), status:'to-book', note:'Legenda Danube Legend: cerca de 1h, com Parlamento, Chain Bridge e Buda iluminados vistos da água.', perrengue:'Escolher o horário disponível e chegar ao píer com antecedência.', infoUrl:'https://legenda.hu/en/danube-legend', buyUrl:'https://webshop.legenda.hu/legenda/legenda_angol.reservation.page?cmd=2000'}),
-      ev('23:10','Voltar ao Up Hotel',{ icon:'🌙', location:loc('Up Hotel Budapest','Up Hotel Budapest, Csengery utca 31, Budapest, Hungary'), note:'Dormir: amanhã o roteiro começa cedo em Buda.'})
+      ev('17:30','New York Café',{ end:'18:15', icon:'☕', location:loc('New York Café','New York Café, Erzsébet körút 9-11, Budapest, Hungary'), note:'Parada encurtada para não sacrificar a margem do cruzeiro.', tip:'Às 18h15, sair mesmo que ainda esteja agradável; o compromisso fixo é o barco.', infoUrl:'https://newyorkcafe.hu/en/'}),
+      ev('18:15','Sair para Dock Zero · margem de segurança',{ end:'18:45', icon:'🚕', location:loc('Dock Zero · Rubin Group','Budapest, Carl Lutz rkp., 1133 Hungary'), note:'Preferir Uber/táxi para evitar baldeação e depois descer ao nível inferior do cais.', perrengue:'Não confiar apenas no endereço. Procurar “Rubin Group” no Maps e a placa grande vermelha “0” no cais inferior.'}),
+      ev('18:45','ESTAR no Dock Zero · embarque',{ end:'19:15', icon:'⏰', location:loc('Dock Zero · Rubin Group','Budapest, Carl Lutz rkp., 1133 Hungary'), ticketId:'budapest-danube-cruise', note:'Fornecedor pede chegada até 19h00. A meta de 18h45 dá 30 minutos antes da saída e 15 minutos extras além do mínimo.', perrengue:'Se o carro deixar no nível da rua, ainda é necessário descer as passarelas/escadas até o Carl Lutz rakpart.'}),
+      ev('19:15','Cruzeiro no Danúbio · Dock Zero',{ end:'20:30', icon:'🚢', location:loc('Dock Zero · Rubin Group','Budapest, Carl Lutz rkp., 1133 Hungary'), ticketId:'budapest-danube-cruise', status:'confirmed', bookingUrl:'https://gyg.me/Wn4Sqie6', note:'Cruzeiro confirmado de aproximadamente 75 minutos; o restante da noite só começa depois do desembarque.'}),
+      ev('20:45','Gozsdu Udvar + jantar',{ end:'21:35', icon:'🍽️', location:loc('Gozsdu Udvar','Gozsdu Udvar, Király u. 13, Budapest, Hungary'), note:'Jantar já dentro do Jewish Quarter, sem criar outro compromisso cronometrado.'}),
+      ev('21:40','Szimpla Kert',{ end:'22:25', icon:'🍻', location:loc('Szimpla Kert','Szimpla Kert, Kazinczy utca 14, Budapest, Hungary'), note:'Opcional depois do cruzeiro e jantar; se estiverem cansados, cortar sem prejuízo.', infoUrl:'https://szimpla.hu/'}),
+      ev('22:40','Voltar ao Up Hotel',{ icon:'🌙', location:loc('Up Hotel Budapest','Up Hotel Budapest, Csengery utca 31, Budapest, Hungary'), note:'Dormir bem: amanhã há dois compromissos fixos e o ônibus para Ljubljana sai cedo no dia seguinte.'})
     ]
   },
   {
-    date:'2026-09-10', city:'Budapest', title:'Buda → Danúbio → Pest → City Park',
-    summary:'Dia cheio em fluxo geográfico: nascer da cidade em Buda, descida ao Danúbio, centro monumental de Pest, bairro judeu e termas no City Park.',
-    theme:'budapest', heroIcon:'♨️', heroLabel:'BUDAPEST · DANUBE',
-    wear:['Tênis','Roupa confortável','Casaco para a noite'],
-    bring:['Roupa de banho','Toalha','Bilhete/transporte BKK','Powerbank'],
+    date:'2026-09-10', city:'Budapest', title:'Pest cedo · Buda reservado · concerto',
+    summary:'Manhã em Pest com Basílica e Sinagoga, deslocamento antecipado para o passeio reservado em Buda e retorno com folga para o concerto noturno na Basílica.',
+    theme:'budapest', heroIcon:'🎟️', heroLabel:'BUDAPEST · RESERVAS FIXAS',
+    wear:['Tênis confortável','Roupa com joelhos e ombros cobertos','Casaco leve'],
+    bring:['QR da Basílica salvo offline','Reservas GetYourGuide','Powerbank','Bilhete/transporte BKK'],
     alerts:[
-      'Amanhã sair do hotel às 05h45 para o FlixBus das 06h45.',
-      'Parlamento: interior somente se houver ingresso; sem ingresso, manter exterior + Kossuth Square.',
-      'Széchenyi fecha às 20h na quinta; a piscina externa de lazer P3 está em manutenção entre 7–18/set, mas as piscinas termais seguem funcionando.'
+      '🚨 Buda Castle Walks começa 14h30 em Dísz tér 15. O fornecedor pede 14h15; a meta é chegar 13h40.',
+      '🎼 Concerto na Basílica: estar lá 19h40; a meta é 19h20.',
+      '♨️ Széchenyi foi retirado deste dia: encaixá-lo entre o passeio de Buda e o concerto deixaria a logística apertada demais.',
+      'Amanhã sair do hotel às 05h45 para o FlixBus das 06h45.'
     ],
     events:[
-      ev('07:15','Sair do hotel para Buda',{ end:'07:40', icon:'🚕', location:loc('Fisherman’s Bastion','Fisherman’s Bastion, Budapest, Hungary'), note:'Começar no alto e depois descer progressivamente para Pest evita zigue-zague.'}),
-      ev('07:45','Fisherman’s Bastion',{ end:'08:40', icon:'🏰', location:loc('Fisherman’s Bastion','Fisherman’s Bastion, Budapest, Hungary'), note:'Terraços neorromânicos com uma das vistas clássicas do Parlamento e do Danúbio.', tip:'Antes das 09h há muito menos gente e o acesso às áreas abertas é mais simples.', infoUrl:'https://fishermansbastion.com/'}),
-      ev('09:00','Matthias Church',{ end:'09:40', icon:'⛪', location:loc('Matthias Church','Szentháromság tér 2, Budapest, Hungary'), status:'to-book', note:'Igreja histórica do Castle District, ligada a coroações e marcada pelo telhado colorido de cerâmica.', infoUrl:'https://matyas-templom.hu/', buyUrl:'https://matyas-templom.hu/en/buy-tickets/'}),
-      ev('09:45','Buda Castle · Palácio Real e pátios',{ end:'10:40', icon:'👑', location:loc('Buda Castle','Buda Castle, Szent György tér, Budapest, Hungary'), note:'Complexo do antigo palácio real, hoje ocupado por importantes instituições culturais e mirantes sobre Pest.', infoUrl:'https://www.budacastle.hu/'}),
-      ev('10:40','Castle Garden + descer e atravessar Chain Bridge',{ end:'11:10', icon:'🌉', location:loc('Széchenyi Chain Bridge','Széchenyi Chain Bridge, Budapest, Hungary'), note:'Descida natural de Castle Hill até o Danúbio e travessia pela ponte histórica para Pest.'}),
-      ev('11:15','Shoes on the Danube Bank',{ end:'11:35', icon:'👞', location:loc('Shoes on the Danube Bank','Shoes on the Danube Bank, Id. Antall József rkp., Budapest, Hungary'), note:'Memorial às vítimas judias assassinadas às margens do Danúbio durante a Segunda Guerra Mundial.', infoUrl:'https://www.budapest.com/en/locations/shoes-on-the-danube-bank'}),
-      ev('11:40','Parlamento + Kossuth Square',{ end:'12:50', icon:'🏛️', location:loc('Hungarian Parliament Building','Kossuth Lajos tér 1-3, Budapest, Hungary'), status:'to-book', note:'O Parlamento é o grande marco neogótico do Danúbio; a visita interna dura cerca de 45 min quando há ingresso.', perrengue:'Sem ingresso, não perder tempo em fila: fazer exterior, Kossuth Square e Visitor Centre.', infoUrl:'https://www.parlament.hu/en/web/house-of-the-national-assembly/visiting-the-parliament', buyUrl:'https://jegymester.hu/event-host/900/parlament'}),
-      ev('13:00','Almoço rápido perto da Basílica',{ end:'13:40', icon:'🍽️', location:loc('St Stephen’s Basilica','Szent István tér 1, Budapest, Hungary'), note:'Almoço no caminho; nada de deslocamento extra.'}),
-      ev('13:45','St Stephen’s Basilica + terraço panorâmico',{ end:'14:45', icon:'⛪', location:loc('St Stephen’s Basilica','Szent István tér 1, Budapest, Hungary'), status:'to-book', note:'Maior igreja de Budapest, dedicada a Santo Estêvão; a cúpula/terraço oferece visão 360° de Pest.', infoUrl:'https://bazilikabudapest.hu/en/', buyUrl:'https://www.bazilika.jegy.eu/en'}),
-      ev('15:00','Grande Sinagoga + complexo judaico',{ end:'16:10', icon:'🕍', location:loc('Dohány Street Synagogue','Dohány u. 2, Budapest, Hungary'), status:'to-book', note:'Uma das maiores sinagogas do mundo, com memorial, cemitério e forte contexto da história judaica húngara.', infoUrl:'https://dohany-zsinagoga.hu/', buyUrl:'https://btm.jegy.hu/venue/dohany-utcai-zsinagoga/info?lang=en'}),
-      ev('16:25','Heroes’ Square + Vajdahunyad Castle + City Park',{ end:'17:10', icon:'🗿', location:loc('Heroes’ Square','Heroes’ Square, Hősök tere, Budapest, Hungary'), note:'Praça monumental do milênio, seguida pelo castelo e pelo parque; tudo já encostado no Széchenyi.', infoUrl:'https://www.budapest.com/en/locations/vajdahunyad-castle'}),
-      ev('17:15','Széchenyi Thermal Bath',{ end:'19:40', icon:'♨️', location:loc('Széchenyi Thermal Bath','Állatkerti krt. 9-11, Budapest, Hungary'), status:'to-book', note:'Maior complexo termal de Budapest, famoso pelas piscinas externas e salões neobarrocos.', perrengue:'Levar roupa de banho e toalha. A piscina externa de lazer P3 está em manutenção 7–18/set.', tip:'Comece pelas piscinas externas ainda com luz e depois vá para as áreas termais internas.', infoUrl:'https://www.szechenyibath.hu/', buyUrl:'https://tickets.szechenyibath.hu/'}),
-      ev('20:10','Jantar perto do Up Hotel',{ end:'21:20', icon:'🍽️', location:loc('Up Hotel Budapest','Csengery utca 31, Budapest, Hungary'), note:'Encerrar perto do hotel para não criar deslocamento na véspera do ônibus cedo.'}),
-      ev('21:30','Hotel · banho + malas prontas',{ icon:'🧳', location:loc('Up Hotel Budapest','Csengery utca 31, Budapest, Hungary'), perrengue:'Alarme cedo: saída 05h45 para Népliget.'})
+      ev('08:20','Sair do hotel para o Parlamento',{ end:'08:50', icon:'🚕', location:loc('Hungarian Parliament Building','Kossuth Lajos tér 1-3, Budapest, Hungary'), note:'Começar em Pest e avançar a pé para o sul evita cruzar o Danúbio duas vezes antes do passeio reservado.'}),
+      ev('08:50','Parlamento + Kossuth Square',{ end:'09:25', icon:'🏛️', location:loc('Hungarian Parliament Building','Kossuth Lajos tér 1-3, Budapest, Hungary'), note:'Exterior + praça. Só entrar se já houver ingresso com horário compatível; não entrar em fila que ameace o restante do dia.', infoUrl:'https://www.parlament.hu/en/web/house-of-the-national-assembly/visiting-the-parliament'}),
+      ev('09:30','Shoes on the Danube Bank',{ end:'09:50', icon:'👞', location:loc('Shoes on the Danube Bank','Shoes on the Danube Bank, Id. Antall József rkp., Budapest, Hungary'), note:'Parada curta no caminho para a Basílica.', infoUrl:'https://www.budapest.com/en/locations/shoes-on-the-danube-bank'}),
+      ev('10:05','Basílica de Santo Estêvão · Igreja + Panorâmico + Tesouro',{ end:'11:20', icon:'⛪', location:loc('St Stephen’s Basilica','Szent István tér 1, 1051 Budapest, Hungary'), ticketId:'basilica-entry', status:'confirmed', note:'Ingresso confirmado, válido a partir de 09h00. QR disponível na Carteira do app.', infoUrl:'https://bazilikabudapest.hu/en/'}),
+      ev('11:30','Almoço cedo perto da Basílica',{ end:'12:10', icon:'🍽️', location:loc('St Stephen’s Basilica','Szent István tér 1, 1051 Budapest, Hungary'), note:'Almoço curto e central; nada de deslocamento extra.'}),
+      ev('12:20','Grande Sinagoga + complexo judaico',{ end:'13:00', icon:'🕍', location:loc('Dohány Street Synagogue','Dohány u. 2, 1074 Budapest, Hungary'), note:'Janela propositalmente limitada. Se houver fila relevante, reduzir ou cortar: o passeio das 14h30 é a prioridade fixa.', perrengue:'Às 13h05 sair obrigatoriamente, mesmo que a visita não tenha terminado.', infoUrl:'https://dohany-zsinagoga.hu/'}),
+      ev('13:05','SAIR da Sinagoga → Dísz tér · Uber/táxi',{ end:'13:40', icon:'🚕', location:loc('Buda Castle Walks meeting point','Budapest, Dísz tér 15, 1014 Hungary'), note:'Janela de 35 min para um trajeto que normalmente é bem menor; a diferença é margem para trânsito, desembarque e localização do portão.'}),
+      ev('13:40','ESTAR em Dísz tér 15 · localizar guia',{ end:'14:30', icon:'⏰', location:loc('Buda Castle Walks meeting point','Budapest, Dísz tér 15, 1014 Hungary'), ticketId:'buda-castle-walk', note:'Ao lado do prédio “Posta”, no grande portão verde. Procurar o guia com guarda-chuva turquesa da Buda Castle Walks.', perrengue:'O fornecedor pede chegada 14h15 e avisa que não espera atrasados. A meta de 13h40 deixa 35 minutos extras.'}),
+      ev('14:30','Buda Castle Walks · passeio guiado',{ end:'16:00', icon:'🏰', location:loc('Buda Castle Walks','Budapest, Dísz tér 15, 1014 Hungary'), ticketId:'buda-castle-walk', status:'confirmed', bookingUrl:'https://gyg.me/Ww3oPthA', note:'Reserva confirmada. Planejado como 90 min; calçado confortável e casaco leve ajudam nas áreas subterrâneas/frias.'}),
+      ev('16:00','Fisherman’s Bastion + Matthias Church exterior',{ end:'16:40', icon:'🏰', location:loc('Fisherman’s Bastion','Fisherman’s Bastion, Budapest, Hungary'), note:'Fica no mesmo setor do fim do passeio; aproveitar sem novo deslocamento. Sem fila interna e sem compromisso adicional.', infoUrl:'https://fishermansbastion.com/'}),
+      ev('16:40','Voltar ao hotel',{ end:'17:20', icon:'🚕', location:loc('Up Hotel Budapest','Up Hotel Budapest, Csengery utca 31, Budapest, Hungary'), note:'Retorno com folga. Se houver trânsito, ainda existe bastante margem até o concerto.'}),
+      ev('17:20','Descanso no hotel',{ end:'18:00', icon:'🛏️', location:loc('Up Hotel Budapest','Up Hotel Budapest, Csengery utca 31, Budapest, Hungary'), note:'Banho, carregar celular e separar a reserva do concerto.'}),
+      ev('18:00','Jantar cedo perto da Basílica',{ end:'18:50', icon:'🍽️', location:loc('St Stephen’s Basilica','Szent István tér 1, 1051 Budapest, Hungary'), note:'Jantar antes do concerto e já no destino final; não marcar reserva rígida de restaurante.'}),
+      ev('18:50','Ir para a Basílica sem pressa',{ end:'19:20', icon:'🚶', location:loc('St Stephen’s Basilica','Szent István tér 1, 1051 Budapest, Hungary'), note:'Mesmo estando perto, reservar esta janela para conta, caminhada e eventual fila de entrada.'}),
+      ev('19:20','ESTAR na Basílica · concerto',{ end:'20:00', icon:'⏰', location:loc('St Stephen’s Basilica','Szent István tér 1, 1051 Budapest, Hungary'), ticketId:'basilica-organ-concert', note:'Fornecedor orienta comparecer às 19h40. A meta de 19h20 dá 20 minutos extras para entrada e localização do assento.'}),
+      ev('20:00','Concerto de órgão na Basílica',{ end:'21:10', icon:'🎼', location:loc('St Stephen’s Basilica','Szent István tér 1, 1051 Budapest, Hungary'), ticketId:'basilica-organ-concert', status:'confirmed', bookingUrl:'https://gyg.me/RqH55aso', note:'Compromisso confirmado; não programar nada com horário fixo imediatamente depois.'}),
+      ev('21:20','Voltar ao Up Hotel',{ end:'21:40', icon:'🚕', location:loc('Up Hotel Budapest','Up Hotel Budapest, Csengery utca 31, Budapest, Hungary'), note:'Encerrar cedo por causa do FlixBus.'}),
+      ev('21:40','Hotel · banho + malas prontas',{ icon:'🧳', location:loc('Up Hotel Budapest','Up Hotel Budapest, Csengery utca 31, Budapest, Hungary'), perrengue:'Alarme cedo: saída 05h45 para Népliget. Passaportes, bilhetes e malas devem ficar prontos hoje.'})
     ]
   },
 ];
