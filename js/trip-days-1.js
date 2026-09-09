@@ -57,15 +57,16 @@ export const tripDays1 = [
     ]
   },
   {
-    date:'2026-09-09', city:'Dubrovnik → Budapest', title:'Rupe · voo · cruzeiro reservado',
-    summary:'Manhã segura em Dubrovnik, voo Wizz e primeira noite em Budapest organizada em torno do cruzeiro confirmado no Dock Zero, com margem real para localizar o píer.',
+    date:'2026-09-09', city:'Dubrovnik → Budapest', title:'Rupe · voo · Budapest Card · cruzeiro',
+    summary:'Manhã segura em Dubrovnik, voo Wizz e primeira noite em Budapest organizada primeiro pela retirada/ativação do Budapest Card e depois pelo cruzeiro confirmado no Dock Zero.',
     theme:'budapest', heroIcon:'✈️', heroLabel:'DUBROVNIK → BUDAPEST',
     wear:['Roupa leve','Tênis confortável','Casaco leve para o Danúbio'],
-    bring:['Passaporte','Boarding pass Wizz Air','Powerbank','Reserva GetYourGuide do cruzeiro'],
+    bring:['Passaporte','Boarding pass Wizz Air','Powerbank','Voucher Budapest Card · 2 × 72h','Reserva GetYourGuide do cruzeiro'],
     alerts:[
       '🚨 W6 2256 sai às 14h10 e a porta de embarque fecha às 13h40.',
       'Meta segura: sair do hotel às 11h30 e estar no DBV por volta de 12h10.',
-      '🚢 Cruzeiro confirmado: saída 19h15. O fornecedor pede chegada 19h00; o roteiro mira 18h45 para haver margem para descer ao cais e localizar a placa vermelha “0”.'
+      '🎟️ 16h45: retirar e ativar os 2 Budapest Cards em Király u. 13 antes de qualquer passeio. O voucher de retirada está na Carteira do app.',
+      '🚢 Cruzeiro confirmado: saída 19h15. O fornecedor pede chegada 19h00; o roteiro mira 18h20 para haver margem ampla para localizar o cais inferior e a placa vermelha “0”.'
     ],
     events:[
       ev('08:00','Café da manhã sem pressa na Old Town',{ end:'08:50', icon:'☕', location:loc('Old Town Dubrovnik','Old Town, Dubrovnik, Croatia'), note:'Manhã propositalmente leve: nada de barco ou deslocamento longo antes do voo.'}),
@@ -76,15 +77,18 @@ export const tripDays1 = [
       ev('12:10','ESTAR no aeroporto DBV · segurança + portão',{ end:'13:20', icon:'🛫', location:loc('Aeroporto de Dubrovnik','Dubrovnik Airport, Čilipi, Croatia'), ticketId:'wizz-henrique', note:'Chegada planejada com margem confortável.'}),
       ev('13:20','Estar no portão de embarque',{ end:'13:40', icon:'⏰', location:loc('Aeroporto de Dubrovnik','Dubrovnik Airport, Čilipi, Croatia'), ticketId:'wizz-henrique', perrengue:'Porta fecha às 13h40.'}),
       ev('14:10','W6 2256 Dubrovnik → Budapest',{ end:'15:30', icon:'✈️', ticketId:'wizz-henrique', note:'Henrique 4B · Cibele 4A · confirmação KWKWWW.'}),
-      ev('15:30','Chegada Budapest Terminal 2B',{ end:'16:20', icon:'🛬', location:loc('Budapest Airport Terminal 2B','Budapest Ferenc Liszt International Airport Terminal 2B, Hungary')}),
-      ev('16:30','Check-in Up Hotel Budapest',{ end:'17:15', icon:'🏨', location:loc('Up Hotel Budapest','Up Hotel Budapest, Csengery utca 31, Budapest, Hungary'), ticketId:'hotel-up'}),
-      ev('17:30','New York Café',{ end:'18:15', icon:'☕', location:loc('New York Café','New York Café, Erzsébet körút 9-11, Budapest, Hungary'), note:'Parada encurtada para não sacrificar a margem do cruzeiro.', tip:'Às 18h15, sair mesmo que ainda esteja agradável; o compromisso fixo é o barco.', infoUrl:'https://newyorkcafe.hu/en/'}),
-      ev('18:15','Sair para Dock Zero · margem de segurança',{ end:'18:45', icon:'🚕', location:loc('Dock Zero · Rubin Group','Budapest, Carl Lutz rkp., 1133 Hungary'), note:'Preferir Uber/táxi para evitar baldeação e depois descer ao nível inferior do cais.', perrengue:'Não confiar apenas no endereço. Procurar “Rubin Group” no Maps e a placa grande vermelha “0” no cais inferior.'}),
-      ev('18:45','ESTAR no Dock Zero · embarque',{ end:'19:15', icon:'⏰', location:loc('Dock Zero · Rubin Group','Budapest, Carl Lutz rkp., 1133 Hungary'), ticketId:'budapest-danube-cruise', note:'Fornecedor pede chegada até 19h00. A meta de 18h45 dá 30 minutos antes da saída e 15 minutos extras além do mínimo.', perrengue:'Se o carro deixar no nível da rua, ainda é necessário descer as passarelas/escadas até o Carl Lutz rakpart.'}),
+      ev('15:30','Chegada Budapest Terminal 2B',{ end:'15:45', icon:'🛬', location:loc('Budapest Airport Terminal 2B','Budapest Ferenc Liszt International Airport Terminal 2B, Hungary')}),
+      ev('15:45','Táxi/Uber para o Up Hotel',{ end:'16:20', icon:'🚕', location:loc('Up Hotel Budapest','Up Hotel Budapest, Csengery utca 31, Budapest, Hungary'), note:'Ir direto ao hotel; não inserir nenhuma parada antes de deixar as malas.'}),
+      ev('16:20','Check-in rápido Up Hotel Budapest',{ end:'16:30', icon:'🏨', location:loc('Up Hotel Budapest','Up Hotel Budapest, Csengery utca 31, Budapest, Hungary'), ticketId:'hotel-up', note:'Deixar malas e sair às 16h30, como combinado.'}),
+      ev('16:30','Sair do hotel · Budapest Card',{ end:'16:45', icon:'🎟️', location:loc('Budapest Card pickup','Budapest, Király u. 13, 1075 Hungary'), ticketId:'budapest-card-voucher', note:'Primeira prioridade da tarde: ir direto retirar os cartões físicos.'}),
+      ev('16:45','Retirar + ativar Budapest Card',{ end:'17:05', icon:'🎟️', location:loc('Budapest Card pickup','Budapest, Király u. 13, 1075 Hungary'), ticketId:'budapest-card-voucher', note:'Voucher único para 2 cartões físicos de 72h. Após a retirada, preencher/ativar os cartões com data e hora conforme indicado no cartão; manter o passaporte/documento à mão.', perrengue:'O voucher da Tiqets pede confirmação do ponto de retirada. Se houver qualquer dúvida no balcão, mostrar a referência 111665639 e a instrução de confirmação em frontoffice@hungariagroup.com.'}),
+      ev('17:05','Gozsdu + Jewish Quarter · passeio leve',{ end:'17:40', icon:'🚶', location:loc('Gozsdu Udvar','Gozsdu Udvar, Király u. 13, Budapest, Hungary'), note:'O ponto de retirada já fica em Gozsdu. Caminhar sem compromisso rígido; nada que impeça a saída às 17h40.'}),
+      ev('17:40','Sair para Dock Zero · margem de segurança',{ end:'18:20', icon:'🚕', location:loc('Dock Zero · Rubin Group','Budapest, Carl Lutz rkp., 1133 Hungary'), note:'Preferir Uber/táxi. A janela é deliberadamente folgada para trânsito e para descer ao nível inferior do cais.', perrengue:'Não confiar apenas no endereço. Procurar “Rubin Group” no Maps e a placa grande vermelha “0” no cais inferior.'}),
+      ev('18:20','ESTAR no Dock Zero · embarque',{ end:'19:15', icon:'⏰', location:loc('Dock Zero · Rubin Group','Budapest, Carl Lutz rkp., 1133 Hungary'), ticketId:'budapest-danube-cruise', note:'Fornecedor pede chegada até 19h00. A meta de 18h20 deixa 55 minutos antes da saída e bastante folga para localizar o píer.', perrengue:'Se o carro deixar no nível da rua, ainda é necessário descer as passarelas/escadas até o Carl Lutz rakpart.'}),
       ev('19:15','Cruzeiro no Danúbio · Dock Zero',{ end:'20:30', icon:'🚢', location:loc('Dock Zero · Rubin Group','Budapest, Carl Lutz rkp., 1133 Hungary'), ticketId:'budapest-danube-cruise', status:'confirmed', bookingUrl:'https://gyg.me/Wn4Sqie6', note:'Cruzeiro confirmado de aproximadamente 75 minutos; o restante da noite só começa depois do desembarque.'}),
-      ev('20:45','Gozsdu Udvar + jantar',{ end:'21:35', icon:'🍽️', location:loc('Gozsdu Udvar','Gozsdu Udvar, Király u. 13, Budapest, Hungary'), note:'Jantar já dentro do Jewish Quarter, sem criar outro compromisso cronometrado.'}),
-      ev('21:40','Szimpla Kert',{ end:'22:25', icon:'🍻', location:loc('Szimpla Kert','Szimpla Kert, Kazinczy utca 14, Budapest, Hungary'), note:'Opcional depois do cruzeiro e jantar; se estiverem cansados, cortar sem prejuízo.', infoUrl:'https://szimpla.hu/'}),
-      ev('22:40','Voltar ao Up Hotel',{ icon:'🌙', location:loc('Up Hotel Budapest','Up Hotel Budapest, Csengery utca 31, Budapest, Hungary'), note:'Dormir bem: amanhã há dois compromissos fixos e o ônibus para Ljubljana sai cedo no dia seguinte.'})
+      ev('20:45','New York Café · opcional',{ end:'21:35', icon:'☕', location:loc('New York Café','New York Café, Erzsébet körút 9-11, Budapest, Hungary'), note:'Só depois do cruzeiro. Se houver fila grande ou cansaço, cortar sem prejuízo.', infoUrl:'https://newyorkcafe.hu/en/'}),
+      ev('21:45','Szimpla Kert / Gozsdu + jantar · opcional',{ end:'22:45', icon:'🍽️', location:loc('Szimpla Kert','Szimpla Kert, Kazinczy utca 14, Budapest, Hungary'), note:'Noite livre, sem nenhum compromisso que possa ser perdido. Escolher jantar ou apenas um passeio pelo ruin bar.', infoUrl:'https://szimpla.hu/'}),
+      ev('23:00','Voltar ao Up Hotel',{ icon:'🌙', location:loc('Up Hotel Budapest','Up Hotel Budapest, Csengery utca 31, Budapest, Hungary'), note:'Dormir bem: amanhã há passeio reservado em Buda, concerto e o ônibus para Ljubljana sai cedo no dia seguinte.'})
     ]
   },
   {
@@ -92,10 +96,10 @@ export const tripDays1 = [
     summary:'Manhã em Pest com Basílica e Sinagoga, deslocamento antecipado para o passeio reservado em Buda e retorno com folga para o concerto noturno na Basílica.',
     theme:'budapest', heroIcon:'🎟️', heroLabel:'BUDAPEST · RESERVAS FIXAS',
     wear:['Tênis confortável','Roupa com joelhos e ombros cobertos','Casaco leve'],
-    bring:['QR da Basílica salvo offline','Reservas GetYourGuide','Powerbank','Bilhete/transporte BKK'],
+    bring:['QR da Basílica salvo offline','Ingressos do concerto na Apple Wallet','Reservas GetYourGuide','Powerbank','Bilhete/transporte BKK'],
     alerts:[
       '🚨 Buda Castle Walks começa 14h30 em Dísz tér 15. O fornecedor pede 14h15; a meta é chegar 13h40.',
-      '🎼 Concerto na Basílica: estar lá 19h40; a meta é 19h20.',
+      '🎼 Concerto na Basílica às 20h00: QR codes na Apple Wallet. O fornecedor pede 19h40; a meta é estar lá 19h20.',
       '♨️ Széchenyi foi retirado deste dia: encaixá-lo entre o passeio de Buda e o concerto deixaria a logística apertada demais.',
       'Amanhã sair do hotel às 05h45 para o FlixBus das 06h45.'
     ],
@@ -111,11 +115,11 @@ export const tripDays1 = [
       ev('14:30','Buda Castle Walks · passeio guiado',{ end:'16:00', icon:'🏰', location:loc('Buda Castle Walks','Budapest, Dísz tér 15, 1014 Hungary'), ticketId:'buda-castle-walk', status:'confirmed', bookingUrl:'https://gyg.me/Ww3oPthA', note:'Reserva confirmada. Planejado como 90 min; calçado confortável e casaco leve ajudam nas áreas subterrâneas/frias.'}),
       ev('16:00','Fisherman’s Bastion + Matthias Church exterior',{ end:'16:40', icon:'🏰', location:loc('Fisherman’s Bastion','Fisherman’s Bastion, Budapest, Hungary'), note:'Fica no mesmo setor do fim do passeio; aproveitar sem novo deslocamento. Sem fila interna e sem compromisso adicional.', infoUrl:'https://fishermansbastion.com/'}),
       ev('16:40','Voltar ao hotel',{ end:'17:20', icon:'🚕', location:loc('Up Hotel Budapest','Up Hotel Budapest, Csengery utca 31, Budapest, Hungary'), note:'Retorno com folga. Se houver trânsito, ainda existe bastante margem até o concerto.'}),
-      ev('17:20','Descanso no hotel',{ end:'18:00', icon:'🛏️', location:loc('Up Hotel Budapest','Up Hotel Budapest, Csengery utca 31, Budapest, Hungary'), note:'Banho, carregar celular e separar a reserva do concerto.'}),
+      ev('17:20','Descanso no hotel',{ end:'18:00', icon:'🛏️', location:loc('Up Hotel Budapest','Up Hotel Budapest, Csengery utca 31, Budapest, Hungary'), note:'Banho, carregar celular e conferir os ingressos do concerto na Apple Wallet.'}),
       ev('18:00','Jantar cedo perto da Basílica',{ end:'18:50', icon:'🍽️', location:loc('St Stephen’s Basilica','Szent István tér 1, 1051 Budapest, Hungary'), note:'Jantar antes do concerto e já no destino final; não marcar reserva rígida de restaurante.'}),
       ev('18:50','Ir para a Basílica sem pressa',{ end:'19:20', icon:'🚶', location:loc('St Stephen’s Basilica','Szent István tér 1, 1051 Budapest, Hungary'), note:'Mesmo estando perto, reservar esta janela para conta, caminhada e eventual fila de entrada.'}),
-      ev('19:20','ESTAR na Basílica · concerto',{ end:'20:00', icon:'⏰', location:loc('St Stephen’s Basilica','Szent István tér 1, 1051 Budapest, Hungary'), ticketId:'basilica-organ-concert', note:'Fornecedor orienta comparecer às 19h40. A meta de 19h20 dá 20 minutos extras para entrada e localização do assento.'}),
-      ev('20:00','Concerto de órgão na Basílica',{ end:'21:10', icon:'🎼', location:loc('St Stephen’s Basilica','Szent István tér 1, 1051 Budapest, Hungary'), ticketId:'basilica-organ-concert', status:'confirmed', bookingUrl:'https://gyg.me/RqH55aso', note:'Compromisso confirmado; não programar nada com horário fixo imediatamente depois.'}),
+      ev('19:20','ESTAR na Basílica · concerto',{ end:'20:00', icon:'⏰', location:loc('St Stephen’s Basilica','Szent István tér 1, 1051 Budapest, Hungary'), ticketId:'basilica-organ-concert', note:'Fornecedor orienta comparecer às 19h40. A meta de 19h20 dá 20 minutos extras. Reserva 439041269; QR codes na Apple Wallet.'}),
+      ev('20:00','Concerto de órgão na Basílica',{ end:'21:10', icon:'🎼', location:loc('St Stephen’s Basilica','Szent István tér 1, 1051 Budapest, Hungary'), ticketId:'basilica-organ-concert', status:'confirmed', bookingUrl:'https://gyg.me/RqH55aso', note:'2 pessoas · ref. 439041269. Ingressos na Apple Wallet. Não programar nada com horário fixo imediatamente depois.'}),
       ev('21:20','Voltar ao Up Hotel',{ end:'21:40', icon:'🚕', location:loc('Up Hotel Budapest','Up Hotel Budapest, Csengery utca 31, Budapest, Hungary'), note:'Encerrar cedo por causa do FlixBus.'}),
       ev('21:40','Hotel · banho + malas prontas',{ icon:'🧳', location:loc('Up Hotel Budapest','Up Hotel Budapest, Csengery utca 31, Budapest, Hungary'), perrengue:'Alarme cedo: saída 05h45 para Népliget. Passaportes, bilhetes e malas devem ficar prontos hoje.'})
     ]
