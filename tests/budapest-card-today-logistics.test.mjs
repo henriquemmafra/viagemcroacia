@@ -36,7 +36,7 @@ test('wallet keeps the Budapest Card collection voucher offline for both physica
   assert.equal(item.category, 'Passes');
   assert.match(item.subtitle, /2 × 72h/i);
   assert.equal(item.locator, '111665639');
-  assert.match(item.codeAsset || '', /^data:image\/png;base64,/);
+  assert.match(item.codeAsset || '', /^data:image\/(?:png|svg\+xml);base64,/);
   assert.match(item.note || '', /retirar os 2 cartões físicos/i);
   assert.match(item.note || '', /não é o cartão físico/i);
 });
