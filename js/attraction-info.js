@@ -2,7 +2,7 @@ import { tripDays } from './trip-data.js';
 
 const attractionEvents = tripDays
   .flatMap((day) => day.events || [])
-  .filter((event) => event.infoUrl || event.buyUrl);
+  .filter((event) => event.infoUrl || event.buyUrl || event.bookingUrl);
 
 function eventForCard(card) {
   const heading = card?.querySelector?.('h3')?.textContent || '';
@@ -48,6 +48,16 @@ export function enhanceAttractionInfo(root = document) {
         event.infoUrl,
         'ⓘ Sobre',
         `Sobre ${event.title}: resumo e fotos`
+      ));
+      added += 1;
+    }
+
+    if (event.bookingUrl && !nav.querySelector('.tl-btn.booking')) {
+      nav.append(externalLink(
+        'tl-btn booking qr',
+        event.bookingUrl,
+        '🎟️ Reserva',
+        `Abrir reserva de ${event.title}`
       ));
       added += 1;
     }

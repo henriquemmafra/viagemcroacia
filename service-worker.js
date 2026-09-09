@@ -1,4 +1,4 @@
-const CACHE = 'adriatico-2026-v27';
+const CACHE = 'adriatico-2026-v29';
 const PRECACHE = [
   './',
   './index.html',
@@ -32,7 +32,8 @@ const PRECACHE = [
   './assets/tickets/dubrovnik-pass-cibele.png',
   './assets/tickets/wizz-henrique-barcode.png',
   './assets/tickets/wizz-cibele-barcode.png',
-  './assets/tickets/flixbus-qr.png'
+  './assets/tickets/flixbus-qr.png',
+  './assets/tickets/basilica-entry-qr.svg'
 ];
 
 self.addEventListener('install', (event) => {

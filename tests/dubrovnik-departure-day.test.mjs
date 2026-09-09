@@ -6,7 +6,7 @@ test('9 Sep keeps a safe airport margin and removes Lokrum before the flight', (
   const day = tripDays1.find((item) => item.date === '2026-09-09');
   assert.ok(day, '9 Sep itinerary must exist');
 
-  assert.match(day.title, /Rupe.*voo.*Budapest/i);
+  assert.match(day.title, /Rupe.*voo.*cruzeiro/i);
   assert.equal(day.events.some((event) => /Lokrum/i.test(event.title)), false, 'Lokrum must not be scheduled before the flight');
   assert.equal(day.events.some((event) => /Ethnographic Museum Rupe/i.test(event.title)), true, 'Rupe should replace Lokrum');
 

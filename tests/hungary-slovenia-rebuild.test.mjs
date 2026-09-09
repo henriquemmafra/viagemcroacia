@@ -18,32 +18,35 @@ const read = async (path) => {
   catch { return ''; }
 };
 
-test('Budapest arrival evening is full and geographically grouped', () => {
+test('Budapest arrival evening activates the card first and prioritizes the confirmed cruise with safe boarding margin', () => {
   const day = tripDays1.find((item) => item.date === '2026-09-09');
   ordered(titles(day), [
-    'Check-in Up Hotel Budapest',
+    'Check-in rápido Up Hotel Budapest',
+    'Sair do hotel · Budapest Card',
+    'Retirar + ativar Budapest Card',
+    'Gozsdu + Jewish Quarter',
+    'Sair para Dock Zero',
+    'ESTAR no Dock Zero',
+    'Cruzeiro no Danúbio',
     'New York Café',
-    'Grande Sinagoga',
-    'Jewish Quarter',
-    'Szimpla Kert',
-    'Gozsdu Udvar',
-    'Cruzeiro noturno no Danúbio'
+    'Szimpla Kert'
   ]);
 });
 
-test('Budapest full day flows from Buda through central Pest to City Park', () => {
+test('Budapest full day protects the fixed Buda walk and Basilica concert', () => {
   const day = tripDays1.find((item) => item.date === '2026-09-10');
   ordered(titles(day), [
-    'Fisherman’s Bastion',
-    'Matthias Church',
-    'Buda Castle',
-    'Chain Bridge',
-    'Shoes on the Danube',
     'Parlamento',
-    'St Stephen’s Basilica',
+    'Shoes on the Danube',
+    'Basílica de Santo Estêvão',
     'Grande Sinagoga',
-    'Heroes’ Square',
-    'Széchenyi Thermal Bath'
+    'SAIR da Sinagoga',
+    'ESTAR em Dísz tér 15',
+    'Buda Castle Walks',
+    'Fisherman’s Bastion',
+    'Voltar ao hotel',
+    'ESTAR na Basílica',
+    'Concerto de órgão'
   ]);
 });
 
@@ -96,7 +99,7 @@ test('major attractions expose an official info link beside Uber, Maps and Waze'
     .filter((day) => day.date >= '2026-09-09' && day.date <= '2026-09-13')
     .flatMap((day) => day.events);
   const attractionTitles = [
-    'New York Café','Fisherman’s Bastion','Matthias Church','Széchenyi Thermal Bath',
+    'New York Café','Fisherman’s Bastion','Basílica de Santo Estêvão','Grande Sinagoga',
     'Open Kitchen','Ljubljana Castle','Vintgar Gorge','Bled Castle','Ojstrica','Predjama','Postojna Cave'
   ];
   for (const title of attractionTitles) {
@@ -115,6 +118,6 @@ test('major attractions expose an official info link beside Uber, Maps and Waze'
 
 test('refreshes the PWA cache for the rebuilt itinerary and info actions', async () => {
   const worker = await read('../service-worker.js');
-  assert.match(worker, /adriatico-2026-v27/);
+  assert.match(worker, /adriatico-2026-v29/);
   assert.match(worker, /\.\/js\/attraction-info\.js/);
 });
