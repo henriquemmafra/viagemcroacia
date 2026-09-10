@@ -1,4 +1,4 @@
-const CACHE = 'adriatico-2026-v30';
+const CACHE = 'adriatico-2026-v29';
 const PRECACHE = [
   './','./index.html','./css/app.css','./css/speech.css','./css/translator.css','./css/languages-tab.css','./css/live-day.css',
   './js/app.js','./js/core.js','./js/speech.js','./js/translator.js','./js/languages-tab.js','./js/live-day.js','./js/nav-icons.js','./js/attraction-info.js','./js/vintgar-patch.js','./js/budapest-sep10-patch.js','./js/weather-engine.js','./js/weather-patch.js','./js/day-tools.js','./js/month-calendar-model.js','./js/month-calendar.js','./js/trip-data.js','./js/trip-days-1.js','./js/trip-days-2.js','./js/trip-days-3.js','./manifest.json','./assets/icons/icon-192.png','./assets/icons/icon-512.png','./assets/tickets/dubrovnik-pass-henrique.png','./assets/tickets/dubrovnik-pass-cibele.png','./assets/tickets/wizz-henrique-barcode.png','./assets/tickets/wizz-cibele-barcode.png','./assets/tickets/flixbus-qr.png','./assets/tickets/basilica-entry-qr.svg'
