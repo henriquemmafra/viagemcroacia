@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { tripDays1 } from '../js/trip-days-1.js';
+import '../js/budapest-sep10-patch.js';
 import { tripDays2 } from '../js/trip-days-2.js';
 
 const titles = (day) => day.events.map((event) => event.title);
@@ -13,10 +14,7 @@ const ordered = (actual, expected) => {
     cursor = index;
   }
 };
-const read = async (path) => {
-  try { return await readFile(new URL(path, import.meta.url), 'utf8'); }
-  catch { return ''; }
-};
+const read = async (path) => { try { return await readFile(new URL(path, import.meta.url), 'utf8'); } catch { return ''; } };
 
 test('Budapest arrival evening activates the card first and prioritizes the confirmed cruise with safe boarding margin', () => {
   const day = tripDays1.find((item) => item.date === '2026-09-09');
@@ -25,9 +23,7 @@ test('Budapest arrival evening activates the card first and prioritizes the conf
 
 test('Budapest Sep 10 follows the approved geographic route and protects the Basilica concert', () => {
   const day = tripDays1.find((item) => item.date === '2026-09-10');
-  ordered(titles(day), [
-    'New York Café','Shoes on the Danube','Parlamento','Basílica de Santo Estêvão','Váci utca','Hungarian National Museum','Chain Bridge','Buda Castle','Hungarian National Gallery','St. Stephen’s Hall','Matthias Church','Fisherman’s Bastion','Budapest Wine Festival','Citadella','ESTAR na Basílica','Concerto de órgão'
-  ]);
+  ordered(titles(day), ['New York Café','Shoes on the Danube','Parlamento','Basílica de Santo Estêvão','Váci utca','Hungarian National Museum','Chain Bridge','Buda Castle','Hungarian National Gallery','St. Stephen’s Hall','Matthias Church','Fisherman’s Bastion','Budapest Wine Festival','Citadella','ESTAR na Basílica','Concerto de órgão']);
   const concert = day.events.find((event) => event.title.includes('Concerto de órgão'));
   assert.equal(concert?.time, '20:00');
   assert.equal(concert?.ticketId, 'basilica-organ-concert');
