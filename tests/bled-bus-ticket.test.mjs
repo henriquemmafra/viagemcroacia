@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { tripDays2 } from '../js/trip-days-2.js';
 import { walletItems } from '../js/trip-data.js';
+import { getTicketSlides } from '../js/core.js';
 import '../js/vintgar-patch.js';
 import '../js/bled-bus-ticket-patch.js';
 
@@ -37,9 +38,18 @@ test('wallet contains the Omio/Nomago booking details for both passengers', () =
   assert.equal(ticket.date, '12 set · 07:15');
   assert.match(ticket.subtitle || '', /Nomago/i);
   assert.match(ticket.note || '', /1867007911/);
-  assert.match(ticket.note || '', /1887167963/);
   assert.match(ticket.note || '', /plataforma 30/i);
   assert.match(ticket.note || '', /€37,80/);
+});
+
+test('wallet exposes both passenger QR codes for offline boarding', () => {
+  const slides = getTicketSlides(walletItems, 'omio-lju-bled');
+  assert.equal(slides.length, 2);
+  assert.deepEqual(slides.map((item) => item.holder), ['Henrique', 'Cibele']);
+  assert.deepEqual(slides.map((item) => item.id), ['omio-lju-bled', 'omio-lju-bled-cibele']);
+  for (const slide of slides) assert.match(slide.codeAsset || '', /^data:image\/png;base64,/);
+  assert.match(slides[0].note || '', /1867007911/);
+  assert.match(slides[1].note || '', /1887167963/);
 });
 
 test('page loads and precaches the Bled bus patch', async () => {
