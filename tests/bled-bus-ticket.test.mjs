@@ -1,7 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import { tripDays2 } from '../js/trip-days-2.js';
 import { walletItems } from '../js/trip-data.js';
+import '../js/vintgar-patch.js';
+import '../js/bled-bus-ticket-patch.js';
+
+const read = (path) => readFile(new URL(path, import.meta.url), 'utf8');
 
 test('12 Sep uses the confirmed Ljubljana to Bled booking and preserves Vintgar margin', () => {
   const day = tripDays2.find((item) => item.date === '2026-09-12');
@@ -35,4 +40,10 @@ test('wallet contains the Omio/Nomago booking details for both passengers', () =
   assert.match(ticket.note || '', /1887167963/);
   assert.match(ticket.note || '', /plataforma 30/i);
   assert.match(ticket.note || '', /€37,80/);
+});
+
+test('page loads and precaches the Bled bus patch', async () => {
+  const [index, worker] = await Promise.all([read('../index.html'), read('../service-worker.js')]);
+  assert.match(index, /js\/bled-bus-ticket-patch\.js/);
+  assert.match(worker, /\.\/js\/bled-bus-ticket-patch\.js/);
 });
