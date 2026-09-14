@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as core from '../js/core.js';
+import { tripDays2 } from '../js/trip-days-2.js';
+import '../js/budapest-sep10-patch.js';
 
 test('builds one quick-access item per ticket group and highlights the next ticket event', () => {
   assert.equal(typeof core.getDayQuickAccessItems, 'function');
@@ -51,4 +53,21 @@ test('keeps a grouped boarding pass highlighted when a later event using the sam
   const items = core.getDayQuickAccessItems(day, [boarding], { current:day.events[1] });
   assert.equal(items[0].emphasis, 'current');
   assert.equal(items[0].time, '14:10');
+});
+
+test('Sep 14 Pula route follows the approved live plan and removes Kamenjak', () => {
+  const day = tripDays2.find((item) => item.date === '2026-09-14');
+  assert.ok(day, 'Sep 14 day must exist');
+  assert.equal(day.datasetPatch, 'pula-sep14-live-v1');
+  const titles = day.events.map((event) => event.title).join(' | ');
+  assert.match(titles, /Arena de Pula/);
+  assert.match(titles, /Twin Gates/);
+  assert.match(titles, /Zerostrasse/);
+  assert.match(titles, /Kaštel/);
+  assert.match(titles, /Templo de Augusto/);
+  assert.doesNotMatch(titles, /Kamenjak/i);
+  const returnBus = day.events.find((event) => /Pula → Rovinj/.test(event.title));
+  assert.ok(returnBus, 'return bus action must exist');
+  assert.equal(returnBus.time, '', 'return bus must not impose a fixed departure time');
+  assert.match(returnBus.buyUrl ?? '', /arriva\.com\.hr/);
 });
