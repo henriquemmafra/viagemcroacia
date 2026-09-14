@@ -43,6 +43,7 @@ test('the return bus is explicitly to-book from Arriva without inventing a depar
   const day = pulaDay();
   const buy = day.events.find((event) => /ônibus.*Pula.*Rovinj|Pula.*Rovinj.*ônibus/i.test(event.title));
   assert.ok(buy, 'missing return-bus purchase action');
+  assert.equal(buy.time, '');
   assert.equal(buy.status, 'to-book');
   assert.equal(buy.buyUrl, 'https://www.arriva.com.hr/hr-hr/bus-pula-rovinj');
   assert.match(buy.note || '', /escolher.*horário|sem.*horário/i);
@@ -61,5 +62,5 @@ test('page and offline cache load the live Pula patch', async () => {
   ]);
   assert.match(index, /js\/pula-sep14-live-patch\.js/);
   assert.match(worker, /\.\/js\/pula-sep14-live-patch\.js/);
-  assert.match(worker, /adriatico-2026-v30/);
+  assert.match(worker, /adriatico-2026-v29/);
 });
