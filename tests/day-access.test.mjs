@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as core from '../js/core.js';
 import { tripDays2 } from '../js/trip-days-2.js';
-import '../js/budapest-sep10-patch.js';
+import '../js/pula-sep14-live-patch.js';
 
 test('builds one quick-access item per ticket group and highlights the next ticket event', () => {
   assert.equal(typeof core.getDayQuickAccessItems, 'function');
